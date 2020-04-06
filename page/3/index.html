@@ -69,12 +69,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-log" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/06/hello-world1/" class="article-date">
+    <a href="/2020/04/06/log/" class="article-date">
   <time datetime="2020-04-06T02:28:13.777Z" itemprop="datePublished">2020-04-06</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">日志分析</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -83,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/hello-world1/">Hello World</a>
+      <a class="article-title" href="/2020/04/06/log/">日志分析</a>
     </h1>
   
 
@@ -91,14 +95,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>hahhahahha</p>
+        <h2 id="1-1-分析遇到的问题以及注意事项"><a href="#1-1-分析遇到的问题以及注意事项" class="headerlink" title="1.1. 分析遇到的问题以及注意事项"></a>1.1. 分析遇到的问题以及注意事项</h2><p>(1) 不记录POST类型日志，POST操作凭经验去猜测，不够全面。<br>(2) 日志文件过大，普通工具无法实现正则提取<br>(3) 攻击特征库、常见工具指纹特征的搜集<br>(4) 结合系统的业务功能,系统功能，区分是正常用户还是攻击者<br>(5) 记录攻击者的ip、攻击起止时间、UA身份标识等。<br>(6) 了解测试环境与线上环境的区别<br>(7) 搜集敏感关键字如password,username等<br>(8) 结合服务器进行分析，对服务器进行审计、扫马等<br>(9) 常见提权工具指纹特征<br>(10)确定UA(攻击者身份标识)进行追踪<br>(11)区分数据库下载操作是人为还是扫描器扫描<br>(12)文件名与参数的组合搜索<br>(13)分析出攻击者所做的破坏操作的一个大概轮廓<br>(14)不能以固定思维去分析，要扩充攻击切入点，了解各种各样可能的攻击手段<br>(15)通过定位访问频率较少的可疑木马文件进行追踪</p>
+<h2 id="1-2-安全审计三要素"><a href="#1-2-安全审计三要素" class="headerlink" title="1.2. 安全审计三要素"></a>1.2. 安全审计三要素</h2><h3 id="1-2-1-交叉分析"><a href="#1-2-1-交叉分析" class="headerlink" title="1.2.1. 交叉分析"></a>1.2.1. 交叉分析</h3><p>从多个维度去分析<br>l 被攻击客户反馈的受攻击情况<br>l 服务器安全审计</p>
+<h3 id="1-2-2-基于状态的分析"><a href="#1-2-2-基于状态的分析" class="headerlink" title="1.2.2. 基于状态的分析"></a>1.2.2. 基于状态的分析</h3><p>识别攻击状态，扫描工具扫描的起始时间定位，以及攻击模式的定位</p>
+<h3 id="1-2-3-以目标为对象"><a href="#1-2-3-以目标为对象" class="headerlink" title="1.2.3. 以目标为对象"></a>1.2.3. 以目标为对象</h3><p>一旦确定攻击者，以该目标为对象进行深入追踪，分析该目标所有的可疑操作<br>结合多个维度的数据来进行分析</p>
+<h2 id="1-3-安全审计流程"><a href="#1-3-安全审计流程" class="headerlink" title="1.3. 安全审计流程"></a>1.3. 安全审计流程</h2><p>未完待续…………</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/hello-world1/" data-id="ck8nvbydq001bc8h5dilx5vp1" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/log/" data-id="ck8nvek9a001ad8h56rqj40uj" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/log/" rel="tag">log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li></ul>
+
     </footer>
   </div>
   
@@ -148,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/hawkeye/" data-id="ck8nvbydk000zc8h5bwwmghi9" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/hawkeye/" data-id="ck8nvek8y000yd8h51y1q5ax2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hawkeye/" rel="tag">Hawkeye</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
@@ -504,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy2/" data-id="ck8nvbydh000rc8h5e2wj56tn" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy2/" data-id="ck8nvek8u000qd8h5c8jq1fgt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
@@ -843,7 +853,7 @@ fmt.Println(msg)</code></pre><p>}</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy3/" data-id="ck8nvbydj000uc8h5att886x4" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy3/" data-id="ck8nvek8w000td8h5a8b5dgk9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
@@ -936,7 +946,7 @@ fmt.Println(msg)</code></pre><p>}</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy1/" data-id="ck8nvbyde000lc8h5dzrkbg1o" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy1/" data-id="ck8nvek8r000ld8h57as0c23x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
@@ -993,7 +1003,7 @@ fmt.Println(msg)</code></pre><p>}</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/first/" data-id="ck8nvbydg000nc8h5beb2h7z9" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/first/" data-id="ck8nvek8s000md8h5e3r7fs8k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
@@ -1044,7 +1054,7 @@ fmt.Println(msg)</code></pre><p>}</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/hello-world/" data-id="ck8nvbydl0011c8h51ci66frc" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/hello-world/" data-id="ck8nvek930010d8h5dkh60ake" class="article-share-link">Share</a>
       
       
     </footer>
