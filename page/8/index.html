@@ -69,6 +69,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-regeorg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/06/regeorg/" class="article-date">
+  <time datetime="2020-04-06T02:28:13.780Z" itemprop="datePublished">2020-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/regeorg/">reGeorg+Proxifier实现内网sock5代理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当获取到一个系统的内网权限<br>为了方便在本地深入地进行渗透测试，我们可能需要将内网代理到本地。</p>
+<p>本文参考<a href="http://www.360doc.com/content/16/1222/19/27425026_616888079.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/16/1222/19/27425026_616888079.shtml</a></p>
+<h1 id="1-环境介绍"><a href="#1-环境介绍" class="headerlink" title="1.环境介绍"></a>1.环境介绍</h1><p>本机ip：117.111.11.28<br>web系统外网域名：<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a><br>web系统对应服务器内网ip:172.19.31.53</p>
+<p>要达到的效果：<br>在我的本机上通过浏览器直接访问<a href="http://172.19.31.53以及远程登录172.19.31.53" target="_blank" rel="noopener">http://172.19.31.53以及远程登录172.19.31.53</a></p>
+<h1 id="2-工具下载"><a href="#2-工具下载" class="headerlink" title="2.工具下载"></a>2.工具下载</h1><p>reGeorg下载地址：<a href="https://github.com/sensepost/reGeorg" target="_blank" rel="noopener">https://github.com/sensepost/reGeorg</a></p>
+<p>Proxifier下载地址：<a href="http://www.pc6.com/softview/SoftView_469575.html" target="_blank" rel="noopener">http://www.pc6.com/softview/SoftView_469575.html</a> (汉化版)</p>
+<h1 id="3-具体配置"><a href="#3-具体配置" class="headerlink" title="3.具体配置"></a>3.具体配置</h1><p>reGeorg-master目录下有个tunnel文件，ashx,aspx,jsp.php多个版本，首先是将reGeorg-master目录下的tunner.aspx上传到web系统，web直接访问显示如下：</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1cfmT.png" alt></p>
+<p>运行reGeorg程序<br>python reGeorgSocksProxy.py -u <a href="http://xxx.com/upload/201610/17/xxx.aspx" target="_blank" rel="noopener">http://xxx.com/upload/201610/17/xxx.aspx</a> -p 8888<br><img src="https://s1.ax1x.com/2018/04/26/C1cTh9.jpg" alt></p>
+<p>8888为转发端口</p>
+<p>接下来是Proxifiter设置</p>
+<p>设置代理服务器<br><img src="https://s1.ax1x.com/2018/04/26/C1cLX6.png" alt></p>
+<p>代理规则设置，这里需要将需要用到的应用设置代理规则</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gStH.jpg" alt></p>
+<p>然后本地使用添加的chrome或者firefox访问<br><a href="http://172.19.31.53/，成功（访问404可能是缺少路径）" target="_blank" rel="noopener">http://172.19.31.53/，成功（访问404可能是缺少路径）</a></p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gict.png" alt></p>
+<p>本地远程172.19.31.53，提示输入密码。</p>
+<p><img src="https://s1.ax1x.com/2018/04/26/C1gAnf.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yi-diandian.com/2020/04/06/regeorg/" data-id="ck8nvek9g001jd8h54k95fkbu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proxifier/" rel="tag">Proxifier</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reGeorg/" rel="tag">reGeorg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sock5/" rel="tag">sock5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91/" rel="tag">内网</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-jingzhe" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/06/jingzhe/" class="article-date">
@@ -1211,6 +1271,10 @@ fmt.Println(msg)</code></pre><p>}</p>
       <ul>
         
           <li>
+            <a href="/2020/05/10/picoctfweb4/">picoCTF-WriteUp-A Simple Question</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/10/picoctfweb3/">picoCTF-WriteUp-Secure Logon</a>
           </li>
         
@@ -1224,10 +1288,6 @@ fmt.Println(msg)</code></pre><p>}</p>
         
           <li>
             <a href="/2020/05/05/sqli-labs45/">Sqli-Labs-Level45学习</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/05/sqli-labs44/">Sqli-Labs-Level44学习</a>
           </li>
         
       </ul>
